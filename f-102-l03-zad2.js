@@ -7,6 +7,9 @@ function subtraction(num1, num2) {
 function multiplication(num1, num2) {
   return num1 * num2;
 }
+function modulo(num1, num2) {
+  return num1 % num2;
+}
 function division(num1, num2) {
   if (num2 === 0) {
     alert("Nie dzieli się przez zero, spróbuj jeszcze raz!");
@@ -14,9 +17,6 @@ function division(num1, num2) {
   } else {
     return num1 / num2;
   }
-}
-function modulo(num1, num2) {
-  return num1 % num2;
 }
 let num1 = parseFloat(prompt("Wpisz pierwszą liczbę:", ""));
 while (isNaN(num1)) {
@@ -38,4 +38,25 @@ let num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
 if (isNaN(num2)) {
   alert("Wpisz liczbę.");
   num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
+}
+
+switch (operation) {
+  case "+":
+    alert(addition(num1, num2));
+    break;
+  case "-":
+    alert(subtraction(num1, num2));
+    break;
+  case "*":
+    alert(multiplication(num1, num2));
+    break;
+  case "/":
+    alert(division(num1, num2));
+    break;
+  case "%":
+    alert(modulo(num1, num2));
+    break;
+  default:
+    alert("Błąd. Spróbuj ponownie i wpisz poprawny znak.");
+    break;
 }
