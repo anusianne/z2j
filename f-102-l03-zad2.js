@@ -18,6 +18,10 @@ function division(num1, num2) {
     return num1 / num2;
   }
 }
+function nextStep() {
+  operation = prompt(`Wynik to: ${result}, wybierz kolejny operator.`);
+  num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
+}
 let num1 = parseFloat(prompt("Wpisz pierwszą liczbę:", ""));
 while (isNaN(num1)) {
   alert("Wpisz liczbę.");
@@ -39,22 +43,28 @@ if (isNaN(num2)) {
   alert("Wpisz liczbę.");
   num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
 }
+let result;
 
 switch (operation) {
   case "+":
-    alert(addition(num1, num2));
+    result = addition(num1, num2);
+    nextStep();
     break;
   case "-":
-    alert(subtraction(num1, num2));
+    result = subtraction(num1, num2);
+    nextStep();
     break;
   case "*":
-    alert(multiplication(num1, num2));
+    result = multiplication(num1, num2);
+    nextStep();
     break;
   case "/":
-    alert(division(num1, num2));
+    result = division(num1, num2);
+    nextStep();
     break;
   case "%":
-    alert(modulo(num1, num2));
+    result = modulo(num1, num2);
+    nextStep();
     break;
   default:
     alert("Błąd. Spróbuj ponownie i wpisz poprawny znak.");
