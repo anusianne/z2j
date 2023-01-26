@@ -16,32 +16,48 @@ function division(num1, num2) {
 function calculate(ans) {
   let num1;
   if (ans === undefined) {
-    num1 = parseFloat(prompt("Wpisz pierwszą liczbę:", ""));
-    while (isNaN(num1)) {
-      alert("Wpisz liczbę.");
-      num1 = parseFloat(prompt("Wpisz pierwszą liczbę:", ""));
+    while (num1 === undefined || isNaN(num1)) {
+      num1 = prompt("Wpisz pierwszą liczbę:");
+      if (!num1) {
+        console.log(typeof num1);
+        return 0;
+      } else {
+        if (isNaN(num1)) {
+          alert("Wpisz liczbę.");
+        }
+      }
     }
   } else {
     num1 = ans;
   }
-  let operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):", "");
-  while (
-    operator != "+" &&
-    operator != "-" &&
-    operator != "*" &&
-    operator != "/" &&
-    operator != "%"
-  ) {
-    alert("Wpisz poprawny znak działania.");
-    operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):", "");
+  let operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):");
+  if (!operator) {
+    return 0;
+  } else {
+    while (
+      operator != "+" &&
+      operator != "-" &&
+      operator != "*" &&
+      operator != "/" &&
+      operator != "%"
+    ) {
+      alert("Wpisz poprawny znak działania.");
+      operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):");
+    }
   }
-  let num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
-  if (isNaN(num2)) {
-    alert("Wpisz liczbę.");
-    num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
-  } else if (num2 === 0 && operator === "/") {
-    alert("Nie dzieli się przez zero, spróbuj jeszcze raz!");
-    num2 = parseFloat(prompt("Wpisz drugą liczbę:", ""));
+  let num2;
+  while (num2 === undefined || isNaN(num2)) {
+    num2 = prompt("Wpisz drugą liczbę:");
+    if (!num2 && num2 != 0) {
+      return 0;
+    } else {
+      if (isNaN(num2)) {
+        alert("Wpisz liczbę.");
+      } else if (parseInt(num2) === 0 && operator === "/") {
+        alert("Nie dzieli się przez zero, spróbuj jeszcze raz!");
+        num2 = undefined;
+      }
+    }
   }
   switch (operator) {
     case "+":
