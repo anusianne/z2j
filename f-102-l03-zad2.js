@@ -19,7 +19,6 @@ function calculate(ans) {
     while (num1 === undefined || isNaN(num1)) {
       num1 = prompt("Wpisz pierwszą liczbę:");
       if (!num1) {
-        console.log(typeof num1);
         return 0;
       } else {
         if (isNaN(num1)) {
@@ -30,7 +29,14 @@ function calculate(ans) {
   } else {
     num1 = ans;
   }
-  let operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):");
+  let operator;
+  if (ans === undefined) {
+    operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):");
+  } else {
+    operator = prompt(
+      `Wynik to: ${ans}. Wybierz następny operator do kolejnych obliczeń.`
+    );
+  }
   if (!operator) {
     return 0;
   } else {
@@ -43,6 +49,9 @@ function calculate(ans) {
     ) {
       alert("Wpisz poprawny znak działania.");
       operator = prompt("Wybierz operator (+ ,- ,* ,/ albo %):");
+      if (!operator) {
+        return 0;
+      }
     }
   }
   let num2;
@@ -61,7 +70,7 @@ function calculate(ans) {
   }
   switch (operator) {
     case "+":
-      result = addition(num1, num2);
+      result = addition(parseFloat(num1), parseFloat(num2));
       break;
     case "-":
       result = subtraction(num1, num2);
