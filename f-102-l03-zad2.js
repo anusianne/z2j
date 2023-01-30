@@ -11,14 +11,21 @@ function modulo(num1, num2) {
   return num1 % num2;
 }
 function division(num1, num2) {
-  return num1 / num2;
+  if (parseInt(num2) != 0) {
+    return parseFloat(num1 / num2);
+  } else {
+    return "Nie dzieli się przez zero. Spróbuj jeszcze raz.";
+  }
 }
 function calculate(ans) {
   let num1;
+  let num2;
+  let result;
   if (ans === undefined) {
-    while (num1 === undefined || isNaN(num1)) {
+    while (num1 === undefined || isNaN(num1) || num1 === "") {
       num1 = prompt("Wpisz pierwszą liczbę:");
-      if (!num1) {
+      console.log(num1);
+      if (!num1 && num1 != "") {
         return 0;
       } else {
         if (isNaN(num1)) {
@@ -27,7 +34,7 @@ function calculate(ans) {
       }
     }
   } else {
-    num1 = ans;
+    num1 = parseFloat(ans);
   }
   let operator;
   if (ans === undefined) {
@@ -37,8 +44,12 @@ function calculate(ans) {
       `Wynik to: ${ans}. Wybierz następny operator do kolejnych obliczeń.`
     );
   }
-  if (!operator) {
+  if (operator === null) {
     return 0;
+  } else if (operator === "") {
+    operator = prompt(
+      "Nie wybrałeś operatora. Wybierz operator (+ ,- ,* ,/ albo %):"
+    );
   } else {
     while (
       operator != "+" &&
@@ -54,16 +65,13 @@ function calculate(ans) {
       }
     }
   }
-  let num2;
-  while (num2 === undefined || isNaN(num2)) {
+  while (num2 === undefined || isNaN(num2) || num2 === "") {
     num2 = prompt("Wpisz drugą liczbę:");
-    if (!num2 && num2 != 0) {
+    if (!num2 && num2 != 0 && num2 != "") {
       return 0;
     } else {
       if (isNaN(num2)) {
         alert("Wpisz liczbę.");
-      } else if (parseInt(num2) === 0 && operator === "/") {
-        alert("Nie dzieli się przez zero, spróbuj jeszcze raz!");
         num2 = undefined;
       }
     }
@@ -80,6 +88,13 @@ function calculate(ans) {
       break;
     case "/":
       result = division(num1, num2);
+      while (typeof result === "string") {
+        num2 = parseFloat(prompt("Wpisz drugą liczbę. INNĄ NIŻ ZERO..."));
+        if (num2 === null) {
+          return;
+        }
+        result = division(num1, num2);
+      }
       break;
     case "%":
       result = modulo(num1, num2);
@@ -88,7 +103,6 @@ function calculate(ans) {
       alert("Błąd. Spróbuj ponownie i wpisz poprawny znak.");
       break;
   }
-  alert(result);
   calculate(result);
 }
 calculate();
