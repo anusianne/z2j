@@ -1,12 +1,17 @@
 .container {
-    display: grid;
-    grid-template-columns: repeat(3,8%);
-    grid-template-rows: repeat(3, 70%);
-    gap: 25px 25px;
-    align-content: start;
-    justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 8%);
+  grid-template-rows: repeat(3, 70%);
+  gap: 25px 25px;
+  align-content: start;
+  justify-content: center;
+  counter-reset: section;
 }
 
 .btn {
-    border-radius: 25px;
+  border-radius: 25px;
+}
+.btn::before {
+  counter-increment: section;
+  content: counter(section);
 }
