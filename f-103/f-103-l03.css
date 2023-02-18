@@ -25,3 +25,7 @@
   counter-increment: section;
   content: counter(section, upper-roman) ") ";
 }
+.row-3:before {
+  counter-increment: section;
+  content: "[" counter(section, decimal-leading-zero) "]";
+}
