@@ -41,3 +41,13 @@
   counter-increment: section;
   content: "[" counter(section, decimal-leading-zero) "] ";
 }
+.btn:nth-child(1):hover,
+.btn:nth-child(2):hover,
+.btn:nth-child(3):hover,
+.btn:nth-child(5):hover,
+.btn:nth-child(6):hover,
+.btn:nth-child(7):hover,
+.btn:nth-child(8):hover {
+  background-color: #e6e6fa;
+  color: white;
+}
