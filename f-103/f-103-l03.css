@@ -9,7 +9,10 @@
 }
 
 .btn {
-  border-radius: 25px;
+  background-color: #ced4da;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 2px 2px 3px;
 }
 .btn::before {
   counter-increment: section;
@@ -24,10 +27,12 @@
 }
 .btn:nth-child(9) {
   background-color: green;
-  color: yellow;
+  color: antiquewhite;
+  box-shadow: 2px 2px 3px black;
 }
 .btn:nth-child(9):hover {
-  background-color: blue;
+  background-color: #8ecae6;
+  color: black;
 }
 .row-1:before {
   counter-increment: section;
@@ -50,4 +55,7 @@
 .btn:nth-child(8):hover {
   background-color: #e6e6fa;
   color: white;
+}
+.btn:active {
+  box-shadow: inset 0 0 10px #b8bedd;
 }
