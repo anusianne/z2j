@@ -10,8 +10,7 @@
 .btn {
   background-color: #ced4da;
   border-radius: 15px;
-  border: none;
-  box-shadow: 2px 2px 3px;
+  box-shadow: 2px 2px 3px black;
   border: 1px solid gray;
 }
 .btn::before {
@@ -20,24 +19,10 @@
 }
 .btn:nth-child(4) {
   background-color: orange;
-  box-shadow: 2px 2px 3px black;
-}
-.btn:nth-child(4):hover {
-  background-color: #2ec4b6;
-  color: yellow;
-  border: none;
-  box-shadow: 2px 2px 3px black;
 }
 .btn:nth-child(9) {
   background-color: green;
   color: antiquewhite;
-  box-shadow: 2px 2px 3px black;
-}
-.btn:nth-child(9):hover {
-  background-color: #8ecae6;
-  color: black;
-  box-shadow: 2px 2px 3px black;
-  border: none;
 }
 .row-1:before {
   counter-increment: section;
@@ -60,11 +45,17 @@
 .btn:nth-child(8):hover {
   background-color: #e6e6fa;
   color: white;
-  box-shadow: 2px 2px 3px black;
+}
+.btn:nth-child(4):hover {
+  background-color: #2ec4b6;
+  color: yellow;
+}
+.btn:nth-child(9):hover {
+  background-color: #8ecae6;
+  color: black;
 }
 .btn:active,
 .btn:nth-child(4):active,
 .btn:nth-child(9):active {
-  box-shadow: inset 0 0 10px #b8bedd;
   border: none;
 }
