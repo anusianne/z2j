@@ -23,11 +23,20 @@ switch (a) {
 //   else no();
 // }
 
-ask(
-  "Do you agree",
-  () => alert("You agreed."),
-  () => alert("You canceled the execution.")
-);
+// ask(
+//   "Do you agree",
+//   () => alert("You agreed."),
+//   () => alert("You canceled the execution.")
+// );
 
+// function clear(elem) {
+//   while (elem.firstChild) {
+//     elem.firstChild.remove();
+//   }
+// }
+// clear(elem);
 
-
+function clear(elem) {
+  elem.innerHTML = "";
+}
+clear(elem);
