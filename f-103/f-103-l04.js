@@ -40,3 +40,6 @@ function clear(elem) {
   elem.innerHTML = "";
 }
 clear(elem);
+
+document.body.classList.add("article");
+alert(document.body.className);
