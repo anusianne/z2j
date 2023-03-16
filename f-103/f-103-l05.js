@@ -13,3 +13,10 @@ function toggle() {
     elem.style.display = "none";
   }
 }
+
+function hiddenButton() {
+    let hbutton = document.getElementById('hbutton');
+    hbutton.style.display = "none";
+}
+
+
