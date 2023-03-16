@@ -1,0 +1,46 @@
+a:focus {
+  outline: 2px solid slateblue;
+  outline-offset: 5px;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-size: 2em;
+}
+
+button {
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  font: inherit;
+  font-weight: bold;
+  border-radius: 2rem;
+  background: #3f25c4;
+  color: #ffffff;
+  min-width: 10rem;
+  cursor: pointer;
+  border: none;
+}
+
+button:hover,
+button:focus {
+  background: #8c7ae6;
+  color: #000000;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0px 0px 0px 3px #192a56;
+}
+
+body {
+  display: grid;
+  place-items: center;
+  font-family: sans-serif;
+  background: #d6d0f6;
+  font-size: 1.3rem;
+}
+
+main {
+  scroll-margin-top: 2em;
+}
