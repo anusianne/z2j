@@ -19,4 +19,3 @@ function hiddenButton() {
     hbutton.style.display = "none";
 }
 
-
