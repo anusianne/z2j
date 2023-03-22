@@ -42,3 +42,7 @@ img {
 .gallery li {
   display: inline-block;
 }
+.icons {
+  width: 130px;
+  transition: -webkit-transform 500ms ease-out;
+}
