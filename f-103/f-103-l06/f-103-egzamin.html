@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="f-103-egzamin.css" />
-    <title>Tick Tac Toe</title>
-  </head>
-  <body>
-    <div>
-      Choose your player:
-      <button id="X" onclick="choosePlayer(id)">X</button>
-      <button id="O" onclick="choosePlayer(id)">O</button>
-    </div>
-    <div class="container">
-      <div id="s11" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s12" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s13" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s21" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s22" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s23" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s31" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s32" class="square" onclick="chooseSquare(id)"></div>
-      <div id="s33" class="square" onclick="chooseSquare(id)"></div>
-    </div>
 
-    <script src="f-103-egzamin.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="f-103-egzamin.css" />
+  <title>Tick Tac Toe</title>
+</head>
+
+<body>
+  <div id="playerChooser">
+    Choose your player:
+    <button id="X" onclick="choosePlayer(id)">X</button>
+    <button id="O" onclick="choosePlayer(id)">O</button>
+  </div>
+  <div class="container">
+    <div id="s11" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s12" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s13" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s21" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s22" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s23" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s31" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s32" class="square" onclick="chooseSquare(id)"></div>
+    <div id="s33" class="square" onclick="chooseSquare(id)"></div>
+  </div>
+
+  <script src="f-103-egzamin.js"></script>
+</body>
+
 </html>

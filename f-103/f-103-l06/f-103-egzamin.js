@@ -10,7 +10,7 @@ const s23 = document.getElementById("s23");
 const s31 = document.getElementById("s31");
 const s32 = document.getElementById("s32");
 const s33 = document.getElementById("s33");
-
+const arr = [s11, s12, s13, s21, s22, s23, s31, s32, s33];
 function choosePlayer(playerID) {
   if (playerID === "X") {
     player1 = "X";
@@ -19,11 +19,20 @@ function choosePlayer(playerID) {
     player1 = "O";
     player2 = "X";
   }
+  document.getElementById("playerChooser").style.display = "none";
 }
 function chooseSquare(squareID) {
-  if (player1) {
-    document.getElementById(squareID).insertAdjacentHTML("afterbegin", player1);
-  } else {
-    document.getElementById(squareID).insertAdjacentHTML("afterbegin", player2);
+  const sq = document.getElementById(squareID);
+  if (sq.innerText === "") {
+    sq.insertAdjacentHTML("afterbegin", player1);
+    setTimeout(aiMove, 500);
+  }
+}
+function aiMove() {
+  for (let sq of arr) {
+    if (sq.innerText === "") {
+      sq.innerText = player2;
+      break;
+    }
   }
 }
