@@ -19,7 +19,7 @@ function choosePlayer(playerID) {
     player1 = "O";
     player2 = "X";
   }
-  document.getElementById("playerChooser").style.display = "none";
+  document.getElementById("playerChooser").style.visibility = "hidden";
 }
 function chooseSquare(squareID) {
   const sq = document.getElementById(squareID);

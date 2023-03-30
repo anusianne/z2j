@@ -1,16 +1,24 @@
 body {
-  background-color: #ffeaea;
+  background-color: #ffd6ff;
 }
 .container {
   display: grid;
   justify-content: center;
+  padding-top: 5em;
   grid-template-columns: repeat(3, 0fr);
   gap: 0px;
 }
 .square {
   display: block;
-  width: 30vh;
-  height: 30vh;
-  border: 2px solid grey;
+  width: 20vh;
+  height: 20vh;
+  border: 2px solid #003566;
   background-color: #f5c6ec;
+  padding-top: 5vh;
+  text-align: center;
+  text-shadow: 2px 2px greenyellow;
+  color: #003566;
+  font-size: 10vh;
+  font-family: "Delicious Handrawn", cursive;
+  cursor: pointer;
 }
