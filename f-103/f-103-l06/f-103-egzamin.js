@@ -25,6 +25,7 @@ function chooseSquare(squareID) {
   const sq = document.getElementById(squareID);
   if (sq.innerText === "") {
     sq.insertAdjacentHTML("afterbegin", player1);
+    isWinning(player1);
     setTimeout(aiMove, 500);
   }
 }
@@ -32,7 +33,43 @@ function aiMove() {
   for (let sq of arr) {
     if (sq.innerText === "") {
       sq.innerText = player2;
+      isWinning(player2);
       break;
+    }
+  }
+}
+function isWinning(player) {
+  const signs = ["X", "O"];
+  for (sign of signs) {
+    if (
+      (s11.innerText === sign &&
+        s12.innerText === sign &&
+        s13.innerText === sign) ||
+      (s21.innerText === sign &&
+        s22.innerText === sign &&
+        s23.innerText === sign) ||
+      (s31.innerText === sign &&
+        s32.innerText === sign &&
+        s33.innerText === sign) ||
+      (s11.innerText === sign &&
+        s22.innerText === sign &&
+        s33.innerText === sign) ||
+      (s13.innerText === sign &&
+        s22.innerText === sign &&
+        s31.innerText === sign) ||
+      (s11.innerText === sign &&
+        s21.innerText === sign &&
+        s31.innerText === sign) ||
+      (s12.innerText === sign &&
+        s22.innerText === sign &&
+        s32.innerText === sign) ||
+      (s13.innerText === sign &&
+        s23.innerText === sign &&
+        s33.innerText === sign)
+    ) {
+      if (player1 === "X" || player1 === "O") {
+        console.log(`${player1} is a winner.`);
+      }
     }
   }
 }
