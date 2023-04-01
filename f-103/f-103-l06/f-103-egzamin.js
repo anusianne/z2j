@@ -11,6 +11,8 @@ const s31 = document.getElementById("s31");
 const s32 = document.getElementById("s32");
 const s33 = document.getElementById("s33");
 const arr = [s11, s12, s13, s21, s22, s23, s31, s32, s33];
+let isWinner = false;
+
 function choosePlayer(playerID) {
   if (playerID === "X") {
     player1 = "X";
@@ -25,16 +27,17 @@ function chooseSquare(squareID) {
   const sq = document.getElementById(squareID);
   if (sq.innerText === "") {
     sq.insertAdjacentHTML("afterbegin", player1);
-    isWinning(player1);
     setTimeout(aiMove, 500);
   }
 }
 function aiMove() {
-  for (let sq of arr) {
-    if (sq.innerText === "") {
-      sq.innerText = player2;
-      isWinning(player2);
-      break;
+  if (isWinning(player1) === false) {
+    for (let sq of arr) {
+      if (sq.innerText === "") {
+        sq.innerText = player2;
+        isWinning(player2);
+        break;
+      }
     }
   }
 }
@@ -67,9 +70,17 @@ function isWinning(player) {
         s23.innerText === sign &&
         s33.innerText === sign)
     ) {
-      if (player1 === "X" || player1 === "O") {
-        console.log(`${player1} is a winner.`);
+      if (player1 === sign && isWinner === false) {
+        alert("You are the winner.");
+        isWinner = true;
+        return isWinner;
+      } else if (player2 === sign && isWinner === false) {
+        alert("Computer is a winner.");
+        isWinner = true;
+        return isWinner;
       }
+    } else {
+      return isWinner;
     }
   }
 }
