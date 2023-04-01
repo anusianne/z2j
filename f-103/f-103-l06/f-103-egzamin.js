@@ -24,19 +24,23 @@ function choosePlayer(playerID) {
   document.getElementById("playerChooser").style.visibility = "hidden";
 }
 function chooseSquare(squareID) {
-  const sq = document.getElementById(squareID);
-  if (sq.innerText === "") {
-    sq.insertAdjacentHTML("afterbegin", player1);
-    setTimeout(aiMove, 500);
+  if (isWinner === false) {
+    const sq = document.getElementById(squareID);
+    if (sq.innerText === "") {
+      sq.insertAdjacentHTML("afterbegin", player1);
+      setTimeout(aiMove, 500);
+    }
   }
 }
 function aiMove() {
-  if (isWinning(player1) === false) {
-    for (let sq of arr) {
-      if (sq.innerText === "") {
-        sq.innerText = player2;
-        isWinning(player2);
-        break;
+  if (isWinner === false) {
+    if (isWinning(player1) === false) {
+      for (let sq of arr) {
+        if (sq.innerText === "") {
+          sq.innerText = player2;
+          isWinning(player2);
+          break;
+        }
       }
     }
   }
@@ -70,17 +74,16 @@ function isWinning(player) {
         s23.innerText === sign &&
         s33.innerText === sign)
     ) {
-      if (player1 === sign && isWinner === false) {
-        alert("You are the winner.");
-        isWinner = true;
-        return isWinner;
-      } else if (player2 === sign && isWinner === false) {
-        alert("Computer is a winner.");
+      if (player === sign && isWinner === false) {
+        if (player1 === sign) {
+          alert("You are the winner.");
+        } else {
+          alert("Computer is a winner.");
+        }
         isWinner = true;
         return isWinner;
       }
-    } else {
-      return isWinner;
     }
   }
+  return isWinner;
 }
