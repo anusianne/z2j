@@ -80,10 +80,19 @@ function isWinning(player) {
         } else {
           alert("Computer is a winner.");
         }
+        createRestartBtn();
         isWinner = true;
         return isWinner;
       }
     }
   }
   return isWinner;
+}
+function createRestartBtn() {
+  const restartBtn = document.createElement("button");
+  restartBtn.innerHTML = "Restart and play again!";
+  document.body.appendChild(restartBtn);
+  addEventListener("click", () => {
+    location.reload();
+  });
 }
