@@ -21,6 +21,7 @@ function choosePlayer(playerID) {
     player1 = "O";
     player2 = "X";
   }
+
   document.getElementById("playerChooser").style.visibility = "hidden";
 }
 function chooseSquare(squareID) {
@@ -28,7 +29,7 @@ function chooseSquare(squareID) {
     const sq = document.getElementById(squareID);
     if (sq.innerText === "") {
       sq.insertAdjacentHTML("afterbegin", player1);
-      setTimeout(aiMove, 500);
+      setTimeout(aiMove, 200);
     }
   }
 }
@@ -37,7 +38,7 @@ function aiMove() {
     if (isWinning(player1) === false) {
       for (let sq of arr) {
         if (sq.innerText === "") {
-          sq.innerText = player2;
+          sq.insertAdjacentHTML("afterbegin", player2);
           isWinning(player2);
           break;
         }
@@ -77,8 +78,10 @@ function isWinning(player) {
       if (player === sign && isWinner === false) {
         if (player1 === sign) {
           alert("You are the winner.");
-        } else {
-          alert("Computer is a winner.");
+        } else if (player2 === sign) {
+          setTimeout(function () {
+            alert("Computer is the winner.");
+          }, 0);
         }
         createRestartBtn();
         isWinner = true;
@@ -92,7 +95,7 @@ function createRestartBtn() {
   const restartBtn = document.createElement("button");
   restartBtn.innerHTML = "Restart and play again!";
   document.body.appendChild(restartBtn);
-  addEventListener("click", () => {
+  restartBtn.addEventListener("click", () => {
     location.reload();
   });
 }
