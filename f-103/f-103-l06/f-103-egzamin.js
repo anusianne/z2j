@@ -22,7 +22,7 @@ function choosePlayer(playerID) {
     player2 = "X";
   }
 
-  document.getElementById("playerChooser").style.visibility = "hidden";
+  document.getElementById("playerChooser").style.display = "none";
 }
 function chooseSquare(squareID) {
   if (isWinner === false) {
