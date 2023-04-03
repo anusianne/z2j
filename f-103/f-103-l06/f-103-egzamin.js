@@ -93,6 +93,7 @@ function isWinning(player) {
 }
 function createRestartBtn() {
   const restartBtn = document.createElement("button");
+  restartBtn.className = "restart-button";
   restartBtn.innerHTML = "Restart and play again!";
   document.body.appendChild(restartBtn);
   restartBtn.addEventListener("click", () => {

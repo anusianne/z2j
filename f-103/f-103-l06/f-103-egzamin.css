@@ -38,7 +38,12 @@ body {
   font-weight: bold;
   letter-spacing: 0.3em;
 }
-.sqBtn {
+.restart-button {
+  margin: auto;
+  display: block;
+}
+.sqBtn,
+.restart-button {
   margin-top: 0.5em;
   font-size: 2.5vh;
   border: 2px solid #003566;
@@ -48,4 +53,7 @@ body {
   text-shadow: 2px 2px greenyellow;
   color: #003566;
   cursor: pointer;
+  font-family: "Delicious Handrawn", cursive;
+  text-transform: uppercase;
+  font-weight: bold;
 }
