@@ -7,18 +7,22 @@ img.images {
   max-width: 1920px;
 }
 #min_gallery {
-  width: 60vh;
+  display: flex;
+  position: fixed;
+  border: 5px solid violet;
+  bottom: 5px;
+  right: 5px;
+  width: 79vh;
   overflow-x: scroll;
-  border: 3px solid violet;
-  white-space: nowrap;
-  font-size: 0;
 }
 img.scrollable {
   height: 100%;
   width: 100%;
 }
 .min_imgs {
-  width: 30vh;
-  height: auto;
-  display: inline-block;
+  width: 200px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  padding: 0;
+  box-shadow: 10px 10px 5px violet;
 }
