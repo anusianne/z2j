@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  box-sizing: border-box;
+}
+img.images {
+  width: 100%;
+  max-width: 1920px;
+}
+#min_gallery {
+  width: 60vh;
+  overflow-x: scroll;
+  border: 3px solid violet;
+  white-space: nowrap;
+  font-size: 0;
+}
+img.scrollable {
+  height: 100%;
+  width: 100%;
+}
+.min_imgs {
+  width: 30vh;
+  height: auto;
+  display: inline-block;
+}
