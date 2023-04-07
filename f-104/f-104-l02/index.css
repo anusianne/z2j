@@ -1,10 +1,22 @@
 body {
   margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+img {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
 img.images {
+  display: block;
   width: 100%;
-  max-width: 1920px;
 }
 #min_gallery {
   display: flex;
@@ -14,15 +26,21 @@ img.images {
   right: 5px;
   width: 79vh;
   overflow-x: scroll;
+  margin-bottom: 0;
 }
 img.scrollable {
-  height: 100%;
+  height: auto;
   width: 100%;
+  max-height: 100%;
+}
+img.scrollable:hover {
+  transform: scale(1.2);
+  transition-duration: 600ms;
 }
 .min_imgs {
   width: 200px;
   flex: 0 0 auto;
   overflow: hidden;
   padding: 0;
-  box-shadow: 10px 10px 5px violet;
+  box-shadow: 10px 10px 10px 25px violet;
 }
