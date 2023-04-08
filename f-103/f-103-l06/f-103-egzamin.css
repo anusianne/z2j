@@ -57,3 +57,6 @@ body {
   text-transform: uppercase;
   font-weight: bold;
 }
+@media (max-width: 1250px) {
+  /* … */
+}
