@@ -11,31 +11,38 @@
 
 <body>
     <h1>Rejestracja</h1>
-    <form action="">
+    <form name="contactForm" onsubmit="validateForm()">
 
         <label for="fname">Imię: </label>
         <input type="text" id="fname">
+        <div class="error" id="fnameErr"></div>
         <label for="lname">Nazwisko: </label>
         <input type="text" id="lname">
-        <label for="sex">Płeć: </label>
-        <input type="radio" id="sex" name="Mężczyzna" value="Mężczyzna">
-        <label for="man">Mężczyzna</label>
-        <input type="radio" id="sex" placeholder="Kobieta">
-        <label for="woman">Kobieta</label>
+        <div class="error" id="lnameErr"></div>
+        <fieldset id="sex">
+            <label for="gender">Płeć: </label>
+            <input type="radio" id="male" name="sex" value="man">
+            <label for="male">Mężczyzna</label>
+            <input type="radio" id="female" name="sex" value="woman">
+            <label for="female">Kobieta</label>
+            <div class="error" id="sexErr"></div>
+        </fieldset>
         <label for="login">Login: </label>
         <input type="text" id="login">
+        <div class="error" id="loginErr"></div>
         <label for="pass">Hasło: </label>
-        <input type="text" id="pass">
+        <input type="password" id="pass">
+        <div class="error" id="passErr"></div>
         <label for="date">Data urodzenia: </label>
-        <input type="date">
+        <input type="date" id="datebirthErr">
 
-        <button>Wyślij</button>
+        <input type="submit" value="Wyślij">
     </form>
 
-    <select id="genres">
+    <!-- <select id="genres">
         <option value="rock" selected>Rock</option>
         <option value="blues">Blues</option>
-    </select>
+    </select> -->
     <script src="f-105-l01.js"></script>
 </body>
 
