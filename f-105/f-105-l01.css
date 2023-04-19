@@ -23,3 +23,22 @@ label {
   color: red;
   background-color: #ecc9ee;
 }
+
+@media only screen and (max-width: 768px) {
+  input,
+  label {
+    width: 8vw;
+  }
+  #myForm {
+    padding: 10vh 0 10vh 0;
+  }
+}
+@media only screen and (max-width: 600px) {
+  input,
+  label {
+    width: 8vw;
+  }
+  #myForm {
+    padding: 10vh 0 10vh 0;
+  }
+}
