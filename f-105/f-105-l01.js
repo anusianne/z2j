@@ -23,39 +23,45 @@ function validateForm() {
     pass: document.getElementById("pass").value.trim(),
     date: document.getElementById("datebirth").value,
   };
-  for (let i in formData) {
-    if (formData[i] == "" || !formData.sex) {
-      document.getElementById(i + "Err").innerHTML = "Proszę wypełnić pole!";
+  let isValid = true;
+  for (const [key, value] of Object.entries(formData)) {
+    if (value === "" || value === null || value === undefined) {
+      console.log(value);
+      document.getElementById(key + "Err").innerHTML = "Proszę wypełnić pole!";
+      isValid = false;
     } else {
-      document.getElementById(i + "Err").innerHTML = "";
-      if (formData.sex.value === "man") {
-        alert(
-          "Pan " +
-            formData.fname +
-            " " +
-            formData.lname +
-            " " +
-            " urodzony " +
-            formData.date +
-            " chce utworzyć konto o loginie " + "'" +
-            formData.login + "'"
-        );
-      } else if (formData.sex.value === "woman") {
-        alert(
-          "Pani " +
-            formData.fname +
-            " " +
-            formData.lname +
-            " " +
-            "urodzona" +
-            formData.date +
-            " chce utworzyć konto o loginie " +
-            "'" +
-            formData.login +
-            "'"
-        );
-      }
-      break;
+      document.getElementById(key + "Err").innerHTML = "";
+    }
+  }
+  if (isValid) {
+    if (formData.sex.value === "man") {
+      alert(
+        "Pan " +
+          formData.fname +
+          " " +
+          formData.lname +
+          " " +
+          " urodzony " +
+          formData.date +
+          " chce utworzyć konto o loginie " +
+          "'" +
+          formData.login +
+          "'"
+      );
+    } else if (formData.sex.value === "woman") {
+      alert(
+        "Pani " +
+          formData.fname +
+          " " +
+          formData.lname +
+          " " +
+          "urodzona" +
+          formData.date +
+          " chce utworzyć konto o loginie " +
+          "'" +
+          formData.login +
+          "'"
+      );
     }
   }
 }
