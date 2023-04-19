@@ -10,15 +10,15 @@
 </head>
 
 <body>
-    <h1>Rejestracja</h1>
+    <h1 class="registration">Rejestracja</h1>
     <form name="contactForm" id="myForm" onsubmit="validateForm()">
 
         <label for="fname">Imię: </label>
         <input type="text" id="fname">
-        <div class="error" id="fnameErr"></div>
+        <div class="error" id="fnameErr"></div><br>
         <label for="lname">Nazwisko: </label>
         <input type="text" id="lname">
-        <div class="error" id="lnameErr"></div>
+        <div class="error" id="lnameErr"></div><br>
         <fieldset id="sex">
             <label for="sex">Płeć: </label>
             <input type="radio" id="male" name="sex" value="man">
@@ -26,16 +26,16 @@
             <input type="radio" id="female" name="sex" value="woman">
             <label for="female">Kobieta</label>
         </fieldset>
-        <div class="error" id="sexErr"></div>
+        <div class="error" id="sexErr"></div><br>
         <label for="login">Login: </label>
         <input type="text" id="login">
-        <div class="error" id="loginErr"></div>
+        <div class="error" id="loginErr"></div><br>
         <label for="pass">Hasło: </label>
         <input type="password" id="pass">
-        <div class="error" id="passErr"></div>
+        <div class="error" id="passErr"></div><br>
         <label for="datebirth">Data urodzenia: </label>
         <input type="date" id="datebirth">
-        <div class="error" id="dateErr"></div>
+        <div class="error" id="dateErr"></div><br>
         <input type="submit" value="Wyślij">
     </form>
 

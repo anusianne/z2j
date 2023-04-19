@@ -1,3 +1,24 @@
+label {
+  font-weight: bold;
+}
+.registration {
+  text-align: center;
+}
+
+#myForm {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  border: 2px solid black;
+  padding: 5vh 0 5vh 0;
+}
+
+#sex {
+  border: none;
+}
 .error {
   color: red;
   background-color: #ecc9ee;
