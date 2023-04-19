@@ -11,7 +11,7 @@
 
 <body>
     <h1>Rejestracja</h1>
-    <form name="contactForm" onsubmit="validateForm()">
+    <form name="contactForm" id="myForm" onsubmit="validateForm()">
 
         <label for="fname">Imię: </label>
         <input type="text" id="fname">
@@ -20,22 +20,22 @@
         <input type="text" id="lname">
         <div class="error" id="lnameErr"></div>
         <fieldset id="sex">
-            <label for="gender">Płeć: </label>
+            <label for="sex">Płeć: </label>
             <input type="radio" id="male" name="sex" value="man">
             <label for="male">Mężczyzna</label>
             <input type="radio" id="female" name="sex" value="woman">
             <label for="female">Kobieta</label>
-            <div class="error" id="sexErr"></div>
         </fieldset>
+        <div class="error" id="sexErr"></div>
         <label for="login">Login: </label>
         <input type="text" id="login">
         <div class="error" id="loginErr"></div>
         <label for="pass">Hasło: </label>
         <input type="password" id="pass">
         <div class="error" id="passErr"></div>
-        <label for="date">Data urodzenia: </label>
-        <input type="date" id="datebirthErr">
-
+        <label for="datebirth">Data urodzenia: </label>
+        <input type="date" id="datebirth">
+        <div class="error" id="dateErr"></div>
         <input type="submit" value="Wyślij">
     </form>
 
