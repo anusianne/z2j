@@ -1,0 +1,55 @@
+label {
+  font-weight: bold;
+}
+.registration {
+  color: #4e6e81;
+  text-align: center;
+}
+hr.hr {
+  border: 1px solid #ecc9ee;
+  width: 80%;
+}
+
+#myForm {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  border: 2px solid #4e6e81;
+  padding: 5vh 0 5vh 0;
+  margin-top: 5vh;
+}
+
+#sex {
+  border: none;
+}
+.error {
+  color: red;
+  background-color: #ecc9ee;
+}
+
+input {
+  border: 2px solid #4e6e81;
+  background-color: #ecc9ee;
+}
+
+@media only screen and (min-width: 450px) {
+  #myForm {
+    width: 200vw;
+    padding: 0;
+    border: none;
+  }
+
+  input,
+  label {
+    width: 50vw;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #myForm {
+    width: 20vw;
+    padding: 10vh 10vh 10vh 10vh;
+  }
+}
