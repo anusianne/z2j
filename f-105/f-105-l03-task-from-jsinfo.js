@@ -72,3 +72,4 @@ function getAverageAge(array) {
   return averageAgeArr;
 }
 console.log(getAverageAge(array));
+//9
