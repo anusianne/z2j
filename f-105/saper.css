@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+#levelChooser {
+  display: grid;
+  grid-template-columns: 1fr;
+  border: 5px solid black;
+}
+.title {
+  text-align: center;
+}
