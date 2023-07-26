@@ -1,12 +1,13 @@
-const easy = document.getElementById("#easy");
-const medium = document.getElementById("#medium");
-const master = document.getElementById("#master");
-
-easy.addEventListener("click", function () {
+const levelBtns = document.getElementsByClassName("level");
+let gridSize = 0;
+function levelBtnHandler() {
   console.log("hi");
-  const div = document.createElement("div");
-  div.className = "container";
-  div.style.gridTemplateColumns = "repeat(8,1fr)";
-  div.style.gridTemplateRows = "repeat(8,1fr)";
-  easy.appendChild("div");
-});
+  let newDiv = document.createElement("div");
+  newDiv.className = "container";
+  newDiv.style.gridTemplateColumns = "repeat(8,1fr)";
+  newDiv.style.gridTemplateRows = "repeat(8,1fr)";
+  document.body.appendChild(newDiv);
+}
+for (el of levelBtns) {
+  el.addEventListener("click", levelBtnHandler);
+}
