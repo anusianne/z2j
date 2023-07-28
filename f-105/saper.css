@@ -13,3 +13,10 @@ body {
 .title {
   text-align: center;
 }
+.container {
+  display: grid;
+  border: 1px solid black;
+  width: 90%;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
