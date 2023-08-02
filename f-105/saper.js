@@ -1,12 +1,14 @@
 const levelBtns = document.getElementsByClassName("level");
-let gridSize = 0;
-function levelBtnHandler() {
-  console.log("hi");
+const levelChooser = document.getElementById("levelChooser");
+const easy = document.getElementById("easy");
+easy.addEventListener("click", function () {
   let newDiv = document.createElement("div");
-  newDiv.className = "container";
-
+  levelChooser.style.display = "none";
+  newDiv.classList.add("container");
   document.body.appendChild(newDiv);
-}
-for (el of levelBtns) {
-  el.addEventListener("click", levelBtnHandler);
-}
+  for (let i = 1; i <= 64; i++) {
+    let box = document.createElement("div");
+    box.classList.add("box");
+    newDiv.appendChild(box);
+  }
+});
