@@ -3,6 +3,7 @@ const levelChooser = document.getElementById("levelChooser");
 const easy = document.getElementById("easy");
 const medium = document.getElementById("medium");
 const master = document.getElementById("master");
+const btnUndo = document.createElement("button");
 easy.addEventListener("click", function () {
   let newDiv = document.createElement("div");
   levelChooser.style.display = "none";
@@ -12,6 +13,14 @@ easy.addEventListener("click", function () {
     let box = document.createElement("div");
     box.classList.add("box");
     newDiv.appendChild(box);
+    document.body.appendChild(btnUndo);
+    btnUndo.innerText = "Undo";
+    btnUndo.addEventListener("click", function () {
+      levelChooser.style.display = "grid";
+      newDiv.style.display = "none";
+      box.style.display = "none";
+      btnUndo.style.display = "none";
+    });
   }
 });
 medium.addEventListener("click", function () {
