@@ -9,31 +9,39 @@ easy.addEventListener("click", function () {
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
   document.body.appendChild(newDiv);
-  for (let i = 1; i <= 64; i++) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    newDiv.appendChild(box);
-    document.body.appendChild(btnUndo);
-    btnUndo.innerText = "Undo";
-    btnUndo.addEventListener("click", function () {
-      levelChooser.style.display = "grid";
-      newDiv.style.display = "none";
-      box.style.display = "none";
-      btnUndo.style.display = "none";
-    });
+  for (let y = 1; y <= 8; y++) {
+    for (let x = 1; x <= 8; x++) {
+      let box = document.createElement("div");
+      box.classList.add("box");
+      box.setAttribute("id", "b" + y.toString() + x.toString());
+      newDiv.appendChild(box);
+    }
   }
+  document.body.appendChild(btnUndo);
+  btnUndo.innerText = "Undo";
+  btnUndo.addEventListener("click", function () {
+    location.reload();
+  });
 });
 medium.addEventListener("click", function () {
   let newDiv = document.createElement("div");
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
   document.body.appendChild(newDiv);
-  for (let i = 1; i <= 256; i++) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    newDiv.style.gridTemplateColumns = "repeat(16,50px)";
-    newDiv.style.gridTemplateRows = "repeat(16,50px)";
-    newDiv.appendChild(box);
+  for (let y = 1; y <= 16; y++) {
+    for (let x = 1; x <= 16; x++) {
+      let box = document.createElement("div");
+      box.classList.add("box");
+      box.setAttribute("id", "b" + y.toString() + x.toString());
+      newDiv.style.gridTemplateColumns = "repeat(16,50px)";
+      newDiv.style.gridTemplateRows = "repeat(16,50px)";
+      newDiv.appendChild(box);
+      document.body.appendChild(btnUndo);
+      btnUndo.innerText = "Undo";
+      btnUndo.addEventListener("click", function () {
+        location.reload();
+      });
+    }
   }
 });
 master.addEventListener("click", function () {
@@ -41,11 +49,19 @@ master.addEventListener("click", function () {
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
   document.body.appendChild(newDiv);
-  for (let i = 1; i <= 480; i++) {
-    let box = document.createElement("div");
-    box.classList.add("box");
-    newDiv.style.gridTemplateColumns = "repeat(30,50px)";
-    newDiv.style.gridTemplateRows = "repeat(16,50px)";
-    newDiv.appendChild(box);
+  for (let y = 1; y <= 30; y++) {
+    for (let x = 1; x <= 16; x++) {
+      let box = document.createElement("div");
+      box.classList.add("box");
+      box.setAttribute("id", "b" + y.toString() + x.toString());
+      newDiv.style.gridTemplateColumns = "repeat(30,50px)";
+      newDiv.style.gridTemplateRows = "repeat(16,50px)";
+      newDiv.appendChild(box);
+      document.body.appendChild(btnUndo);
+      btnUndo.innerText = "Undo";
+      btnUndo.addEventListener("click", function () {
+        location.reload();
+      });
+    }
   }
 });
