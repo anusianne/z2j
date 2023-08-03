@@ -16,8 +16,6 @@ body {
 .container {
   display: grid;
   border: 1px solid black;
-  grid-template-columns: repeat(8, 50px);
-  grid-template-rows: repeat(8, 50px);
 }
 .box {
   background-color: #6a1b9a;

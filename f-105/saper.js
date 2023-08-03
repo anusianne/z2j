@@ -12,6 +12,8 @@ easy.addEventListener("click", function () {
   for (let y = 1; y <= 8; y++) {
     for (let x = 1; x <= 8; x++) {
       let box = document.createElement("div");
+      newDiv.style.gridTemplateColumns = "repeat(8,50px)";
+      newDiv.style.gridTemplateRows = "repeat(8,50px)";
       box.classList.add("box");
       box.setAttribute("id", "b" + y.toString() + x.toString());
       newDiv.appendChild(box);
@@ -36,13 +38,13 @@ medium.addEventListener("click", function () {
       newDiv.style.gridTemplateColumns = "repeat(16,50px)";
       newDiv.style.gridTemplateRows = "repeat(16,50px)";
       newDiv.appendChild(box);
-      document.body.appendChild(btnUndo);
-      btnUndo.innerText = "Undo";
-      btnUndo.addEventListener("click", function () {
-        location.reload();
-      });
     }
   }
+  document.body.appendChild(btnUndo);
+  btnUndo.innerText = "Undo";
+  btnUndo.addEventListener("click", function () {
+    location.reload();
+  });
 });
 master.addEventListener("click", function () {
   let newDiv = document.createElement("div");
@@ -57,11 +59,11 @@ master.addEventListener("click", function () {
       newDiv.style.gridTemplateColumns = "repeat(30,50px)";
       newDiv.style.gridTemplateRows = "repeat(16,50px)";
       newDiv.appendChild(box);
-      document.body.appendChild(btnUndo);
-      btnUndo.innerText = "Undo";
-      btnUndo.addEventListener("click", function () {
-        location.reload();
-      });
     }
   }
+  document.body.appendChild(btnUndo);
+  btnUndo.innerText = "Undo";
+  btnUndo.addEventListener("click", function () {
+    location.reload();
+  });
 });
