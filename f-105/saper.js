@@ -85,9 +85,10 @@ levelOption.master.addEventListener("click", function () {
   });
 });
 function rightClick(box) {
-  box.setAttribute(
-    "isFlagged",
-    box.getAttribute("isFlagged") === "false" ? "true" : "false"
-  );
-  console.log(box.getAttribute("isFlagged"));
+  if (box.getAttribute("isFlagged") === "false") {
+    box.setAttribute("isFlagged", "true");
+  } else {
+    box.setAttribute("isFlagged", "false");
+  }
+  box.classList.toggle("isFlagged", box.getAttribute("isFlagged") === "true");
 }
