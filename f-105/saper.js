@@ -1,10 +1,12 @@
 const levelBtns = document.getElementsByClassName("level");
 const levelChooser = document.getElementById("levelChooser");
-const easy = document.getElementById("easy");
-const medium = document.getElementById("medium");
-const master = document.getElementById("master");
+const levelOption = {
+  easy: document.getElementById("easy"),
+  medium: document.getElementById("medium"),
+  master: document.getElementById("master"),
+};
 const btnUndo = document.createElement("button");
-easy.addEventListener("click", function () {
+levelOption.easy.addEventListener("click", function () {
   let newDiv = document.createElement("div");
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
@@ -12,10 +14,15 @@ easy.addEventListener("click", function () {
   for (let y = 1; y <= 8; y++) {
     for (let x = 1; x <= 8; x++) {
       let box = document.createElement("div");
+      box.setAttribute("isFlagged", "false");
       newDiv.style.gridTemplateColumns = "repeat(8,50px)";
       newDiv.style.gridTemplateRows = "repeat(8,50px)";
       box.classList.add("box");
       box.setAttribute("id", "b" + y.toString() + x.toString());
+      box.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        rightClick(box);
+      });
       newDiv.appendChild(box);
     }
   }
@@ -25,7 +32,7 @@ easy.addEventListener("click", function () {
     location.reload();
   });
 });
-medium.addEventListener("click", function () {
+levelOption.medium.addEventListener("click", function () {
   let newDiv = document.createElement("div");
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
@@ -33,10 +40,15 @@ medium.addEventListener("click", function () {
   for (let y = 1; y <= 16; y++) {
     for (let x = 1; x <= 16; x++) {
       let box = document.createElement("div");
+      box.setAttribute("isFlagged", "false");
       box.classList.add("box");
       box.setAttribute("id", "b" + y.toString() + x.toString());
       newDiv.style.gridTemplateColumns = "repeat(16,50px)";
       newDiv.style.gridTemplateRows = "repeat(16,50px)";
+      box.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        rightClick(box);
+      });
       newDiv.appendChild(box);
     }
   }
@@ -46,7 +58,7 @@ medium.addEventListener("click", function () {
     location.reload();
   });
 });
-master.addEventListener("click", function () {
+levelOption.master.addEventListener("click", function () {
   let newDiv = document.createElement("div");
   levelChooser.style.display = "none";
   newDiv.classList.add("container");
@@ -55,9 +67,14 @@ master.addEventListener("click", function () {
     for (let x = 1; x <= 16; x++) {
       let box = document.createElement("div");
       box.classList.add("box");
+      box.setAttribute("isFlagged", "false");
       box.setAttribute("id", "b" + y.toString() + x.toString());
       newDiv.style.gridTemplateColumns = "repeat(30,50px)";
       newDiv.style.gridTemplateRows = "repeat(16,50px)";
+      box.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        rightClick(box);
+      });
       newDiv.appendChild(box);
     }
   }
@@ -67,3 +84,10 @@ master.addEventListener("click", function () {
     location.reload();
   });
 });
+function rightClick(box) {
+  box.setAttribute(
+    "isFlagged",
+    box.getAttribute("isFlagged") === "false" ? "true" : "false"
+  );
+  console.log(box.getAttribute("isFlagged"));
+}
