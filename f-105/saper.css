@@ -21,6 +21,10 @@ body {
   background-color: #6a1b9a;
   border: 1px solid black;
 }
+.clickedBox {
+  background-color: blueviolet;
+  border: 1px solid black;
+}
 .isFlagged::before {
   content: "\2691";
   background-color: #6a1b9a;

@@ -5,6 +5,7 @@ const levelOption = {
   medium: document.getElementById("medium"),
   master: document.getElementById("master"),
 };
+const totalBoxes = { easy: 64, medium: 256, master: 480 };
 const btnUndo = document.createElement("button");
 levelOption.easy.addEventListener("click", function () {
   let newDiv = document.createElement("div");
@@ -24,6 +25,10 @@ levelOption.easy.addEventListener("click", function () {
         rightClick(box);
       });
       newDiv.appendChild(box);
+      box.addEventListener("click", () => {
+        box.className = "clickedBox";
+        spreadMines();
+      });
     }
   }
   document.body.appendChild(btnUndo);
@@ -50,6 +55,9 @@ levelOption.medium.addEventListener("click", function () {
         rightClick(box);
       });
       newDiv.appendChild(box);
+      box.addEventListener("click", () => {
+        box.className = "clickedBox";
+      });
     }
   }
   document.body.appendChild(btnUndo);
@@ -76,6 +84,9 @@ levelOption.master.addEventListener("click", function () {
         rightClick(box);
       });
       newDiv.appendChild(box);
+      box.addEventListener("click", () => {
+        box.className = "clickedBox";
+      });
     }
   }
   document.body.appendChild(btnUndo);
@@ -91,4 +102,20 @@ function rightClick(box) {
     box.setAttribute("isFlagged", "false");
   }
   box.classList.toggle("isFlagged", box.getAttribute("isFlagged") === "true");
+}
+function spreadMines() {
+  let totalMines;
+  switch (levelOption) {
+    case totalBoxes.easy:
+      totalMines = 10;
+      break;
+    case totalBoxes.medium:
+      totalMines = 40;
+      break;
+    case totalBoxes.master:
+      totalMines = 90;
+      break;
+    default:
+      totalMines = 10;
+  }
 }
