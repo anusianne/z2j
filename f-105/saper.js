@@ -5,7 +5,8 @@ const levelOption = {
   medium: document.getElementById("medium"),
   master: document.getElementById("master"),
 };
-const totalBoxes = { easy: 64, medium: 256, master: 480 };
+let mineCounter = 0;
+const totalBoxesPerOptions = { easy: 64, medium: 256, master: 480 };
 const btnUndo = document.createElement("button");
 levelOption.easy.addEventListener("click", function () {
   let newDiv = document.createElement("div");
@@ -27,15 +28,29 @@ levelOption.easy.addEventListener("click", function () {
       newDiv.appendChild(box);
       box.addEventListener("click", () => {
         box.className = "clickedBox";
-        spreadMines();
       });
     }
   }
-  document.body.appendChild(btnUndo);
-  btnUndo.innerText = "Undo";
-  btnUndo.addEventListener("click", function () {
-    location.reload();
-  });
+  const boxes = document.getElementsByClassName("box");
+  const totalBoxes = parseInt(getTotalBoxes(totalBoxesPerOptions));
+  const totalMines = parseInt(numberOfMines(totalBoxes));
+  while (mineCounter < totalMines) {
+    console.log("total mines: " + totalMines);
+    console.log(boxes);
+    for (let box = 0; box < boxes.length - 1; box++) {
+      let divider = parseFloat(totalMines / totalBoxes).toFixed(4);
+      console.log("trying to plant " + divider);
+      if (Math.random() <= parseFloat(divider) && mineCounter < totalMines) {
+        boxes.item(box).setAttribute("hasMine", "true");
+        mineCounter += 1;
+      }
+    }
+    document.body.appendChild(btnUndo);
+    btnUndo.innerText = "Undo";
+    btnUndo.addEventListener("click", function () {
+      location.reload();
+    });
+  }
 });
 levelOption.medium.addEventListener("click", function () {
   let newDiv = document.createElement("div");
@@ -103,19 +118,27 @@ function rightClick(box) {
   }
   box.classList.toggle("isFlagged", box.getAttribute("isFlagged") === "true");
 }
-function spreadMines() {
-  let totalMines;
-  switch (levelOption) {
+function numberOfMines(totalBoxes) {
+  switch (totalBoxes) {
     case totalBoxes.easy:
-      totalMines = 10;
-      break;
+      return 10;
     case totalBoxes.medium:
-      totalMines = 40;
-      break;
+      return 40;
     case totalBoxes.master:
-      totalMines = 90;
-      break;
+      return 90;
     default:
-      totalMines = 10;
+      return 10;
+  }
+}
+function getTotalBoxes(totalBoxesPerOptions) {
+  switch (totalBoxesPerOptions) {
+    case totalBoxesPerOptions.easy:
+      return 64;
+    case totalBoxesPerOptions.medium:
+      return 256;
+    case totalBoxesPerOptions.master:
+      return 480;
+    default:
+      return 64;
   }
 }
