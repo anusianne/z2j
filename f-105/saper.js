@@ -6,6 +6,7 @@ const levelOption = {
   master: document.getElementById("master"),
 };
 let mineCounter = 0;
+const boxes = document.getElementsByClassName("box");
 const totalBoxesPerOptions = { easy: 64, medium: 256, master: 480 };
 const btnUndo = document.createElement("button");
 levelOption.easy.addEventListener("click", function () {
@@ -28,10 +29,11 @@ levelOption.easy.addEventListener("click", function () {
       newDiv.appendChild(box);
       box.addEventListener("click", () => {
         box.className = "clickedBox";
+        countMinesAround(box);
       });
     }
   }
-  const boxes = document.getElementsByClassName("box");
+
   const totalBoxes = parseInt(getTotalBoxes(totalBoxesPerOptions));
   const totalMines = parseInt(numberOfMines(totalBoxes));
   while (mineCounter < totalMines) {
@@ -141,4 +143,22 @@ function getTotalBoxes(totalBoxesPerOptions) {
     default:
       return 64;
   }
+}
+function countMinesAround(box) {
+  let bombCount = 0;
+  const boxClickedId = box.id;
+  boxarr = boxClickedId.split("").shift();
+  console.log(boxarr);
+  for (let y = -1; y <= 1; y++) {
+    for (let x = -1; x <= 1; x++) {
+      if (y === 0 && x === 0) {
+        continue;
+      }
+      const idToSearch = "b" + y.toString() + x.toString();
+      if (boxes.some((b) => b.id === idToSearch)) {
+        bombCount++;
+      }
+    }
+  }
+  return bombCount;
 }
