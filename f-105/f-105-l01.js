@@ -7,3 +7,15 @@ console.log(styles[0]);
 styles.shift();
 styles.unshift("Rap", "Reggae");
 console.log(styles);
+
+// ! calculator object with two methods:
+let calculator = {
+  sum() {
+    return this.a + this.b;
+  },
+  mul() {
+    return this.a * this.b;
+  },
+};
+alert(calculator.sum());
+alert(calculator.mul());
