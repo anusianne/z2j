@@ -1,33 +1,10 @@
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-#levelChooser {
-  display: grid;
-  grid-template-columns: 1fr;
-  border: 5px solid black;
-}
-.title {
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  display: inline-block;
   text-align: center;
-}
-.container {
-  display: grid;
-  border: 1px solid black;
-}
-.box {
-  background-color: #6a1b9a;
-  border: 1px solid black;
-}
-.clickedBox {
-  background-color: blueviolet;
-  border: 1px solid black;
-}
-.isFlagged::before {
-  content: "\2691";
-  background-color: #6a1b9a;
-  font-size: 24px;
-  position: absolute;
+  line-height: 30px;
+  font-size: 16px;
+  cursor: pointer;
 }

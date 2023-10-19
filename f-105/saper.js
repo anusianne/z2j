@@ -6,9 +6,12 @@ const levelChooser = {
 let xSize;
 let ySize;
 let bombAmount;
-levelChooser.easy.addEventListener("click", createBoard);
-levelChooser.medium.addEventListener("click", createBoard);
-levelChooser.master.addEventListener("click", createBoard);
+const gridContainer = document.getElementById("grid-container");
+
+levelChooser.easy.addEventListener("click", () => createBoard("easy"));
+levelChooser.medium.addEventListener("click", () => createBoard("medium"));
+levelChooser.master.addEventListener("click", () => createBoard("master"));
+
 function createBoard(levelOption) {
   switch (levelOption) {
     case "easy":
@@ -27,8 +30,57 @@ function createBoard(levelOption) {
       bombAmount = 99;
       break;
   }
-  console.log(`${xSize}`);
+
+  // Clear the previous grid
+  gridContainer.innerHTML = "";
+
+  for (let i = 0; i < ySize; i++) {
+    for (let j = 0; j < xSize; j++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      cell.dataset.row = i;
+      cell.dataset.col = j;
+      cell.addEventListener("click", handleCellClick);
+      gridContainer.appendChild(cell);
+    }
+  }
+
+  // Generate bomb positions
+  const bombPositions = generateBombPositions();
+
+  console.log(`${xSize} x ${ySize} grid created with ${bombAmount} bombs.`);
 }
+
+function generateBombPositions() {
+  const bombPositions = [];
+  while (bombPositions.length < bombAmount) {
+    const x = Math.floor(Math.random() * xSize);
+    const y = Math.floor(Math.random() * ySize);
+    const position = `${x}-${y}`;
+    if (!bombPositions.includes(position)) {
+      bombPositions.push(position);
+      const cell = document.querySelector(`[data-row="${y}"][data-col="${x}"]`);
+      cell.classList.add("bomb");
+    }
+  }
+  return bombPositions;
+}
+
+function handleCellClick(event) {
+  const cell = event.target;
+  const isBomb = cell.classList.contains("bomb");
+  if (isBomb) {
+    // Handle game over (e.g., show all bombs and end the game)
+    cell.style.backgroundColor = "red";
+  } else {
+    // Handle cell reveal logic (e.g., show numbers, recursively reveal adjacent cells)
+    cell.style.backgroundColor = "#ddd";
+    // Add logic to display numbers or recursively reveal adjacent cells
+  }
+}
+
+// Call createBoard with an initial level (e.g., "easy")
+createBoard("easy");
 
 // const levelBtns = document.getElementsByClassName("level");
 // const levelChooser = document.getElementById("levelChooser");
