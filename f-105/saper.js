@@ -30,16 +30,12 @@ function createBoard(levelOption) {
       bombAmount = 99;
       break;
   }
-
-  // Clear the previous grid
-  gridContainer.innerHTML = "";
-
-  for (let i = 0; i < ySize; i++) {
-    for (let j = 0; j < xSize; j++) {
+  for (let y = 0; y < ySize; y++) {
+    for (let x = 0; x < xSize; x++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-      cell.dataset.row = i;
-      cell.dataset.col = j;
+      cell.dataset.row = y;
+      cell.dataset.col = x;
       cell.addEventListener("click", handleCellClick);
       gridContainer.appendChild(cell);
     }
