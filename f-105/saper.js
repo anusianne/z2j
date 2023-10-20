@@ -7,7 +7,6 @@ let xSize;
 let ySize;
 let bombAmount;
 const gridContainer = document.getElementById("grid-container");
-
 levelChooser.easy.addEventListener("click", () => createBoard("easy"));
 levelChooser.medium.addEventListener("click", () => createBoard("medium"));
 levelChooser.master.addEventListener("click", () => createBoard("master"));
@@ -36,44 +35,13 @@ function createBoard(levelOption) {
       square.classList.add("square");
       square.dataset.row = y;
       square.dataset.col = x;
-      square.addEventListener("click", handleCellClick);
+      square.addEventListener("click", createBoard);
       gridContainer.appendChild(square);
     }
   }
   // Generate bomb positions
-  const bomb = generateBomb();
   console.log(`${xSize} x ${ySize} grid created with ${bombAmount} bombs.`);
 }
-function generateBomb() {
-  const bomb = [];
-  while (bomb.length < bombAmount) {
-    const x = Math.floor(Math.random() * xSize);
-    const y = Math.floor(Math.random() * ySize);
-    const position = `${x}-${y}`;
-    if (!bombPositions.includes(position)) {
-      bombPositions.push(position);
-      const square = document.querySelector(
-        `[data-row="${y}"][data-col="${x}"]`
-      );
-      square.classList.add("bomb");
-    }
-  }
-  return bombPositions;
-}
-
-function handleCellClick(event) {
-  const square = event.target;
-  const isBomb = square.classList.contains("bomb");
-  if (isBomb) {
-    // Handle game over (e.g., show all bombs and end the game)
-    square.style.backgroundColor = "red";
-  } else {
-    // Handle cell reveal logic (e.g., show numbers, recursively reveal adjacent cells)
-    square.style.backgroundColor = "#ddd";
-    // Add logic to display numbers or recursively reveal adjacent cells
-  }
-}
-
 // Call createBoard with an initial level (e.g., "easy")
 createBoard("easy");
 
