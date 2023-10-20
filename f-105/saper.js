@@ -32,45 +32,44 @@ function createBoard(levelOption) {
   }
   for (let y = 0; y < ySize; y++) {
     for (let x = 0; x < xSize; x++) {
-      const cell = document.createElement("div");
-      cell.classList.add("cell");
-      cell.dataset.row = y;
-      cell.dataset.col = x;
-      cell.addEventListener("click", handleCellClick);
-      gridContainer.appendChild(cell);
+      const square = document.createElement("div");
+      square.classList.add("square");
+      square.dataset.row = y;
+      square.dataset.col = x;
+      square.addEventListener("click", handleCellClick);
+      gridContainer.appendChild(square);
     }
   }
-
   // Generate bomb positions
-  const bombPositions = generateBombPositions();
-
+  const bomb = generateBomb();
   console.log(`${xSize} x ${ySize} grid created with ${bombAmount} bombs.`);
 }
-
-function generateBombPositions() {
-  const bombPositions = [];
-  while (bombPositions.length < bombAmount) {
+function generateBomb() {
+  const bomb = [];
+  while (bomb.length < bombAmount) {
     const x = Math.floor(Math.random() * xSize);
     const y = Math.floor(Math.random() * ySize);
     const position = `${x}-${y}`;
     if (!bombPositions.includes(position)) {
       bombPositions.push(position);
-      const cell = document.querySelector(`[data-row="${y}"][data-col="${x}"]`);
-      cell.classList.add("bomb");
+      const square = document.querySelector(
+        `[data-row="${y}"][data-col="${x}"]`
+      );
+      square.classList.add("bomb");
     }
   }
   return bombPositions;
 }
 
 function handleCellClick(event) {
-  const cell = event.target;
-  const isBomb = cell.classList.contains("bomb");
+  const square = event.target;
+  const isBomb = square.classList.contains("bomb");
   if (isBomb) {
     // Handle game over (e.g., show all bombs and end the game)
-    cell.style.backgroundColor = "red";
+    square.style.backgroundColor = "red";
   } else {
     // Handle cell reveal logic (e.g., show numbers, recursively reveal adjacent cells)
-    cell.style.backgroundColor = "#ddd";
+    square.style.backgroundColor = "#ddd";
     // Add logic to display numbers or recursively reveal adjacent cells
   }
 }
