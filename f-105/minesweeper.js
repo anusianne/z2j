@@ -33,6 +33,7 @@ function createBoard(level) {
   for (let i = 0; i < level.xSize * level.ySize; i++) {
     const square = document.createElement("div");
     square.classList.add("square");
+    square.setAttribute("id", `s${i}`);
     grid.appendChild(square);
   }
 }
