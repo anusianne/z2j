@@ -1,21 +1,28 @@
 const levelChooser = document.getElementById("levelChooser");
-const easy = document.getElementById("easy");
-const medium = document.getElementById("medium");
-const master = document.getElementById("master");
+// Define a function to handle the click event for all level buttons
+function handleLevelClick(xSize, ySize, bombAmount) {
+  return function () {
+    createBoard({ xSize, ySize, bombAmount });
+  };
+}
 const levels = {
-  easy_lvl: { xSize: 8, ySize: 8, bombAmount: 10 },
-  medium_lvl: { xSize: 16, ySize: 16, bombAmount: 40 },
-  master_lvl: { xSize: 30, ySize: 16, bombAmount: 99 },
+  easy: { xSize: 8, ySize: 8, bombAmount: 10 },
+  medium: { xSize: 16, ySize: 16, bombAmount: 40 },
+  master: { xSize: 30, ySize: 16, bombAmount: 99 },
 };
-easy.addEventListener("click", () => {
-  createBoard(levels.easy_lvl);
-});
-medium.addEventListener("click", () => {
-  createBoard(levels.medium_lvl);
-});
-master.addEventListener("click", () => {
-  createBoard(levels.master_lvl);
-});
+// Add click event listeners for each level button
+for (const level in levels) {
+  document
+    .getElementById(level)
+    .addEventListener(
+      "click",
+      handleLevelClick(
+        levels[level].xSize,
+        levels[level].ySize,
+        levels[level].bombAmount
+      )
+    );
+}
 function createBoard(level) {
   console.log(level.xSize);
 }
