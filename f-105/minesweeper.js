@@ -1,4 +1,5 @@
 const levelChooser = document.getElementById("levelChooser");
+const grid = document.getElementById("grid");
 // Define a function to handle the click event for all level buttons
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
@@ -24,5 +25,7 @@ for (const level in levels) {
     );
 }
 function createBoard(level) {
-  console.log(level.xSize);
+  grid.style.display = "grid";
+  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr})`;
+  grid.style.gridTemplateRows = `repeat(${level.ySize}, 1fr)`;
 }
