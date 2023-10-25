@@ -25,7 +25,9 @@ for (const level in levels) {
     );
 }
 function createBoard(level) {
-  grid.style.display = "grid";
-  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr})`;
+  levelChooser.style.display = "none";
+  console.log(level.xSize);
+  grid.classList.add("grid-container");
+  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 1fr)`;
 }
