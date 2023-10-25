@@ -35,5 +35,9 @@ function createBoard(level) {
     square.classList.add("square");
     square.setAttribute("id", `s${i}`);
     grid.appendChild(square);
+    square.oncontextmenu = (e) => {
+      e.preventDefault();
+    };
   }
 }
+console.log(Math.random());
