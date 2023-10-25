@@ -1,7 +1,11 @@
 .grid-container {
   display: grid;
-  width: 800px;
-  height: 800px;
+  margin: 0 auto;
+  width: 1000px;
+  height: 1000px;
+  background-color: aquamarine;
   border: 1px solid black;
-  gap: 10px;
+}
+.square {
+  border: 1px solid black;
 }

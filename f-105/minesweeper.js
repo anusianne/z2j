@@ -30,4 +30,9 @@ function createBoard(level) {
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 1fr)`;
+  for (let i = 0; i < level.xSize * level.ySize; i++) {
+    const square = document.createElement("div");
+    square.classList.add("square");
+    grid.appendChild(square);
+  }
 }
