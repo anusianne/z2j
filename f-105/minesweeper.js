@@ -62,23 +62,23 @@ function generateRandomMines(xSize, ySize, bombAmount) {
   }
   return mines;
 }
-function gameOver(square) {
-  // isGameOver = true;
-  squares.forEach((square) => {
-    if (square.classList.contains("mine")) {
-      console.log("bomb");
-      square.style.backgroundColor = "red";
-    }
-  });
-}
+// function gameOver(square) {
+//   // isGameOver = true;
+//   squares.forEach((square) => {
+//     if (square.classList.contains("mine")) {
+//       console.log("bomb");
+//       square.style.backgroundColor = "red";
+//     }
+//   });
+// }
 function clickAction(square) {
   if (square.classList.contains("mine")) {
-    console.log("game over");
-    square.style.backgroundColor = "red";
     // change color for every square with class mine
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
       mineSquare.style.backgroundColor = "red";
     });
+  } else {
+    square.style.backgroundColor = "green";
   }
 }
