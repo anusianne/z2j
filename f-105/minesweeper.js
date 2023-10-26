@@ -30,14 +30,30 @@ function createBoard(level) {
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 1fr)`;
+  // Generate random mines
+  const mines = generateRandomMines(level.xSize, level.ySize, level.bombAmount);
   for (let i = 0; i < level.xSize * level.ySize; i++) {
     const square = document.createElement("div");
     square.classList.add("square");
     square.setAttribute("id", `s${i}`);
+    // Check if this square is a mine
+    if (mines.includes(i)) {
+      square.classList.add("mine");
+    }
     grid.appendChild(square);
     square.oncontextmenu = (e) => {
       e.preventDefault();
     };
   }
 }
-console.log(Math.random());
+function generateRandomMines(xSize, ySize, bombAmount) {
+  const totalSquares = xSize * ySize;
+  const mines = [];
+  while (mines.length < bombAmount) {
+    const randomMines = Math.floor(Math.random() * totalSquares);
+    if (!mines.includes(randomMines)) {
+      mines.push(randomMines);
+    }
+  }
+  return mines;
+}
