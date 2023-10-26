@@ -75,6 +75,10 @@ function clickAction(square) {
   if (square.classList.contains("mine")) {
     console.log("game over");
     square.style.backgroundColor = "red";
-    gameOver(square);
+    // change color for every square with class mine
+    const mineSquares = document.querySelectorAll(".mine");
+    mineSquares.forEach((mineSquare) => {
+      mineSquare.style.backgroundColor = "red";
+    });
   }
 }
