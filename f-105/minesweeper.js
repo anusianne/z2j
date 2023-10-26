@@ -44,7 +44,9 @@ function createBoard(level) {
     }
     grid.appendChild(square);
     square.addEventListener("click", () => {
-      clickAction(square);
+      if (!isGameOver) {
+        clickAction(square);
+      }
     });
     square.oncontextmenu = (e) => {
       e.preventDefault();
@@ -62,15 +64,11 @@ function generateRandomMines(xSize, ySize, bombAmount) {
   }
   return mines;
 }
-// function gameOver(square) {
-//   // isGameOver = true;
-//   squares.forEach((square) => {
-//     if (square.classList.contains("mine")) {
-//       console.log("bomb");
-//       square.style.backgroundColor = "red";
-//     }
-//   });
-// }
+function gameOverCheck() {
+  if (isGameOver == true) {
+    alert("Game over");
+  }
+}
 function clickAction(square) {
   if (square.classList.contains("mine")) {
     // change color for every square with class mine
@@ -78,7 +76,13 @@ function clickAction(square) {
     mineSquares.forEach((mineSquare) => {
       mineSquare.style.backgroundColor = "red";
     });
+    isGameOver = true;
+    //!set Timeout added to solve the problem with synchonous appearing bomb and alert comunicated Game over
+    setTimeout(function () {
+      alert("over");
+    }, 200);
+    window.location.reload();
   } else {
-    square.style.backgroundColor = "green";
+    square.classList.add("valid");
   }
 }

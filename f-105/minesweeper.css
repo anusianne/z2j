@@ -9,3 +9,6 @@
 .square {
   border: 1px solid black;
 }
+.valid {
+  background-color: green;
+}
