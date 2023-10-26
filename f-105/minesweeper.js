@@ -1,5 +1,7 @@
 const levelChooser = document.getElementById("levelChooser");
 const grid = document.getElementById("grid");
+const squares = [];
+let isGameOver = false;
 // Define a function to handle the click event for all level buttons
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
@@ -41,6 +43,9 @@ function createBoard(level) {
       square.classList.add("mine");
     }
     grid.appendChild(square);
+    square.addEventListener("click", () => {
+      clickAction(square);
+    });
     square.oncontextmenu = (e) => {
       e.preventDefault();
     };
@@ -56,4 +61,20 @@ function generateRandomMines(xSize, ySize, bombAmount) {
     }
   }
   return mines;
+}
+function gameOver(square) {
+  // isGameOver = true;
+  squares.forEach((square) => {
+    if (square.classList.contains("mine")) {
+      console.log("bomb");
+      square.style.backgroundColor = "red";
+    }
+  });
+}
+function clickAction(square) {
+  if (square.classList.contains("mine")) {
+    console.log("game over");
+    square.style.backgroundColor = "red";
+    gameOver(square);
+  }
 }
