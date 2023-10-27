@@ -50,6 +50,7 @@ function createBoard(level) {
     });
     square.oncontextmenu = (e) => {
       e.preventDefault();
+      square.innerHTML = "flag";
     };
   }
 }
