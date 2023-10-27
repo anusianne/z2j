@@ -79,9 +79,9 @@ function clickAction(square) {
     isGameOver = true;
     //!set Timeout added to solve the problem with synchonous appearing bomb and alert comunicated Game over
     setTimeout(function () {
-      alert("over");
-    }, 200);
-    window.location.reload();
+      alert("Game over");
+      window.location.reload();
+    }, 300);
   } else {
     square.classList.add("valid");
   }
