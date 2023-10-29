@@ -30,8 +30,8 @@ function createBoard(level) {
   levelChooser.style.display = "none";
   console.log(level.xSize);
   grid.classList.add("grid-container");
-  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 1fr)`;
-  grid.style.gridTemplateRows = `repeat(${level.ySize}, 1fr)`;
+  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
+  grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
   // Generate random mines
   const mines = generateRandomMines(level.xSize, level.ySize, level.bombAmount);
   for (let i = 0; i < level.xSize * level.ySize; i++) {
