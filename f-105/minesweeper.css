@@ -7,3 +7,7 @@
 .valid {
   background-color: green;
 }
+.checked {
+  background-color: aqua;
+  color: black;
+}

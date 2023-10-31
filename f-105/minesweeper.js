@@ -28,7 +28,6 @@ for (const level in levels) {
 }
 function createBoard(level) {
   levelChooser.style.display = "none";
-  console.log(level.xSize);
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
@@ -45,7 +44,7 @@ function createBoard(level) {
     grid.appendChild(square);
     square.addEventListener("click", () => {
       if (!isGameOver) {
-        clickAction(square);
+        clickAction(square, level);
       }
     });
     square.oncontextmenu = (e) => {
@@ -71,19 +70,24 @@ function gameOverCheck() {
   }
 }
 function clickAction(square) {
+  let currentId = square.id;
   if (square.classList.contains("mine")) {
-    // change color for every square with class mine
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
       mineSquare.style.backgroundColor = "red";
     });
     isGameOver = true;
-    //!set Timeout added to solve the problem with synchonous appearing bomb and alert comunicated Game over
     setTimeout(function () {
       alert("Game over");
       window.location.reload();
     }, 300);
   } else {
-    square.classList.add("valid");
+    let total = square.getAttribute("data");
+    if (total !== 0) {
+      square.classList.add("checked");
+      square.innerHTML = total;
+      return;
+    }
+    square.classList.add("checked");
   }
 }
