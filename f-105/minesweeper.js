@@ -28,6 +28,7 @@ for (const level in levels) {
 }
 function createBoard(level) {
   levelChooser.style.display = "none";
+  console.log(level.xSize);
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
@@ -44,7 +45,7 @@ function createBoard(level) {
     grid.appendChild(square);
     square.addEventListener("click", () => {
       if (!isGameOver) {
-        clickAction(square, level);
+        clickAction(square);
       }
     });
     square.oncontextmenu = (e) => {
@@ -70,24 +71,39 @@ function gameOverCheck() {
   }
 }
 function clickAction(square) {
-  let currentId = square.id;
   if (square.classList.contains("mine")) {
+    // change color for every square with class mine
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
       mineSquare.style.backgroundColor = "red";
     });
     isGameOver = true;
+    //!set Timeout added to solve the problem with synchonous appearing bomb and alert comunicated Game over
     setTimeout(function () {
       alert("Game over");
       window.location.reload();
     }, 300);
   } else {
-    let total = square.getAttribute("data");
-    if (total !== 0) {
-      square.classList.add("checked");
-      square.innerHTML = total;
-      return;
-    }
-    square.classList.add("checked");
+    square.classList.add("valid");
+    adjacentMineFind(square);
+  }
+}
+function adjacentMineFind(square) {
+  console.log("adjacent");
+  let x = parseInt(square.id.slice(1));
+  let y = parseInt(square.id.slice(1));
+  const directions = [
+    [x - 1, y - 1],
+    [x, y - 1],
+    [x + 1, y - 1],
+    [x - 1, y] /*[0,0]*/,
+    ,
+    [x + 1, y],
+    [x - 1, y + 1],
+    [x, y + 1],
+    [x + 1, y + 1],
+  ];
+  for (let direction of directions) {
+    console.log(direction);
   }
 }
