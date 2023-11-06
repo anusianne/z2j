@@ -111,5 +111,6 @@ function adjacentMineFind(square) {
   if (counter > 0) {
     console.log(counter);
     square.innerHTML = counter;
+  } else {
   }
 }
