@@ -1,5 +1,6 @@
 const levelChooser = document.getElementById("levelChooser");
 const grid = document.getElementById("grid");
+const resetBtn = document.getElementById("resetBtn");
 const squares = [];
 let isGameOver = false;
 // Define a function to handle the click event for all level buttons
@@ -28,7 +29,8 @@ for (const level in levels) {
 }
 function createBoard(level) {
   levelChooser.style.display = "none";
-  console.log(level.xSize);
+  resetBtn.style.display = "block";
+  resetBtn.addEventListener("click", resetClick);
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
@@ -78,6 +80,9 @@ function gameOverCheck() {
   if (isGameOver == true) {
     alert("Game over");
   }
+}
+function resetClick() {
+  window.location.reload();
 }
 function clickAction(square) {
   if (square.classList.contains("mine")) {

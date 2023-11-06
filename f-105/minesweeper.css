@@ -17,3 +17,6 @@
   background-color: aqua;
   color: black;
 }
+.resetBtn {
+  display: none;
+}
