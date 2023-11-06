@@ -108,7 +108,8 @@ function adjacentMineFind(square) {
   const clickedY = parseInt(square.id.slice(1).charAt(1));
   for (let x = clickedX - 1; x <= clickedX + 1; x++) {
     for (let y = clickedY - 1; y <= clickedY + 1; y++) {
-      if (document.getElementById(`s${x}${y}`).classList.contains("mine")) {
+      const adjacentSquare = document.getElementById(`s${x}${y}`);
+      if (adjacentSquare && adjacentSquare.classList.contains("mine")) {
         counter = counter + 1;
       }
     }
