@@ -36,8 +36,8 @@ function createBoard(level) {
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
   // Generate random mines
   const mines = generateRandomMines(level.xSize, level.ySize, level.bombAmount);
-  for (let x = 1; x <= level.xSize; x++) {
-    for (let y = 1; y <= level.ySize; y++) {
+  for (let y = 1; y <= level.ySize; y++) {
+    for (let x = 1; x <= level.xSize; x++) {
       const square = document.createElement("div");
       square.classList.add("square");
       square.setAttribute("id", `${x}s${y}`);
@@ -62,8 +62,8 @@ function generateRandomMines(xSize, ySize, bombAmount) {
   const totalSquares = xSize * ySize;
   let mines = [];
   while (mines.length < bombAmount) {
-    for (let x = 1; x <= xSize; x++) {
-      for (let y = 1; y <= ySize; y++) {
+    for (let y = 1; y <= ySize; y++) {
+      for (let x = 1; x <= xSize; x++) {
         const randomMines = Math.floor(Math.random() * 100);
         if (
           (bombAmount / (xSize * ySize)) * 100 > randomMines &&
@@ -108,8 +108,8 @@ function adjacentMineFind(square) {
   console.log(clickedX);
   const clickedY = parseInt(square.id.split("s")[1]);
   console.log(clickedY);
-  for (let x = clickedX - 1; x <= clickedX + 1; x++) {
-    for (let y = clickedY - 1; y <= clickedY + 1; y++) {
+  for (let y = clickedY - 1; y <= clickedY + 1; y++) {
+    for (let x = clickedX - 1; x <= clickedX + 1; x++) {
       const adjacentSquare = document.getElementById(`${x}s${y}`);
       if (adjacentSquare && adjacentSquare.classList.contains("mine")) {
         counter = counter + 1;
@@ -124,8 +124,8 @@ function adjacentMineFind(square) {
 }
 function checkAdjacentSquare(square, clickedX, clickedY) {
   if (square.classList.contains("valid")) {
-    for (let x = clickedX - 1; x <= clickedX + 1; x++) {
-      for (let y = clickedX - 1; y <= clickedY + 1; y++) {
+    for (let y = clickedY - 1; y <= clickedY + 1; y++) {
+      for (let x = clickedX - 1; x <= clickedX + 1; x++) {
         console.log(square);
         const adjacentSquare = document.getElementById(`${x}s${y}`);
         adjacentSquare.classList.add("valid");
