@@ -40,7 +40,7 @@ function createBoard(level) {
     for (let y = 1; y <= level.ySize; y++) {
       const square = document.createElement("div");
       square.classList.add("square");
-      square.setAttribute("id", `s${x}${y}`);
+      square.setAttribute("id", `${x}s${y}`);
       // Check if this square is a mine
       if (mines.includes(`${x}${y}`)) {
         square.classList.add("mine");
@@ -104,19 +104,35 @@ function clickAction(square) {
 }
 function adjacentMineFind(square) {
   let counter = 0;
-  const clickedX = parseInt(square.id.slice(1).charAt(0));
-  const clickedY = parseInt(square.id.slice(1).charAt(1));
+  const clickedX = parseInt(square.id.split("s")[0]);
+  console.log(clickedX);
+  const clickedY = parseInt(square.id.split("s")[1]);
+  console.log(clickedY);
   for (let x = clickedX - 1; x <= clickedX + 1; x++) {
     for (let y = clickedY - 1; y <= clickedY + 1; y++) {
-      const adjacentSquare = document.getElementById(`s${x}${y}`);
+      const adjacentSquare = document.getElementById(`${x}s${y}`);
       if (adjacentSquare && adjacentSquare.classList.contains("mine")) {
         counter = counter + 1;
       }
     }
   }
   if (counter > 0) {
-    console.log(counter);
     square.innerHTML = counter;
   } else {
+    checkAdjacentSquare(square, clickedX, clickedY);
   }
+}
+function checkAdjacentSquare(square, clickedX, clickedY) {
+  if (square.classList.contains("valid")) {
+    for (let x = clickedX - 1; x <= clickedX + 1; x++) {
+      for (let y = clickedX - 1; y <= clickedY + 1; y++) {
+        console.log(square);
+        const adjacentSquare = document.getElementById(`${x}s${y}`);
+        adjacentSquare.classList.add("valid");
+        checkAdjacentSquare(adjacentSquare);
+      }
+    }
+  }
+  // if (counter > 0) {
+  // }
 }
