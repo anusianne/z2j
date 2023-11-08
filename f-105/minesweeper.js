@@ -105,9 +105,7 @@ function clickAction(square) {
 function adjacentMineFind(square) {
   let counter = 0;
   const clickedX = parseInt(square.id.split("s")[0]);
-  console.log(clickedX);
   const clickedY = parseInt(square.id.split("s")[1]);
-  console.log(clickedY);
   for (let y = clickedY - 1; y <= clickedY + 1; y++) {
     for (let x = clickedX - 1; x <= clickedX + 1; x++) {
       const adjacentSquare = document.getElementById(`${x}s${y}`);
@@ -126,13 +124,10 @@ function checkAdjacentSquare(square, clickedX, clickedY) {
   if (square.classList.contains("valid")) {
     for (let y = clickedY - 1; y <= clickedY + 1; y++) {
       for (let x = clickedX - 1; x <= clickedX + 1; x++) {
-        console.log(square);
         const adjacentSquare = document.getElementById(`${x}s${y}`);
         adjacentSquare.classList.add("valid");
         checkAdjacentSquare(adjacentSquare);
       }
     }
   }
-  // if (counter > 0) {
-  // }
 }
