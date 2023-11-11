@@ -52,10 +52,6 @@ function createBoard(level) {
           clickAction(square);
         }
       });
-      square.oncontextmenu = (e) => {
-        e.preventDefault();
-        square.innerHTML = "🚩";
-      };
     }
   }
 }
