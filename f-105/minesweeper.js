@@ -3,19 +3,21 @@ const grid = document.getElementById("grid");
 const resetBtn = document.getElementById("resetBtn");
 const squares = [];
 let isGameOver = false;
+const timerDisplay = document.getElementById("timer");
+let timerInterval;
+let timer = 0;
 
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
     createBoard({ xSize, ySize, bombAmount });
+    setTimer();
   };
 }
-
 const levels = {
   easy: { xSize: 8, ySize: 8, bombAmount: 10 },
   medium: { xSize: 16, ySize: 16, bombAmount: 40 },
   master: { xSize: 30, ySize: 16, bombAmount: 99 },
 };
-
 for (const level in levels) {
   document
     .getElementById(level)
@@ -28,7 +30,6 @@ for (const level in levels) {
       )
     );
 }
-
 function createBoard(level) {
   levelChooser.style.display = "none";
   resetBtn.style.display = "block";
@@ -36,27 +37,21 @@ function createBoard(level) {
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
   grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
-
   const mines = generateRandomMines(level.xSize, level.ySize, level.bombAmount);
-
   for (let y = 1; y <= level.ySize; y++) {
     for (let x = 1; x <= level.xSize; x++) {
       const square = document.createElement("div");
       square.classList.add("square");
       square.setAttribute("id", `${x}s${y}`);
-
       if (mines.includes(`${x}${y}`)) {
         square.classList.add("mine");
       }
-
       grid.appendChild(square);
-
       square.addEventListener("click", () => {
         if (!isGameOver) {
           clickAction(square);
         }
       });
-
       square.oncontextmenu = (e) => {
         e.preventDefault();
         square.innerHTML = "🚩";
@@ -64,33 +59,26 @@ function createBoard(level) {
     }
   }
 }
-
 function generateRandomMines(xSize, ySize, bombAmount) {
   let mines = [];
-
   while (mines.length < bombAmount) {
     const x = Math.floor(Math.random() * xSize) + 1;
     const y = Math.floor(Math.random() * ySize) + 1;
     const squareId = `${x}${y}`;
-
     if (!mines.includes(squareId)) {
       mines.push(squareId);
     }
   }
-
   return mines;
 }
-
 function gameOverCheck() {
   if (isGameOver == true) {
     alert("Game over");
   }
 }
-
 function resetClick() {
   window.location.reload();
 }
-
 function clickAction(square) {
   if (square.classList.contains("mine")) {
     const mineSquares = document.querySelectorAll(".mine");
@@ -98,9 +86,9 @@ function clickAction(square) {
       mineSquare.style.backgroundColor = "red";
     });
     isGameOver = true;
-
     setTimeout(function () {
       alert("Game over");
+      stopTimer();
       window.location.reload();
     }, 300);
   } else {
@@ -108,7 +96,6 @@ function clickAction(square) {
     adjacentMineFind(square);
   }
 }
-
 function adjacentMineFind(square) {
   let counter = 0;
   const clickedX = parseInt(square.id.split("s")[0]);
@@ -123,7 +110,6 @@ function adjacentMineFind(square) {
       }
     }
   }
-
   if (counter > 0) {
     square.innerHTML = counter;
   } else {
@@ -136,4 +122,14 @@ function adjacentMineFind(square) {
       }
     }
   }
+}
+//! set Timer:
+function setTimer() {
+  timerInterval = setInterval(function () {
+    timer++;
+    timerDisplay.innerText = `Time: ${timer} s`;
+  }, 1000);
+}
+function stopTimer() {
+  clearInterval(timerInterval);
 }
