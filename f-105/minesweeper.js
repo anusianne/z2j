@@ -90,8 +90,8 @@ function clickAction(square) {
   } else {
     square.classList.add("valid");
     adjacentMineFind(square);
+    checkWinner();
   }
-  checkWinner();
 }
 function adjacentMineFind(square) {
   let counter = 0;
@@ -131,5 +131,18 @@ function stopTimer() {
   clearInterval(timerInterval);
 }
 function checkWinner() {
-  console.log("you won");
+  let allSquares = document.querySelectorAll(".square");
+  let allRevealed = true;
+  allSquares.forEach((square) => {
+    if (
+      !square.classList.contains("mine") &&
+      !square.classList.contains("valid")
+    ) {
+      allRevealed = false;
+    }
+  });
+  if (allRevealed) {
+    stopTimer();
+    alert("Congratulations! You won!");
+  }
 }
