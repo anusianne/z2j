@@ -6,6 +6,7 @@ let isGameOver = false;
 const timerDisplay = document.getElementById("timer");
 let timerInterval;
 let timer = 0;
+let isFirstClick = true;
 
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
@@ -66,6 +67,7 @@ function generateRandomMines(xSize, ySize, bombAmount) {
   }
   return mines;
 }
+//! checking gameover condition
 function gameOverCheck() {
   if (isGameOver == true) {
     alert("Game over");
@@ -74,8 +76,13 @@ function gameOverCheck() {
 function resetClick() {
   window.location.reload();
 }
+//! click on every square on a borad
 function clickAction(square) {
-  setTimer();
+  if (isFirstClick) {
+    setTimer();
+    isFirstClick = false;
+  }
+
   if (square.classList.contains("mine")) {
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
@@ -90,18 +97,17 @@ function clickAction(square) {
   } else {
     square.classList.add("valid");
     adjacentMineFind(square);
-    checkWinner();
+    winnerCheck();
   }
 }
+//! counting adjacent mine on the board
 function adjacentMineFind(square) {
   let counter = 0;
   const clickedX = parseInt(square.id.split("s")[0]);
   const clickedY = parseInt(square.id.split("s")[1]);
-
   for (let y = clickedY - 1; y <= clickedY + 1; y++) {
     for (let x = clickedX - 1; x <= clickedX + 1; x++) {
       const adjacentSquare = document.getElementById(`${x}s${y}`);
-
       if (adjacentSquare && adjacentSquare.classList.contains("mine")) {
         counter = counter + 1;
       }
@@ -130,7 +136,8 @@ function setTimer() {
 function stopTimer() {
   clearInterval(timerInterval);
 }
-function checkWinner() {
+//! winning condition
+function winnerCheck() {
   let allSquares = document.querySelectorAll(".square");
   let allRevealed = true;
   allSquares.forEach((square) => {
