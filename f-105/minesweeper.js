@@ -91,6 +91,7 @@ function clickAction(square) {
     square.classList.add("valid");
     adjacentMineFind(square);
   }
+  checkWinner();
 }
 function adjacentMineFind(square) {
   let counter = 0;
@@ -128,4 +129,7 @@ function setTimer() {
 }
 function stopTimer() {
   clearInterval(timerInterval);
+}
+function checkWinner() {
+  console.log("you won");
 }
