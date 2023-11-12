@@ -10,7 +10,6 @@ let timer = 0;
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
     createBoard({ xSize, ySize, bombAmount });
-    setTimer();
   };
 }
 const levels = {
@@ -76,6 +75,7 @@ function resetClick() {
   window.location.reload();
 }
 function clickAction(square) {
+  setTimer();
   if (square.classList.contains("mine")) {
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
