@@ -26,12 +26,11 @@ html {
   background-color: antiquewhite;
   width: 40%;
   padding: 1em 2em;
-  box-shadow: 2px grey;
   margin-top: 1em;
   border-radius: 1.25em;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 4px 4px 8px -3px rgba(66, 68, 90, 1);
+  box-shadow: 4px 4px 8px -2px rgba(60, 60, 60, 1);
   transition: transform 400ms;
 }
 .level:hover {
@@ -41,15 +40,24 @@ html {
   display: grid;
   margin: 0 auto;
   margin-top: 15em;
-  opacity: 0.7;
   justify-content: center;
 }
 .square {
   border: 1px solid black;
   background-color: #e5e4dc;
+  opacity: 0.8;
+  border-radius: 20%;
+  padding-top: 30%;
+}
+.mine {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .valid {
-  background-color: green;
+  background-color: yellowgreen;
+  opacity: 1;
+  text-align: center;
 }
 .checked {
   background-color: aqua;
