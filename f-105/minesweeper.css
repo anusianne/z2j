@@ -12,8 +12,7 @@ html {
 }
 .levelChooser {
   display: grid;
-  background-color: #e5e4dc;
-  opacity: 0.7;
+  background-color: rgba(229, 228, 220, 0.7);
   margin: 0 auto;
   margin-top: 10em;
   place-items: center;
@@ -22,6 +21,7 @@ html {
   border-radius: 1.25em;
   font-size: 1.1rem;
 }
+
 .level {
   background-color: antiquewhite;
   width: 40%;
@@ -32,6 +32,7 @@ html {
   cursor: pointer;
   box-shadow: 4px 4px 8px -2px rgba(60, 60, 60, 1);
   transition: transform 400ms;
+  opacity: 1;
 }
 .level:hover {
   transform: translateY(10%);
