@@ -35,8 +35,8 @@ function createBoard(level) {
   resetBtn.style.display = "block";
   resetBtn.addEventListener("click", resetClick);
   grid.classList.add("grid-container");
-  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 3em)`;
-  grid.style.gridTemplateRows = `repeat(${level.ySize}, 3em)`;
+  grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
+  grid.style.gridTemplateRows = `repeat(${level.ySize}, 2em)`;
   const mines = generateRandomMines(level.xSize, level.ySize, level.bombAmount);
   for (let y = 1; y <= level.ySize; y++) {
     for (let x = 1; x <= level.xSize; x++) {
