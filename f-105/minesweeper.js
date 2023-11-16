@@ -86,7 +86,8 @@ function clickAction(square) {
   if (square.classList.contains("mine")) {
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
-      mineSquare.style.backgroundImage = "url(photo/pngwing.com.png)";
+      mineSquare.style.backgroundImage = "url(photo/image-asset.jpeg)";
+      mineSquare.style.backgroundColor = "black";
     });
     isGameOver = true;
     setTimeout(function () {
@@ -115,12 +116,16 @@ function adjacentMineFind(square) {
   }
   if (counter > 0) {
     square.innerHTML = counter;
+    square.style.color = "rgb(229, 228, 220)";
+    square.style.fontWeight = "bold";
   } else {
     for (let y = clickedY - 1; y <= clickedY + 1; y++) {
       for (let x = clickedX - 1; x <= clickedX + 1; x++) {
         const adjacentSquare = document.getElementById(`${x}s${y}`);
         if (adjacentSquare && !adjacentSquare.classList.contains("valid")) {
           clickAction(adjacentSquare);
+          square.style.border = "1px solid black";
+          square.style.opacity = "0.8";
         }
       }
     }
