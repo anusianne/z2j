@@ -54,7 +54,7 @@ html {
   background-color: #e5e4dc;
   opacity: 1;
   border-radius: 20%;
-  padding-top: 30%;
+  padding-top: 20%;
 }
 .mine {
   background-position: center;
@@ -62,14 +62,15 @@ html {
   background-size: cover;
 }
 .valid {
-  background-color: yellowgreen;
+  background: radial-gradient(
+    circle at 10% 20%,
+    rgb(98, 114, 128) 0%,
+    rgb(52, 63, 51) 90.1%
+  );
   opacity: 1;
   text-align: center;
 }
-.checked {
-  background-color: aqua;
-  color: black;
-}
+
 .resetBtn {
   display: none;
 }
