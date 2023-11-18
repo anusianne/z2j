@@ -40,7 +40,7 @@ html {
   display: grid;
   margin: 0 auto;
   margin-top: 10em;
-  padding: 1em;
+  padding: 2em;
   justify-content: center;
   background-color: rgba(229, 228, 220, 0.7);
   width: fit-content;
@@ -66,7 +66,18 @@ html {
   );
   text-align: center;
 }
-
+#timer {
+  position: absolute;
+  top: 10.5em;
+  font-weight: bold;
+  font-family: "Lumoslatino";
+}
 .resetBtn {
   display: none;
+}
+@font-face {
+  font-family: "Lumoslatino";
+  src: url("font/lumoslatino-font/Lumoslatino-XA8K.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

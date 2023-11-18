@@ -3,6 +3,7 @@ const grid = document.getElementById("grid");
 const resetBtn = document.getElementById("resetBtn");
 const squares = [];
 let isGameOver = false;
+const gridContainer = document.getElementsByClassName("grid-container");
 const timerDisplay = document.getElementById("timer");
 let timerInterval;
 let timer = 0;
