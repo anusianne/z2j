@@ -39,7 +39,7 @@ html {
 .grid-container {
   display: grid;
   margin: 0 auto;
-  margin-top: 10em;
+  margin-top: 15em;
   padding: 2em;
   justify-content: center;
   background-color: rgba(229, 228, 220, 0.7);
@@ -68,9 +68,10 @@ html {
 }
 #timer {
   position: absolute;
-  top: 10.5em;
+  top: 7.5em;
   font-weight: bold;
   font-family: "Lumoslatino";
+  font-size: 2rem;
 }
 .resetBtn {
   display: none;

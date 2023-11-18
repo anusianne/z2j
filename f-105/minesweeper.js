@@ -9,6 +9,10 @@ let timerInterval;
 let timer = 0;
 let isFirstClick = true;
 
+document.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
 function handleLevelClick(xSize, ySize, bombAmount) {
   return function () {
     createBoard({ xSize, ySize, bombAmount });
@@ -34,6 +38,7 @@ for (const level in levels) {
 function createBoard(level) {
   levelChooser.style.display = "none";
   resetBtn.style.display = "block";
+  timerDisplay.innerText = "TIME:";
   resetBtn.addEventListener("click", resetClick);
   grid.classList.add("grid-container");
   grid.style.gridTemplateColumns = `repeat(${level.xSize}, 2em)`;
@@ -83,7 +88,6 @@ function clickAction(square) {
     setTimer();
     isFirstClick = false;
   }
-
   if (square.classList.contains("mine")) {
     const mineSquares = document.querySelectorAll(".mine");
     mineSquares.forEach((mineSquare) => {
@@ -134,9 +138,10 @@ function adjacentMineFind(square) {
 }
 //! set Timer:
 function setTimer() {
+  const timerStart = (timerDisplay.innerText = "TIME:");
   timerInterval = setInterval(function () {
     timer++;
-    timerDisplay.innerText = `Time: ${timer} s`;
+    timerDisplay.innerText = `${timerStart} ${timer} s`;
   }, 1000);
 }
 function stopTimer() {
@@ -156,6 +161,8 @@ function winnerCheck() {
   });
   if (allRevealed) {
     stopTimer();
-    alert("Congratulations! You won!");
+    setTimeout(function () {
+      alert("Congratulations! You won!");
+    }, 1000);
   }
 }
