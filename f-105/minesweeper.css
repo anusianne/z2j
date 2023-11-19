@@ -5,7 +5,7 @@ html {
   background-color: antiquewhite;
   background: url("photo/hogwart.jpg") no-repeat center center fixed;
   background-size: cover;
-  font-family: "Roboto", sans-serif;
+  font-family: "Lumoslatino";
 }
 .levelChooser {
   display: grid;
@@ -28,6 +28,7 @@ html {
   margin-top: 1em;
   border-radius: 1.25em;
   font-size: 1rem;
+  font-family: "Lumoslatino";
   cursor: pointer;
   box-shadow: 4px 4px 8px -2px rgba(60, 60, 60, 1);
   transition: transform 400ms;
@@ -70,7 +71,6 @@ html {
   position: absolute;
   top: 7.5em;
   font-weight: bold;
-  font-family: "Lumoslatino";
   font-size: 2rem;
 }
 .modal {
@@ -80,7 +80,6 @@ html {
   background-color: red;
   top: 20em;
   left: 19em;
-  font-family: "Lumoslatino";
   font-size: 2rem;
 }
 .tenor-gif-embed {
@@ -93,7 +92,6 @@ html {
   padding: 1em;
   display: block;
   border-radius: 20px;
-  font-family: "Lumoslatino";
 }
 @font-face {
   font-family: "Lumoslatino";
