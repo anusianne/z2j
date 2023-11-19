@@ -161,8 +161,14 @@ function winnerCheck() {
   });
   if (allRevealed) {
     stopTimer();
-    setTimeout(function () {
-      alert("Congratulations! You won!");
-    }, 1000);
+    const resetBtn = document.createElement("button");
+    resetBtn.classList.add("resetBtn");
+    const modal = document.createElement("div");
+    grid.appendChild(modal);
+    modal.classList.add("modal");
+    modal.innerHTML = "You von! Start again?";
+    modal.appendChild(resetBtn);
+    resetBtn.style.visibility = "visible";
+    resetBtn.innerText = "Start again";
   }
 }
