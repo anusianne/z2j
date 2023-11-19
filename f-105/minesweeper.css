@@ -83,6 +83,9 @@ html {
   font-family: "Lumoslatino";
   font-size: 2rem;
 }
+.tenor-gif-embed {
+  display: none;
+}
 .resetBtn {
   visibility: hidden;
   width: 5em;

@@ -164,10 +164,13 @@ function winnerCheck() {
     const resetBtn = document.createElement("button");
     resetBtn.classList.add("resetBtn");
     const modal = document.createElement("div");
+    const gif = document.querySelector(".tenor-gif-embed");
     grid.appendChild(modal);
     modal.classList.add("modal");
     modal.innerHTML = "You von! Start again?";
     modal.appendChild(resetBtn);
+    modal.appendChild(gif);
+    gif.style.display = "block";
     resetBtn.style.visibility = "visible";
     resetBtn.innerText = "Start again";
   }
