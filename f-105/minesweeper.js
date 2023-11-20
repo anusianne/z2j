@@ -172,7 +172,7 @@ function winnerCheck() {
     modal.appendChild(gif);
     gif.style.display = "block";
     resetBtn.style.visibility = "visible";
-    resetBtn.innerText = "Start again";
+    resetBtn.innerText = "Reset game";
     resetBtn.addEventListener("click", () => {
       location.reload();
     });
