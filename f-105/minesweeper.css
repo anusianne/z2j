@@ -2,7 +2,6 @@ html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background-color: antiquewhite;
   background: url("photo/hogwart.jpg") no-repeat center center fixed;
   background-size: cover;
   font-family: "Lumoslatino";
@@ -21,7 +20,8 @@ html {
 .difficulty {
   font-weight: bold;
 }
-.level {
+.level,
+.resetBtn {
   background-color: antiquewhite;
   width: 40%;
   padding: 1em 2em;
@@ -35,7 +35,8 @@ html {
   transition: transform 400ms;
   opacity: 1;
 }
-.level:hover {
+.level:hover,
+.resetBtn:hover {
   transform: translateY(10%);
 }
 .grid-container {
@@ -76,23 +77,31 @@ html {
 }
 .modal {
   position: absolute;
-  width: 300px;
-  height: 100px;
-  background-color: red;
+  width: 15em;
+  height: 15em;
+  background-color: antiquewhite;
+  border-radius: 1.25em;
   top: 20em;
   left: 19em;
-  font-size: 2rem;
+  font-size: 1.5rem;
+  transition: transform;
+  text-align: center;
+  padding-top: 2em;
 }
+
 .tenor-gif-embed {
+  margin-top: 2em;
   display: none;
 }
 .resetBtn {
-  visibility: hidden;
-  width: 5em;
-  height: 1em;
-  padding: 1em;
-  display: block;
-  border-radius: 20px;
+  /* visibility: hidden; */
+  width: 10em;
+  padding: 1em 2em;
+  border-radius: 1.5em;
+  cursor: pointer;
+  font-family: "Lumoslatino";
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 @font-face {
   font-family: "Lumoslatino";

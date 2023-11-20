@@ -173,5 +173,8 @@ function winnerCheck() {
     gif.style.display = "block";
     resetBtn.style.visibility = "visible";
     resetBtn.innerText = "Start again";
+    resetBtn.addEventListener("click", () => {
+      location.reload();
+    });
   }
 }
