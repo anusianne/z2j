@@ -27,7 +27,8 @@ html {
   padding: 1em 2em;
   margin-top: 1em;
   border-radius: 1.25em;
-  font-size: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
   font-family: "Lumoslatino";
   cursor: pointer;
   box-shadow: 4px 4px 8px -2px rgba(60, 60, 60, 1);
