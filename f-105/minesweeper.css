@@ -8,12 +8,13 @@ html {
 }
 .levelChooser {
   display: grid;
+  place-items: center;
+  text-align: center;
   background-color: rgba(229, 228, 220, 0.7);
   margin: 0 auto;
   margin-top: 10em;
-  place-items: center;
   padding: 3em 0;
-  width: 35%;
+  width: 65%;
   border-radius: 1.25em;
   font-size: 1.1rem;
 }
@@ -23,8 +24,10 @@ html {
 .level,
 .resetBtn {
   background-color: antiquewhite;
+  display: flex;
+  justify-content: center;
   width: 40%;
-  padding: 1em 2em;
+  padding: 1em 2.5em;
   margin-top: 1em;
   border-radius: 1.25em;
   font-size: 1.25rem;
