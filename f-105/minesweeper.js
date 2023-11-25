@@ -96,9 +96,24 @@ function clickAction(square) {
     });
     isGameOver = true;
     setTimeout(function () {
-      alert("Game over");
-      stopTimer();
-      window.location.reload();
+      {
+        stopTimer();
+        const resetBtn = document.createElement("button");
+        resetBtn.classList.add("resetBtn");
+        const modal = document.createElement("div");
+        const gif = document.querySelector(".evil-gifs");
+        grid.appendChild(modal);
+        modal.classList.add("modal");
+        modal.innerHTML = "You loss! Try again!";
+        modal.appendChild(resetBtn);
+        modal.appendChild(gif);
+        gif.style.display = "block";
+        resetBtn.style.visibility = "visible";
+        resetBtn.innerText = "Reset game";
+        resetBtn.addEventListener("click", () => {
+          location.reload();
+        });
+      }
     }, 300);
   } else {
     square.classList.add("valid");
@@ -164,7 +179,7 @@ function winnerCheck() {
     const resetBtn = document.createElement("button");
     resetBtn.classList.add("resetBtn");
     const modal = document.createElement("div");
-    const gif = document.querySelector(".tenor-gif-embed");
+    const gif = document.querySelector(".win-gif");
     grid.appendChild(modal);
     modal.classList.add("modal");
     modal.innerHTML = "You von! Start again?";

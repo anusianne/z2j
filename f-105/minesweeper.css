@@ -44,6 +44,12 @@ html {
   color: crimson;
   background-color: cornsilk;
 }
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .grid-container {
   display: grid;
   margin: 0 auto;
@@ -81,7 +87,7 @@ html {
   font-size: 2rem;
 }
 .modal {
-  width: 10vw;
+  width: 50%;
   height: auto;
   background-color: antiquewhite;
   border: 5px black;
@@ -97,12 +103,15 @@ html {
   text-align: center;
   padding: 2em 1em;
 }
-.tenor-gif-embed {
+.tenor-gif-embed,
+.tenor-gif-embed,
+.evil-gifs,
+.win-gif {
   margin-top: 1em;
   display: none;
 }
 .resetBtn {
-  /* visibility: hidden; */
+  visibility: hidden;
   width: 10em;
   padding: 1em 2em;
   border-radius: 1.5em;
