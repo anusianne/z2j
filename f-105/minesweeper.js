@@ -104,7 +104,7 @@ function clickAction(square) {
         const gif = document.querySelector(".evil-gifs");
         grid.appendChild(modal);
         modal.classList.add("modal");
-        modal.innerHTML = "You loss! Try again!";
+        modal.innerHTML = "You lose! Try again!";
         modal.appendChild(resetBtn);
         modal.appendChild(gif);
         gif.style.display = "block";
