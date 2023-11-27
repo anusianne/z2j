@@ -85,6 +85,7 @@ html {
   top: 7.5em;
   font-weight: bold;
   font-size: 2rem;
+  padding: 10px 0;
 }
 .modal {
   width: 50%;
@@ -125,4 +126,9 @@ html {
   src: url("font/lumoslatino-font/Lumoslatino-XA8K.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
+}
+@media screen and (min-width: 800px) {
+  .levelChooser {
+    width: 40%;
+  }
 }
