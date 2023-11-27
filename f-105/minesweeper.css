@@ -94,11 +94,12 @@ html {
   border: 5px black;
   border-style: ridge;
   border-radius: 1.25em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
   justify-content: center;
+  align-items: center;
+  place-items: center;
   position: absolute;
+  left: 24%;
   font-size: 1.5rem;
   transition: transform;
   text-align: center;
@@ -113,6 +114,9 @@ html {
 }
 .resetBtn {
   visibility: hidden;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5%;
   width: 10em;
   padding: 1em 2em;
   border-radius: 1.5em;
@@ -131,6 +135,7 @@ html {
 @media screen and (min-width: 600px) {
   .modal {
     width: 30%;
+    left: 30%;
   }
   .resetBtn {
     width: 10em;
@@ -139,6 +144,16 @@ html {
 @media screen and (min-width: 800px) {
   .modal {
     width: 25%;
+    left: 35%;
+  }
+  .resetBtn {
+    width: 10em;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .modal {
+    width: 20%;
+    left: 37%;
   }
   .resetBtn {
     width: 10em;
@@ -146,10 +161,11 @@ html {
 }
 @media screen and (min-width: 1200px) {
   .levelChooser {
-    width: 40%;
+    width: 20%;
   }
   .modal {
     width: 15%;
+    left: 41%;
   }
   .resetBtn {
     width: 10em;
