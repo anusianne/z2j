@@ -133,6 +133,9 @@ html {
 }
 
 @media screen and (min-width: 600px) {
+  .levelChooser {
+    width: 40%;
+  }
   .modal {
     width: 30%;
     left: 30%;
@@ -142,6 +145,9 @@ html {
   }
 }
 @media screen and (min-width: 800px) {
+  .levelChooser {
+    width: 40%;
+  }
   .modal {
     width: 25%;
     left: 35%;
@@ -151,6 +157,9 @@ html {
   }
 }
 @media screen and (min-width: 1000px) {
+  .levelChooser {
+    width: 40%;
+  }
   .modal {
     width: 20%;
     left: 37%;
