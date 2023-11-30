@@ -2,7 +2,7 @@ html {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  background: url("photo/hogwart.jpg") no-repeat center center fixed;
+  background: url("Minesweeper/photo/hogwart.jpg") no-repeat center center fixed;
   background-size: cover;
   font-family: "Lumoslatino";
 }
@@ -127,7 +127,7 @@ html {
 }
 @font-face {
   font-family: "Lumoslatino";
-  src: url("font/lumoslatino-font/Lumoslatino-XA8K.ttf") format("truetype");
+  src: url("Minesweeper/font/lumoslatino-font/Lumoslatino-XA8K.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
