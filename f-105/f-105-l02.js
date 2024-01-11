@@ -52,5 +52,15 @@ function multiplyNumeric(obj) {
     return obj;
 }
 multiplyNumeric(menu);
+//constructor function
+function Car(make,model,year,color) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.color = color;
+}
+const car1 = new Car("Ford","Mustang",2024,"red");
+const car2 = new Car("Chevrolet","Camaro", 2018, "green");
+const car3 = new Car("Dodge", "Charger", 2016, "silver");
 
 
