@@ -108,7 +108,7 @@ function whatNumberIsIt(n){
 }
 
 //strings
-checkSpam(str) {
+function checkSpam(str) {
     let lowerStr = str.toLowerCase();
     if (lowerStr.includes('viagra') || lowerStr.includes('xxx')) {
         return true;
@@ -117,3 +117,21 @@ checkSpam(str) {
     }
 
 }
+
+//Write a program that takes a user's input and calculates the length of the input string using the length property.
+function lengthInput(user){
+    return user.length;
+}
+lengthInput('Maxymilian');
+
+//Create a program that prompts the user for a string and an index. Then, use the charAt() method to display the character at that index.
+function charAtMethod(str,i) {
+    return str.indexOf(i);
+}
+charAtMethod("Bejbe", 'j')
+
+//Take a sentence with extra whitespace and use string methods to remove the extra spaces, leaving only single spaces between words.
+function removeWhiteSpace(string) {
+   return string.trim();
+}
+removeWhiteSpace("       Ole ole ole ole       ")
