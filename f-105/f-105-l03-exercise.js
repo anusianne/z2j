@@ -131,3 +131,42 @@ console.log(characters.filter((ch) => ch.mass > 100));
 console.log(characters.filter((h) => h.height < 200));
 console.log(characters.filter((male) => male.gender === "male"));
 console.log(characters.filter((fem) => fem.gender === "female"));
+
+//forEach()
+let wizards = ["Edwin Odesseiron", "Harry Potter", "Ronny the Bear", "Gandalf the Grey"];
+wizards.forEach(console.log)
+
+//2.forEach()
+
+let wizards = [
+  {
+    name: "Edwin Odesseiron",
+    age: 37,
+    alignment: "lawful evil"
+  },
+  {
+    name: "Harry Potter",
+    age: 21,
+    alignment: "neutral good"
+  },
+  {
+    name: "Hermony Granger",
+    age: 21,
+    alignment: "lawful good"
+  },
+  {
+    name: "Ronny the Bear",
+    age: 21,
+    alignment: "neutral good"
+  },
+  {
+    name: "Gandalf",
+    age: 100,
+    alignment: "neutral good"
+  }
+]
+// wizards.forEach((wizard) => {console.log(wizard.name)})
+for (let wizard of wizards) {
+  wizard.isAlive = true;
+}
+console.log(wizards)
