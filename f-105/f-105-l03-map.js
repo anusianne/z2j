@@ -128,3 +128,36 @@ console.log(
     },
   ])
 );
+
+//10 Doubling Numbers
+const numbers = [1, 2, 3, 4, 5];
+const doubleNums = numbers.map(num=>num*2);
+console.log(doubleNums);
+
+//11 Uppercasing Strings
+const words = ['apple', 'banana', 'cherry'];
+const uppercasedStrings = words.map((word) => word.toUpperCase());
+console.log(uppercasedStrings)
+
+//12 Extracting Object Properties
+const users = [
+ { name: 'Alice', age: 25 },
+ { name: 'Bob', age: 30 },
+ { name: 'Charlie', age: 22 }
+];
+const userName = users.map((user) => user.name)
+console.log(userName);
+
+//13 Calculate Area of Rectangles
+const rectangles = [
+    { width: 3, height: 5 },
+    { width: 4, height: 8 },
+    { width: 2, height: 6 }
+];
+const areaOfRect = rectangles.map((area) => area.width * area.height);
+console.log(areaOfRect)
+
+//14 Extract Initials from Names
+const names = ['John Doe', 'Alice Smith', 'Bob Johnson'];
+const initials = names.map((name) => name[0]);
+console.log(initials);

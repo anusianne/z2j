@@ -166,7 +166,7 @@ let wizards = [
   }
 ]
 // wizards.forEach((wizard) => {console.log(wizard.name)})
-for (let wizard of wizards) {
-  wizard.isAlive = true;
-}
-console.log(wizards)
+// for (let wizard of wizards) {
+//   wizard.isAlive = true;
+// }
+// console.log(wizards)
