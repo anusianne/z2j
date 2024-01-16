@@ -40,3 +40,8 @@ console.log(
     { name: "Unlucky Swami", age: 77 },
   ])
 );
+
+// find the lowest value of array
+const points = [40, 100, 1, 5, 25, 10];
+const ascArr = points.sort(function(a,b){return a-b});
+console.log(ascArr[0]);
