@@ -19,3 +19,4 @@ function getWeekDay(date) {
   return weekDay[date.getDay()];
 }
 alert(getWeekDay(myDate));
+
