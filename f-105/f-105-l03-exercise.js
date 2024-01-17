@@ -211,3 +211,19 @@ const totalCost = items.reduce((currentTotal,item) => {
   return item.price + currentTotal;
 },0)
 console.log(totalCost)
+
+//setTimeout/setInterval
+
+function printNumbers(from,to) {
+  let current = from;
+  function go() {
+    console.log(current);
+    if (current === to) {
+      clearTimeout(timerId);
+    }
+    current++;
+  }
+  go();
+  let timerId = setInterval(go, 1000);
+}
+printNumbers(2,7);
