@@ -18,4 +18,31 @@ const product2 = new Product("Pants", 22.50);
 product1.displayProduct();
 product2.displayProduct();
 const total = product1.calculateTotal(salesTax);
-console.log(`Total price (with tax): $${total.toFixed(2)}`);
+console.log(`Total price (with tax): $ ${total.toFixed(2)}`);
+
+//Classes inheritance
+class Animal{
+    alive = true;
+    eat() {
+        console.log(`This ${this.name} is eating.`);
+    }
+    sleep() {
+        console.log(`This ${this.name} is sleeping.`);
+    }
+}
+class Rabbit extends Animal {
+    name = "rabbit";
+}
+class Fish extends Animal {
+    name = "fish";
+}
+class Cat extends Animal {
+    name = "kitty";
+}
+const rabbit = new Rabbit();
+const fish = new Fish();
+const cat = new Cat();
+
+console.log(rabbit.alive);
+rabbit.eat();
+cat.sleep();
