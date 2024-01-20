@@ -46,3 +46,22 @@ const cat = new Cat();
 console.log(rabbit.alive);
 rabbit.eat();
 cat.sleep();
+//Classes with FreeCodeCamp
+class Rectangle {
+    constructor(width, height, color) {
+        this.width = width;
+        this.height = height;
+        this.color = color;
+    }
+    getArea() {
+        return this.width * this.height;
+    }
+    printDescription() {
+        console.log(`I am a rectangle of ${this.width} x ${this.height} and I am ${this.color}`)
+    }
+}
+let myRectangle1 = new Rectangle(5,2,"red");
+let myRectangle2 = new Rectangle(6,3,"orange");
+console.log(myRectangle1.getArea());
+console.log(myRectangle2.getArea());
+myRectangle2.printDescription();
