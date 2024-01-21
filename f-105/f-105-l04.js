@@ -65,3 +65,23 @@ let myRectangle2 = new Rectangle(6,3,"orange");
 console.log(myRectangle1.getArea());
 console.log(myRectangle2.getArea());
 myRectangle2.printDescription();
+
+// super keyword with using class
+class Animal2{
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+class Fox extends Animal2{
+    constructor(name, age, runSpeed) {
+        super(name,age);
+        this.runSpeed = runSpeed;
+    }
+}
+class Fishes extends Animal {
+    constructor(name, age, swimSpeed) {
+        super(name,age);
+        this.swimSpeed = swimSpeed;
+    }
+}
