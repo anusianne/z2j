@@ -117,3 +117,21 @@ class Person {
 const person = new Person("Spongebob", "Square", 99);
 console.log(person.firstName, person.lastName, person.age)
 console.log(person.fullName);
+//class User
+class User {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    introduce() {
+        console.log(`My name is ${this.name} and I am ${this.age} years old.`)
+    }
+}
+//Exercise 2: Inheritance
+// Also, override the introduce method to include the grade in the introduction.
+class Student extends Person {
+    constructor(name, age, grade) {
+        super(name,age);
+        this.grade = grade;
+    }
+}
