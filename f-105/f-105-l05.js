@@ -45,4 +45,23 @@ const nameList = {
 nameList.init(function(newName) {
     console.log(newName);
 })
-nameList.addName("Domenic")
+nameList.addName("Domenic");
+
+//Callback ex. 2
+hello(goodbye);
+function hello(callback) {
+    console.log("Hello");
+    callback();
+}
+function goodbye() {
+    console.log("Goodbye");
+}
+//Callback ex. 3
+sum(displayConsole, 2, 4)
+function sum(callback, x, y) {
+    let result = x + y;
+    callback(result);
+}
+function displayConsole(result) {
+    console.log(result);
+}
