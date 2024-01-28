@@ -107,3 +107,15 @@ new Promise(function(resolve,reject) {
 }).then(function(result){
     alert(result);
 })
+
+// Chaining 2
+let promise3 = new Promise((resolve,reject) => {
+    resolve();
+})
+promise3.then(()=> {
+    console.log('first then');
+}).then(() => {
+    console.log('second then');
+}).then(() => {
+    console.log('third then');
+});
