@@ -119,3 +119,5 @@ promise3.then(()=> {
 }).then(() => {
     console.log('third then');
 });
+
+// Chaining promise 3
