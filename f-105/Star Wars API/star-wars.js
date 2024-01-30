@@ -21,9 +21,9 @@ function fetchCharacters() {
                     }
                     h3.textContent = `Date of birth: ${person.birth_year}`;
                     container.append(newDiv);
-                    container.append(h2);
-                    container.append(h3);
-                    container.append(p);
+                    newDiv.append(h2);
+                    newDiv.append(h3);
+                    newDiv.append(p);
                 }
                 resolve(); // Resolve the promise once the loop is done
             });
