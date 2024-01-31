@@ -5,7 +5,6 @@ let nextURL = null;
 const previousBtn = document.getElementById("previous");
 const nextBtn = document.getElementById("next");
 let currentPage = 1; // Initial page
-const charactersPerPage = 10;
 function fetchCharacters() {
     const url = `https://swapi.dev/api/people/?page=${currentPage}`;
     fetch(url)
