@@ -10,25 +10,67 @@ body {
     -webkit-text-stroke: 0.5px #FFE81F;
     color: black;
     background-color: black;
+    position: relative;
 }
 #container {
-    margin-top: 4em;
+    margin-top: 1em;
     display: grid;
-    margin-left: 10em;
+    margin-left: 25em;
     grid-template-columns: 1fr 1fr 1fr;
     grid-column-gap: 2em;
-    width: 50%;
+    width: 40%;
+    max-width: 500px;
+    max-height: 800px;
+}
+img {
+    width: 200px;
+}
+h1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 0;
+    font-size: 2.5em;
+    margin: 0;
+}
+.logo {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+button {
+    background-color: black;
+    border: none;
+    border-color: black;
+    cursor: pointer;
+    font-size: 2em;
+    color: #FFE81F;
+    font-family: 'Star_jedi';
+}
+#previous {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+#next {
+    position: absolute;
+    top: 40%;
+    right: 10%;
+}
+h3,h4,p {
+    margin: 0.5em;
 }
 .character {
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
     transform: perspective(500px) rotateX(25deg);
     font-size: 1rem;
-    /*animation: crawl 60s linear;*/
+    animation: crawl 60s linear;
 }
 .character_name {
     font-size: 2.4rem;
-    width: 10em;
+    max-width: 10em;
     text-align: center;
 }
 @keyframes crawl {
