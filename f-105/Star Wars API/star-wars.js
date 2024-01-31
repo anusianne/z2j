@@ -1,7 +1,11 @@
 const container = document.getElementById("container");
 const h4 = document.createElement("h4");
-function fetchCharacters() {
-    fetch('https://swapi.dev/api/people')
+let previousURL = null;
+let nextURL = null;
+const previousBtn = document.getElementById("previous");
+const nextBtn = document.getElementById("next");
+function fetchCharacters(url) {
+    fetch(url)
         .then(response => response.json())
         .then(people => {
                 for (let person of people.results) {
@@ -27,6 +31,10 @@ function fetchCharacters() {
                     // Call the function to fetch and display home planet
                     callHomePlanet(person.homeworld, newDiv);
                 }
+                previousURL = people.previous;
+                nextURL = people.next;
+                nextBtn.disabled = !nextURL;
+                previousBtn.disabled = !previousURL;
             })
             .catch(error => {
                 console.error('Error fetching characters:', error);
@@ -44,7 +52,23 @@ function callHomePlanet(planetUrl, containerElement) {
         .catch(error => {
             console.error('Error fetching home planet:', error);
         });}
-fetchCharacters();
+function loadPreviousButton(url) {
+    if (previousURL) {
+        fetchCharacters(previousURL);
+    } else {
+    previousBtn.disabled = true;
+    }
+}
+function loadNextButton(url) {
+    if(nextURL) {
+        fetchCharacters(nextURL);
+    } else {
+        nextBtn.disabled = true;
+    }
+}
+fetchCharacters('https://swapi.dev/api/people');
 
+    previousBtn.addEventListener('click', loadPreviousButton);
+    nextBtn.addEventListener('click', loadNextButton);
 
 
