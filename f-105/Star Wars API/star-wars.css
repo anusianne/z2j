@@ -46,16 +46,23 @@ button {
     font-size: 2em;
     color: #FFE81F;
     font-family: 'Star_jedi';
+    transition: transform 700ms ease-in-out;
+}
+button:hover {
+    transform: scale(1.4);
 }
 #previous {
     position: absolute;
     top: 40%;
-    left: 10%;
+    left: 5%;
 }
 #next {
     position: absolute;
     top: 40%;
-    right: 10%;
+    right: 5%;
+}
+button[disabled] {
+    opacity: 0.3;
 }
 h3,h4,p {
     margin: 0.5em;
@@ -78,6 +85,9 @@ h3,h4,p {
         transform: translateY(100%) perspective(600px) rotateX(25deg);
     }
     100% {
-        transform: translateY(-30%) perspective(600px) rotateX(25deg);
+        transform: translateY(-20%) perspective(600px) rotateX(25deg);
     }
+}
+.character {
+    animation: crawl 1s ease-in-out;
 }

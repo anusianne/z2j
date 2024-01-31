@@ -4,7 +4,10 @@ let previousURL = null;
 let nextURL = null;
 const previousBtn = document.getElementById("previous");
 const nextBtn = document.getElementById("next");
-function fetchCharacters(url) {
+let currentPage = 1; // Initial page
+const charactersPerPage = 10;
+function fetchCharacters() {
+    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
     fetch(url)
         .then(response => response.json())
         .then(people => {
@@ -33,8 +36,8 @@ function fetchCharacters(url) {
                 }
                 previousURL = people.previous;
                 nextURL = people.next;
-                nextBtn.disabled = !nextURL;
                 previousBtn.disabled = !previousURL;
+                nextBtn.disabled = !nextURL;
             })
             .catch(error => {
                 console.error('Error fetching characters:', error);
@@ -52,22 +55,18 @@ function callHomePlanet(planetUrl, containerElement) {
         .catch(error => {
             console.error('Error fetching home planet:', error);
         });}
-function loadPreviousButton(url) {
-    if (previousURL) {
-        fetchCharacters(previousURL);
-    } else {
-    previousBtn.disabled = true;
-    }
-}
-function loadNextButton(url) {
-    if(nextURL) {
-        fetchCharacters(nextURL);
-    } else {
-        nextBtn.disabled = true;
-    }
-}
-fetchCharacters('https://swapi.dev/api/people');
 
+function loadPreviousButton() {
+    container.innerHTML = "";
+    currentPage--;
+        fetchCharacters(previousURL);
+}
+function loadNextButton() {
+    container.innerHTML = "";
+    currentPage++;
+        fetchCharacters(nextURL);
+}
+fetchCharacters();
     previousBtn.addEventListener('click', loadPreviousButton);
     nextBtn.addEventListener('click', loadNextButton);
 
