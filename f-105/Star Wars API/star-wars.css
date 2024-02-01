@@ -12,16 +12,6 @@ body {
     background-color: black;
     position: relative;
 }
-#container {
-    margin-top: 1em;
-    display: grid;
-    margin-left: 25em;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-column-gap: 2em;
-    width: 40%;
-    max-width: 500px;
-    max-height: 800px;
-}
 img {
     width: 200px;
 }
@@ -38,28 +28,25 @@ h1 {
     margin: 0 auto;
     margin-top: 2em;
 }
+.buttons{
+    margin-top: 1em;
+    text-align: center;
+}
 button {
     background-color: black;
     border: none;
     border-color: black;
     cursor: pointer;
-    font-size: 2em;
+    font-size: 1.5em;
     color: #FFE81F;
     font-family: 'Star_jedi';
     transition: transform 700ms ease-in-out;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-left: 2em;
 }
 button:hover {
     transform: scale(1.4);
-}
-#previous {
-    position: absolute;
-    top: 40%;
-    left: 5%;
-}
-#next {
-    position: absolute;
-    top: 40%;
-    right: 5%;
 }
 button[disabled] {
     opacity: 0.3;
@@ -68,7 +55,8 @@ h3,h4,p {
     margin: 0.5em;
 }
 .character {
-    max-width: 800px;
+    width: 80%;
+    padding: 0 1em;
     margin: 0 auto;
     text-align: center;
     transform: perspective(500px) rotateX(25deg);
@@ -76,8 +64,8 @@ h3,h4,p {
     animation: crawl 20s linear;
 }
 .character_name {
+    margin: 0 auto;
     font-size: 2.4rem;
-    max-width: 10em;
     text-align: center;
 }
 @keyframes crawl {
@@ -85,9 +73,9 @@ h3,h4,p {
         transform: translateY(100%) perspective(600px) rotateX(25deg);
     }
     100% {
-        transform: translateY(-20%) perspective(600px) rotateX(25deg);
+        transform: translateY(-10%) perspective(600px) rotateX(25deg);
     }
 }
-.character {
-    animation: crawl 1s ease-in-out;
-}
+/*.character {*/
+/*    animation: crawl 1s ease-in-out;*/
+/*}*/
