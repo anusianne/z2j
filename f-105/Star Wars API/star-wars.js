@@ -1,16 +1,24 @@
 const container = document.getElementById("container");
-const h4 = document.createElement("h4");
-let previousURL = null;
-let nextURL = null;
 const previousBtn = document.getElementById("previous");
 const nextBtn = document.getElementById("next");
+let previousURL = null;
+let nextURL = null;
 let currentPage = 1; // Initial page
-function fetchCharacters() {
-    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
+function fetchUrl(url,successCallback, errorCallback) {
     fetch(url)
         .then(response => response.json())
-        .then(people => {
-                for (let person of people.results) {
+        .then(successCallback)
+        .catch(errorCallback);
+}
+function fetchCharacters() {
+    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
+    fetchUrl(url, displayCharacters, handleFetchError);
+}
+function handleFetchError(error) {
+    console.error('Error fetching data:', error);
+}
+function displayCharacters(people) {
+            for (let person of people.results) {
                     const newDiv = document.createElement("div");
                     newDiv.classList.add("character");
                     const h2 = document.createElement("h2");
@@ -33,40 +41,29 @@ function fetchCharacters() {
                     // Call the function to fetch and display home planet
                     callHomePlanet(person.homeworld, newDiv);
                 }
-                previousURL = people.previous;
-                nextURL = people.next;
-                previousBtn.disabled = !previousURL;
-                nextBtn.disabled = !nextURL;
-            })
-            .catch(error => {
-                console.error('Error fetching characters:', error);
-            });
-}
+    previousURL = people.previous;
+    nextURL = people.next;
+    previousBtn.disabled = !previousURL;
+    nextBtn.disabled = !nextURL;
+            }
 function callHomePlanet(planetUrl, containerElement) {
-    fetch(planetUrl)
-        .then(response => response.json())
-        .then(planet => {
-            const h4 = document.createElement("h4");
-            h4.classList.add("planet");
-            h4.textContent = `Home Planet: ${planet.name}`;
-            containerElement.append(h4);
-        })
-        .catch(error => {
-            console.error('Error fetching home planet:', error);
-        });}
-
+    fetchUrl(planetUrl, planet => {
+        const h4 = document.createElement("h4");
+        h4.classList.add("planet");
+        h4.textContent = `Home Planet: ${planet.name}`;
+        containerElement.append(h4);
+    }, handleFetchError);
+}
 function loadPreviousButton() {
     container.innerHTML = "";
     currentPage--;
-        fetchCharacters(previousURL);
+        fetchCharacters();
 }
 function loadNextButton() {
     container.innerHTML = "";
     currentPage++;
-        fetchCharacters(nextURL);
+        fetchCharacters();
 }
 fetchCharacters();
     previousBtn.addEventListener('click', loadPreviousButton);
     nextBtn.addEventListener('click', loadNextButton);
-
-
