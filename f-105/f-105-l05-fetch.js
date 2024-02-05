@@ -1,3 +1,4 @@
+//first fetch
 fetch('people.json').then(function(response) {
     return response.json();
 }).then(function(obj) {
