@@ -34,3 +34,39 @@ async function loadJson(url) {
 }
 loadJson('https://javascript.info/no-such-user.json')
     .catch(alert); // Error: 404
+// Rewrite "rethrow" with async/await. Below you can find the “rethrow” example. Rewrite it using async/await instead of then/catch. And get rid of the recursion in favour of a loop in demoGithubUser: with async/await that becomes easy to do.
+class HttpError extends Error {
+    constructor(response) {
+        super(`${response.status} for ${response.url}`);
+        this.name = 'HttpError';
+        this.response = response;
+    }
+}
+async function loadJson(url) {
+   const fetchData =  await fetch(url);
+            if (response.status == 200) {
+                const response = await response.json();
+            } else {
+                throw new HttpError(response);
+            }
+}
+// Ask for a user name until github returns a valid user
+async function demoGithubUser() {
+    let user;
+    while(true) {
+        let name = prompt("Enter a name?", "iliakan");
+        try {
+            user = await loadJson(`https://api.github.com/users/${name}`)
+            break;
+    } catch(error) {
+            if (error instanceof HttpError && error.response.status == 404) {
+                alert("No user, please try again.")
+            } else {
+                throw error;
+            }
+        }
+    }
+        alert(`Full name: ${user.name}.`);
+        return user;
+    }
+demoGithubUser();
