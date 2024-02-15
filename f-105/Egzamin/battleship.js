@@ -1,5 +1,13 @@
 window.addEventListener("load", createBoards);
 
+const shipTypes = [
+  { name: "Carrier", length: 5 },
+  { name: "Battleship", length: 4 },
+  { name: "Destroyer", length: 3 },
+  { name: "Submarine", length: 3 },
+  { name: "Patrol Boat", length: 2 },
+];
+
 function createBoards() {
   createBoard("playerBoard");
   createBoard("aiBoard");
@@ -13,24 +21,5 @@ function createBoard(boardId) {
     board.appendChild(gridCell);
   }
   if (board === "aiBoard") {
-    board.addEventListener("click", aiMove);
-    placeComputerShips();
   }
-}
-
-function aiMove(event) {
-  const computerShotIndex = Math.floor(Math.random() * 100);
-  const cell = event.target;
-  // Simulate hit or miss (for demonstration purposes)
-  if (cell.classList.contains("ship")) {
-    cell.style.backgroundColor = "red"; // Mark as hit
-  } else {
-    cell.style.backgroundColor = "blue";
-  }
-}
-function placeComputerShips() {
-  const aiBoard = document.getElementById("aiBoard");
-  const gridCells = document.querySelectorAll(".grid-cell");
-  const randomCellIndex = Math.floor(Math.random() * cells.length);
-  cells[randomCellIndex].classList.add("ship");
 }
