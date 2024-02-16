@@ -1,13 +1,18 @@
 window.addEventListener("load", createBoards);
+//types of Ships
+class Ship {
+    constructor(name, length) {
+        this.name = name;
+        this.length = length;
+    }
+}
+const patrolBoat = new Ship("Patrol Boat", 2);
+const submarine = new Ship("Submarine", 3);
+const destroyer = new Ship("Destroyer", 3);
+const battleship = new Ship("BattleShip", 4);
+const carrier = new Ship("Carrier", 5);
 
-const shipTypes = [
-  { name: "Carrier", length: 5 },
-  { name: "Battleship", length: 4 },
-  { name: "Destroyer", length: 3 },
-  { name: "Submarine", length: 3 },
-  { name: "Patrol Boat", length: 2 },
-];
-
+const ships = [patrolBoat, submarine, destroyer, battleship, carrier]
 function createBoards() {
   createBoard("playerBoard");
   createBoard("aiBoard");
