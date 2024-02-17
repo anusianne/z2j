@@ -27,6 +27,10 @@
   justify-content: center;
   width: 200px;
   height: 200px;
+  padding-top: 90px;
+}
+.rotateBtn {
+  padding: 0.5em 1em;
 }
 .destroyer {
   background-color: #8c7ae6;

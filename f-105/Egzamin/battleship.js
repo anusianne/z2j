@@ -1,4 +1,13 @@
 window.addEventListener("load", createBoards);
+const rotateBtn = document.querySelector('.rotateBtn');
+const shipContainer = document.querySelector('.shipContainer');
+let angle = 0;
+function rotateShip() {
+const shipTypes = Array.from(shipContainer.children);
+    angle = angle === 0 ? 90 : 0;
+    shipTypes.forEach(shipType => shipType.style.transform = `rotate(${angle}deg)`);
+}
+rotateBtn.addEventListener('click',rotateShip)
 //types of Ships
 class Ship {
     constructor(name, length) {
