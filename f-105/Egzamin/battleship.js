@@ -16,9 +16,9 @@ class Ship {
         this.length = length;
     }
 }
-const patrolBoat = new Ship("Patrol Boat", 2);
+const patrolBoat = new Ship("Patrol Boat", 3);
 const submarine = new Ship("Submarine", 3);
-const destroyer = new Ship("Destroyer", 3);
+const destroyer = new Ship("Destroyer", 2);
 const battleship = new Ship("BattleShip", 4);
 const carrier = new Ship("Carrier", 5);
 
@@ -36,3 +36,21 @@ function createBoard(boardId, user) {
       gridCell.id = `${user}${i}`;
       board.appendChild(gridCell);
   }}
+
+//random ships for ai board
+function addShipRandomly(ship) {
+    const allBoardGrids = document.querySelectorAll('#aiBoard div');
+    let randomBoolean = Math.random() < 0.5;
+    let isHorizontal = true;
+    // console.log(allBoardGrids)
+    let randomStartIndex = Math.floor(Math.random() * width * width);
+
+    let ShipBlocks = [];
+    // console.log(randomStartIndex)
+    for (let i = 0; i < ship.length; i++) {
+        if(isHorizontal) {
+        console.log(allBoardGrids[Number(randomStartIndex) + i]);
+        }
+    }
+}
+addShipRandomly(destroyer)
