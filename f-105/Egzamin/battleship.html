@@ -2,23 +2,20 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
     <link rel="stylesheet" href="battleship.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="gameBoard" id="playerBoard"></div>
-      <div class="gameBoard" id="aiBoard"></div>
-    </div>
-    <button class="rotateBtn">Rotate</button>
+    <div id="gameboards-container"></div>
     <div class="shipContainer">
       <div class="destroyer-preview destroyer"></div>
       <div class="submarine-preview submarine"></div>
       <div class="cruiser-preview cruiser"></div>
       <div class="battleship-preview battleship"></div>
-      <div class="carrier-preview carrier"></div><br>
+      <div class="carrier-preview carrier"></div>
     </div>
-
-    <script src="battleship.js"></script>
+    <button id="rotateBtn">Rotate ship</button>
+    <script type="module" src="battleship.js"></script>
   </body>
 </html>
