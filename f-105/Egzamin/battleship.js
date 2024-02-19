@@ -19,7 +19,7 @@ function createBoard(color, user) {
   gameBoardContainer.style.backgroundColor = color;
   gameBoardContainer.id = user;
   //create 100 gridcells for each board
-  for (let i = 1; i <= width * width; i++) {
+  for (let i = 0; i < width * width; i++) {
     const gridCell = document.createElement("div");
     gridCell.classList.add("gridCell");
     gridCell.id = i;
@@ -68,9 +68,27 @@ function addShip(ship) {
       shipCells.push(allBoardCells[Number(validStart) + i * width]);
     }
   }
-  shipCells.forEach((shipCell) => {
-    shipCell.classList.add(ship.name);
-    shipCell.classList.add("taken");
-  });
+  let valid;
+  if (isHorizontal) {
+    valid = shipCells.every(
+      (_shipCell, index) =>
+        shipCells[0].id % width !== width - (shipCells.length - (index + 1))
+    );
+  } else {
+    valid = shipCells.every(
+      (_shipCell, index) => shipCells[0].id < 90 + (width * index + 1)
+    );
+  }
+  const notTaken = shipCells.every(
+    (shipCell) => !shipCell.classList.contains("taken")
+  );
+  if (valid && notTaken) {
+    shipCells.forEach((shipCell) => {
+      shipCell.classList.add(ship.name);
+      shipCell.classList.add("taken");
+    });
+  } else {
+    addShip(ship);
+  }
 }
 ships.forEach((ship) => addShip(ship));
