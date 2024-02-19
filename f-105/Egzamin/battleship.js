@@ -47,22 +47,30 @@ const carrier = new Ship("carrier", 5);
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
 //Adding randomly ship to an ai board
 function addShip(ship) {
-  const allBoardGrids = document.querySelectorAll("#ai div");
+  const allBoardCells = document.querySelectorAll("#ai div");
   let randomStartIndex = Math.floor(Math.random() * width * width);
   let randomBoolean = Math.random() < 0.5;
-  console.log(randomStartIndex);
+  // console.log(randomStartIndex);
   let isHorizontal = randomBoolean;
-  let shipBlocks = [];
+  let shipCells = [];
+  let validStart = isHorizontal
+    ? randomStartIndex <= width * width - ship.length
+      ? randomStartIndex
+      : width * width - ship.length
+    : //isVertical??
+    randomStartIndex <= width * width - width * ship.length
+    ? randomStartIndex
+    : randomStartIndex - ship.length * width + width;
   for (let i = 0; i < ship.length; i++) {
     if (isHorizontal) {
-      shipBlocks.push(allBoardGrids[Number(randomStartIndex) + i]);
+      shipCells.push(allBoardCells[Number(validStart) + i]);
     } else {
-      shipBlocks.push(allBoardGrids[Number(randomStartIndex) + i * width]);
+      shipCells.push(allBoardCells[Number(validStart) + i * width]);
     }
   }
-  shipBlocks.forEach((shipBlock) => {
-    shipBlock.classList.add(ship.name);
-    shipBlock.classList.add("taken");
+  shipCells.forEach((shipCell) => {
+    shipCell.classList.add(ship.name);
+    shipCell.classList.add("taken");
   });
 }
-addShip(destroyer);
+ships.forEach((ship) => addShip(ship));
