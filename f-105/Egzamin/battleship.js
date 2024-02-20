@@ -121,6 +121,14 @@ function dropShip(e) {
     draggedShip.remove();
   }
   if (shipContainer.children.length === 0) {
-    shipContainer.textContent = "You dropped the ships. Let's start and play!";
+    shipContainer.textContent =
+      "You dispatchedd the ships. Let's start and play!";
+    const startBtn = document.getElementById("startBtn");
+    startBtn.style.display = "block";
+    startBtn.addEventListener("click", () => {
+      rotateBtn.style.display = "none";
+      startBtn.style.display = "none";
+      shipContainer.style.display = "none";
+    });
   }
 }
