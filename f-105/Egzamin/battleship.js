@@ -120,4 +120,7 @@ function dropShip(e) {
   if (!notDropped) {
     draggedShip.remove();
   }
+  if (shipContainer.children.length === 0) {
+    shipContainer.textContent = "You dropped the ships. Let's start and play!";
+  }
 }
