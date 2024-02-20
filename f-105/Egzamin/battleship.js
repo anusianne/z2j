@@ -53,7 +53,7 @@ function addShip(user, ship, startId) {
   let startIndex = startId ? startId : randomStartIndex;
   let randomBoolean = Math.random() < 0.5;
   // console.log(randomStartIndex);
-  let isHorizontal = user === "player" ? (angle = 0) : randomBoolean;
+  let isHorizontal = user === "player" ? angle === 0 : randomBoolean;
   let shipCells = [];
   let validStart = isHorizontal
     ? startIndex <= width * width - ship.length
