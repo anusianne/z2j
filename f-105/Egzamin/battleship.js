@@ -1,10 +1,10 @@
 const rotateBtn = document.getElementById("rotateBtn");
 const shipContainer = document.querySelector(".shipContainer");
 const gameBoardsContainer = document.querySelector("#gameboards-container");
+const shipTypes = Array.from(shipContainer.children);
 //shipTypes rotate
 let angle = 0;
 function rotate() {
-  const shipTypes = Array.from(shipContainer.children);
   angle = angle === 0 ? 90 : 0;
   shipTypes.forEach(
     (shipType) => (shipType.style.transform = `rotate(${angle}deg)`)
@@ -45,22 +45,24 @@ const cruiser = new Ship("cruiser", 3);
 const battleship = new Ship("battleship", 4);
 const carrier = new Ship("carrier", 5);
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
+let notDropped;
 //Adding randomly ship to an ai board
-function addShip(ship) {
-  const allBoardCells = document.querySelectorAll("#ai div");
+function addShip(user, ship, startId) {
+  const allBoardCells = document.querySelectorAll(`#${user} div`);
   let randomStartIndex = Math.floor(Math.random() * width * width);
+  let startIndex = startId ? startId : randomStartIndex;
   let randomBoolean = Math.random() < 0.5;
   // console.log(randomStartIndex);
-  let isHorizontal = randomBoolean;
+  let isHorizontal = user === "player" ? (angle = 0) : randomBoolean;
   let shipCells = [];
   let validStart = isHorizontal
-    ? randomStartIndex <= width * width - ship.length
-      ? randomStartIndex
+    ? startIndex <= width * width - ship.length
+      ? startIndex
       : width * width - ship.length
     : //isVertical??
-    randomStartIndex <= width * width - width * ship.length
-    ? randomStartIndex
-    : randomStartIndex - ship.length * width + width;
+    startIndex <= width * width - width * ship.length
+    ? startIndex
+    : startIndex - ship.length * width + width;
   for (let i = 0; i < ship.length; i++) {
     if (isHorizontal) {
       shipCells.push(allBoardCells[Number(validStart) + i]);
@@ -88,7 +90,34 @@ function addShip(ship) {
       shipCell.classList.add("taken");
     });
   } else {
-    addShip(ship);
+    if (user === "ai") addShip(user, ship);
+    if (user === "player") notDropped = true;
   }
 }
-ships.forEach((ship) => addShip(ship));
+ships.forEach((ship) => addShip("ai", ship));
+//Drag&drop ships
+let draggedShip;
+shipTypes.forEach((shipType) =>
+  shipType.addEventListener("dragstart", dragStart)
+);
+const allPlayerCells = document.querySelectorAll("#player div");
+allPlayerCells.forEach((allPlayerCell) => {
+  allPlayerCell.addEventListener("dragover", dragOver);
+  allPlayerCell.addEventListener("drop", dropShip);
+});
+function dragStart(e) {
+  // console.log(e.target);
+  notDropped = false;
+  draggedShip = e.target;
+}
+function dragOver(e) {
+  e.preventDefault();
+}
+function dropShip(e) {
+  const startId = e.target.id;
+  const ship = ships[draggedShip.id];
+  addShip("player", ship, startId);
+  if (!notDropped) {
+    draggedShip.remove();
+  }
+}
