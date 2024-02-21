@@ -122,11 +122,11 @@ function dropShip(e) {
   }
   if (shipContainer.children.length === 0) {
     shipContainer.textContent =
-      "You dispatchedd the ships. Let's start and play!";
+      "You dispatched the ships. Let's start and play!";
+      rotateBtn.style.display = "none";
     const startBtn = document.getElementById("startBtn");
     startBtn.style.display = "block";
     startBtn.addEventListener("click", () => {
-      rotateBtn.style.display = "none";
       startBtn.style.display = "none";
       shipContainer.style.display = "none";
     });
