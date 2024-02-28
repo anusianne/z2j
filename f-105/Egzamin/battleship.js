@@ -157,13 +157,21 @@ let playerTurn;
 
 //Start Game
 function startGame() {
-if (shipContainer.children.length === 0) {
-const allBoardCells = document.querySelectorAll('#ai div');
-allBoardCells.forEach(block => block.addEventListener('click', handleClick))
+  if (playerTurn === undefined) {
+    if (shipContainer.children.length !== 0) {
+      console.log('place all ships on the board!');
+    } else {
+      const allBoardCells = document.querySelectorAll('#ai div');
+      allBoardCells.forEach(block => block.addEventListener('click', handleClick))
+    }
+    playerTurn = true;
+  }
 }
-}
+startBtn.addEventListener('click', startGame)
 let playerHits = [];
 let aiHits = [];
+let playerSunkShips = [];
+let aiSunkShips = [];
 function handleClick(e) {
   if(!gameOver) {
     if(e.target.classList.contains('taken')) {
@@ -174,7 +182,7 @@ function handleClick(e) {
       classes = classes.filter(className => className!== 'taken');
       playerHits.push(...classes);
       aiHits.push(...classes);
-      console.log(playerHits)
+      checkScore('player',playerHits, playerSunkShips)
     }
     if (!e.target.classList.contains('taken')) {
       e.target.classList.add('empty')
@@ -185,7 +193,7 @@ function handleClick(e) {
     setTimeout(computerTurn, 3000);
   }
 }
-startBtn.addEventListener('click', startGame)
+
 
 //Computer Turn
 function computerTurn() {
@@ -199,11 +207,12 @@ function computerTurn() {
         return;
       } else if (allBoardBlocks[randomGo].classList.contains('taken') && !allBoardBlocks[randomGo].classList.contains('boom')) {
         allBoardBlocks[randomGo].classList.add('boom');
-        let classes = Array.from(e.target.classList);
+        let classes = Array.from(allBoardBlocks[randomGo].classList);
         classes = classes.filter(className => className !== 'gridCell');
         classes = classes.filter(className => className !== 'boom');
         classes = classes.filter(className => className !== 'taken');
         aiHits.push(...classes);
+        checkScore('ai', aiHits, aiSunkShips)
       } else {
         allBoardBlocks[randomGo].classList.add('empty');
       }
@@ -213,5 +222,35 @@ playerTurn = true;
 const allBoardBlocks = document.querySelectorAll('#ai div');
 allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
     }, 6000)
+  }
+}
+function checkScore(user, userHits, userSunkShips) {
+function checkShip(shipName, shipLength) {
+  if (userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
+    if (user === 'player') {
+      console.log(`${user}'s ${shipName}`);
+      playerHits = userHits.filter(storedShipName => storedShipName !== shipName);
+    }
+    else {
+      console.log(`${user}'s ${shipName}`);
+      aiHits = userHits.filter(storedShipName => storedShipName !== shipName);
+    }
+    userSunkShips.push(shipName);
+  }
+}
+checkShip('destoyer', 2);
+checkShip('submarine', 3);
+checkShip('cruiser', 3);
+checkShip('battleship', 4);
+checkShip('carrier', 5);
+console.log('playerHits' ,playerHits);
+console.log('aiHits', aiHits);
+  if(playerSunkShips.length === 5) {
+    console.log('you sunk all the computers ships. You won!');
+    gameOver=true;
+  }
+  if(aiSunkShips.length === 5) {
+    console.log('computer won!');
+    gameOver=true;
   }
 }
