@@ -162,11 +162,56 @@ const allBoardCells = document.querySelectorAll('#ai div');
 allBoardCells.forEach(block => block.addEventListener('click', handleClick))
 }
 }
+let playerHits = [];
+let aiHits = [];
 function handleClick(e) {
   if(!gameOver) {
     if(e.target.classList.contains('taken')) {
       e.target.classList.add('boom');
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className => className!== 'gridCell');
+      classes = classes.filter(className => className!== 'boom');
+      classes = classes.filter(className => className!== 'taken');
+      playerHits.push(...classes);
+      aiHits.push(...classes);
+      console.log(playerHits)
     }
+    if (!e.target.classList.contains('taken')) {
+      e.target.classList.add('empty')
+    }
+    playerTurn = false;
+    const allBoardBlocks = document.querySelectorAll('#ai div');
+    allBoardBlocks.forEach(block => block.replaceWith(block.cloneNode(true)));
+    setTimeout(computerTurn, 3000);
   }
 }
 startBtn.addEventListener('click', startGame)
+
+//Computer Turn
+function computerTurn() {
+  if (!gameOver) {
+    setTimeout(() => {
+      let randomGo = Math.floor(Math.random() * width * width);
+      const allBoardBlocks = document.querySelectorAll('#player div');
+      if (allBoardBlocks[randomGo].classList.contains('taken') && allBoardBlocks[randomGo].classList.contains('boom')
+      ) {
+        computerTurn();
+        return;
+      } else if (allBoardBlocks[randomGo].classList.contains('taken') && !allBoardBlocks[randomGo].classList.contains('boom')) {
+        allBoardBlocks[randomGo].classList.add('boom');
+        let classes = Array.from(e.target.classList);
+        classes = classes.filter(className => className !== 'gridCell');
+        classes = classes.filter(className => className !== 'boom');
+        classes = classes.filter(className => className !== 'taken');
+        aiHits.push(...classes);
+      } else {
+        allBoardBlocks[randomGo].classList.add('empty');
+      }
+    }, 3000)
+    setTimeout(() => {
+playerTurn = true;
+const allBoardBlocks = document.querySelectorAll('#ai div');
+allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    }, 6000)
+  }
+}
