@@ -46,23 +46,16 @@ const battleship = new Ship("battleship", 4);
 const carrier = new Ship("carrier", 5);
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
 let notDropped;
-//Adding randomly ship to an ai board
-function addShip(user, ship, startId) {
-  const allBoardCells = document.querySelectorAll(`#${user} div`);
-  let randomStartIndex = Math.floor(Math.random() * width * width);
-  let startIndex = startId ? startId : randomStartIndex;
-  let randomBoolean = Math.random() < 0.5;
-  // console.log(randomStartIndex);
-  let isHorizontal = user === "player" ? angle === 0 : randomBoolean;
+function getValidity(allBoardCells, isHorizontal, startIndex, ship) {
   let shipCells = [];
   let validStart = isHorizontal
-    ? startIndex <= width * width - ship.length
-      ? startIndex
-      : width * width - ship.length
-    : //isVertical??
-    startIndex <= width * width - width * ship.length
-    ? startIndex
-    : startIndex - ship.length * width + width;
+      ? startIndex <= width * width - ship.length
+          ? startIndex
+          : width * width - ship.length
+      : //isVertical??
+      startIndex <= width * width - width * ship.length
+          ? startIndex
+          : startIndex - ship.length * width + width;
   for (let i = 0; i < ship.length; i++) {
     if (isHorizontal) {
       shipCells.push(allBoardCells[Number(validStart) + i]);
@@ -73,28 +66,40 @@ function addShip(user, ship, startId) {
   let valid;
   if (isHorizontal) {
     valid = shipCells.every(
-      (_shipCell, index) =>
-        shipCells[0].id % width !== width - (shipCells.length - (index + 1))
+        (_shipCell, index) =>
+            shipCells[0].id % width !== width - (shipCells.length - (index + 1))
     );
   } else {
     valid = shipCells.every(
-      (_shipCell, index) => shipCells[0].id < 90 + (width * index + 1)
+        (_shipCell, index) => shipCells[0].id < 90 + (width * index + 1)
     );
   }
   const notTaken = shipCells.every(
-    (shipCell) => !shipCell.classList.contains("taken")
+      (shipCell) => !shipCell.classList.contains("taken")
   );
+  return {shipCells, valid, notTaken}
+}
+//Adding randomly ship to an ai board
+function addShip(user, ship, startId) {
+  const allBoardCells = document.querySelectorAll(`#${user} div`);
+  let randomStartIndex = Math.floor(Math.random() * width * width);
+  let startIndex = startId ? startId : randomStartIndex;
+  let randomBoolean = Math.random() < 0.5;
+  // console.log(randomStartIndex);
+  let isHorizontal = user === "player" ? angle === 0 : randomBoolean;
+const {shipCells, valid, notTaken} = getValidity(allBoardCells,isHorizontal,startIndex,ship)
   if (valid && notTaken) {
     shipCells.forEach((shipCell) => {
       shipCell.classList.add(ship.name);
       shipCell.classList.add("taken");
     });
   } else {
-    if (user === "ai") addShip(user, ship);
+    if (user === "ai") addShip(user, ship, startId);
     if (user === "player") notDropped = true;
   }
 }
-ships.forEach((ship) => addShip("ai", ship));
+ships.forEach((ship) =>
+    addShip("ai", ship));
 //Drag&drop ships
 let draggedShip;
 shipTypes.forEach((shipType) =>
@@ -112,6 +117,8 @@ function dragStart(e) {
 }
 function dragOver(e) {
   e.preventDefault();
+  const ship = ships[draggedShip.id];
+  highlightArea(e.target.id, ship)
 }
 function dropShip(e) {
   const startId = e.target.id;
@@ -130,5 +137,18 @@ function dropShip(e) {
       startBtn.style.display = "none";
       shipContainer.style.display = "none";
     });
+  }
+}
+
+//Highlighting
+function highlightArea(startIndex, ship) {
+  const allBoardBlocks =document.querySelectorAll('#player div');
+  let isHorizontal = angle === 0;
+  const {shipCells, valid, notTaken} = getValidity(allBoardBlocks,isHorizontal,startIndex,ship)
+  if(valid&&notTaken) {
+    shipCells.forEach(shipCell => {
+      shipCell.classList.add('hover');
+      setTimeout(() => shipCell.classList.remove('hover'), 500)
+    })
   }
 }

@@ -66,3 +66,12 @@
 #startBtn {
   display: none;
 }
+.hover {
+  background-color: grey;
+}
+.boom {
+  background-color: red;
+}
+.empty {
+  background-color: grey;
+}
