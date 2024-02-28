@@ -1,4 +1,5 @@
 const rotateBtn = document.getElementById("rotateBtn");
+const startBtn = document.getElementById("startBtn");
 const shipContainer = document.querySelector(".shipContainer");
 const gameBoardsContainer = document.querySelector("#gameboards-container");
 const shipTypes = Array.from(shipContainer.children);
@@ -139,7 +140,6 @@ function dropShip(e) {
     });
   }
 }
-
 //Highlighting
 function highlightArea(startIndex, ship) {
   const allBoardBlocks =document.querySelectorAll('#player div');
@@ -152,3 +152,21 @@ function highlightArea(startIndex, ship) {
     })
   }
 }
+let gameOver = false;
+let playerTurn;
+
+//Start Game
+function startGame() {
+if (shipContainer.children.length === 0) {
+const allBoardCells = document.querySelectorAll('#ai div');
+allBoardCells.forEach(block => block.addEventListener('click', handleClick))
+}
+}
+function handleClick(e) {
+  if(!gameOver) {
+    if(e.target.classList.contains('taken')) {
+      e.target.classList.add('boom');
+    }
+  }
+}
+startBtn.addEventListener('click', startGame)
