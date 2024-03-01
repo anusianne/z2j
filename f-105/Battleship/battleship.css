@@ -81,3 +81,8 @@ h1 {
 .carrier {
   background-color: blue;
 }
+/*Btn section*/
+.buttonSection {
+    display: flex;
+    justify-content: center;
+}

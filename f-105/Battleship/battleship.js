@@ -1,7 +1,11 @@
 const boardSection = document.getElementById('boardSection');
+const shipSection = document.getElementById('shipSection')
 const player = document.getElementById('player');
 const ai = document.getElementById('ai');
+const rotateBtn = document.querySelector('.rotateBtn');
 const width = 10;
+let angle = 0;
+const shipTypes = Array.from(shipSection.children);
 
 //Create Board:
 function createBoard(user) {
@@ -22,3 +26,11 @@ function createBoards() {
     createBoard('ai');
 }
 createBoards();
+//Rotate button to rotate ship's direction:
+rotateBtn.addEventListener('click', rotateShip)
+function rotateShip() {
+    angle = angle === 0 ? 90 : 0;
+    shipTypes.forEach(
+        (shipType) => (shipType.style.transform = `rotate(${angle}deg)`)
+    );
+}
