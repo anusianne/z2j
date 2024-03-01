@@ -1,10 +1,83 @@
+
 * {
     font-family: "Roboto", sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
 }
 h1 {
     display: flex;
     justify-content: center;
-    margin-top: 2em;
+    background-color: #8ecae6;
+}
+#boardSection {
+    margin: 0 auto;
+    width: 500px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #8c7ae6;
+}
+#shipSection {
+    background-color: #3f25c4;
+    width: 500px;
+    margin: 0 auto;
+    height: 100px;
+}
+.gameContainer {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.gridCell {
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+/* Ships */
+#shipSection {
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+}
+.destroyer-preview {
+  width: 20px;
+  height: 10px;
+  margin: 5px;
+}
+.destroyer {
+  background-color: blueviolet;
+}
+.submarine-preview {
+  width: 30px;
+  height: 10px;
+  margin: 5px;
+}
+.submarine {
+  background-color: chartreuse;
+}
+.cruiser-preview {
+  width: 30px;
+  height: 10px;
+  margin: 5px;
+}
+.cruiser {
+  background-color: white;
+}
+.battleship-preview {
+  width: 40px;
+  height: 10px;
+  margin: 5px;
+}
+.battleship {
+  background-color: black;
+}
+.carrier-preview {
+  width: 50px;
+  height: 10px;
+  margin: 5px;
+}
+.carrier {
+  background-color: blue;
 }
