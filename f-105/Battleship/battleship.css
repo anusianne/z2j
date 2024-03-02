@@ -81,8 +81,12 @@ h1 {
 .carrier {
   background-color: blue;
 }
+.draggable.dragging {
+    opacity: 0.5;
+}
 /*Btn section*/
 .buttonSection {
     display: flex;
     justify-content: center;
 }
+

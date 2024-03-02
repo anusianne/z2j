@@ -6,6 +6,7 @@ const rotateBtn = document.querySelector('.rotateBtn');
 const width = 10;
 let angle = 0;
 const shipTypes = Array.from(shipSection.children);
+const draggables = document.querySelectorAll('.draggable');
 
 //Create Board:
 function createBoard(user) {
@@ -34,3 +35,12 @@ function rotateShip() {
         (shipType) => (shipType.style.transform = `rotate(${angle}deg)`)
     );
 }
+// Draggable elements
+draggables.forEach(draggable => {
+    draggable.addEventListener('dragstart', () => {
+        draggable.classList.add('dragging');
+    })
+    draggable.addEventListener('dragend', () => {
+        draggable.classList.remove('dragging');
+    })
+})
