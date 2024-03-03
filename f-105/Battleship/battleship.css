@@ -28,6 +28,7 @@ h1 {
     height: 200px;
     display: flex;
     flex-wrap: wrap;
+    position: relative;
 }
 .gridCell {
     width: 20px;
@@ -79,14 +80,23 @@ h1 {
   margin: 5px;
 }
 .carrier {
-  background-color: blue;
+    background-color: blue;
 }
 .draggable.dragging {
     opacity: 0.5;
+}
+.dragging {
+    position:absolute;
 }
 /*Btn section*/
 .buttonSection {
     display: flex;
     justify-content: center;
+}
+
+/* Adjust sizes to fit within a grid cell */
+
+.invisible {
+    display: none;
 }
 

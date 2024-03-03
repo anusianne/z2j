@@ -1,12 +1,28 @@
 const boardSection = document.getElementById('boardSection');
-const shipSection = document.getElementById('shipSection')
-const player = document.getElementById('player');
+const shipSection = document.getElementById('shipSection');
+const player = document.querySelector('#player');
 const ai = document.getElementById('ai');
 const rotateBtn = document.querySelector('.rotateBtn');
 const width = 10;
 let angle = 0;
 const shipTypes = Array.from(shipSection.children);
 const draggables = document.querySelectorAll('.draggable');
+
+// Ship Class
+class Ships {
+    constructor(name,length) {
+        this.name = name;
+        this.length = length;
+    }
+}
+const destroyer = new Ships('destroyer', 2);
+const submarine = new Ships('submarine', 3);
+const cruiser = new Ships('cruiser', 3);
+const battleship = new Ships('battleship', 4);
+const carrier = new Ships('carrier', 5);
+
+const ships = [destroyer, submarine, cruiser, battleship, carrier];
+
 
 //Create Board:
 function createBoard(user) {
@@ -36,11 +52,30 @@ function rotateShip() {
     );
 }
 // Draggable elements
-draggables.forEach(draggable => {
-    draggable.addEventListener('dragstart', () => {
-        draggable.classList.add('dragging');
+let draggedShip;
+shipTypes.forEach(shipType =>
+    shipType.addEventListener('dragstart', dragStart));
+const allPlayerBlocks = document.querySelectorAll('#player div');
+allPlayerBlocks.forEach(playerBlock => {
+    playerBlock.addEventListener('dragover', dragOver)
+    playerBlock.addEventListener('drop', ()=> {
+        playerBlock.append(draggedShip);
     })
-    draggable.addEventListener('dragend', () => {
-        draggable.classList.remove('dragging');
-    })
-})
+});
+function dragStart(e) {
+   draggedShip = e.target;
+}
+function dragOver(e) {
+    e.preventDefault();
+}
+// function dropShip(e) {
+//     const startId = e.target.id;
+//     const ship = ships[draggedShip.id];
+// }
+
+
+
+
+
+
+
