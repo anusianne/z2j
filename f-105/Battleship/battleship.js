@@ -53,30 +53,59 @@ function rotateShip() {
 //Add Ship
 function addShip(ship) {
     const allBoardCells = document.querySelectorAll('#ai div');
-    console.log(allBoardCells);
-    let randomBoolean = Math.random() < 0.5;
-    let isHorizontal = randomBoolean;
-    let randomStartIndex = Math.floor(Math.random() * width * width);
-    console.log(randomStartIndex);
-    let shipBlocks = [];
+    let attempt = 0; // To avoid infinite loops
+    let success = false;
 
-    for (let i = 0; i < ship.length ; i++) {
-        if(isHorizontal) {
-            shipBlocks.push(allBoardCells[Number(randomStartIndex) + i]);
-        } else {
-            shipBlocks.push(allBoardCells[Number(randomStartIndex) + i * width])
+    while (!success && attempt < 200) { // Limit attempts to prevent infinite loop
+        attempt++;
+        let randomBoolean = Math.random() < 0.5;
+        let isHorizontal = randomBoolean;
+        let randomStartIndex = Math.floor(Math.random() * width * width);
+        let validStart = isHorizontal ?
+            randomStartIndex % width <= width - ship.length ?
+                randomStartIndex : null : // Horizontal invalid start
+            randomStartIndex < width * (width - ship.length + 1) ?
+                randomStartIndex : null; // Vertical invalid start
+
+        if (validStart === null) continue; // Skip to next attempt if start is invalid
+
+        let shipCells = [];
+        let isValidPlacement = true;
+
+        for (let i = 0; i < ship.length; i++) {
+            let index = isHorizontal ? Number(validStart) + i : Number(validStart) + i * width;
+            const cell = allBoardCells[index];
+            // Define a function to check surrounding cells
+            const isSurroundingCellOccupied = (index) => {
+                const surroundingOffsets = [-1, 1, -width, width, -width-1, -width+1, width-1, width+1];
+                return surroundingOffsets.some(offset => {
+                    const surroundingIndex = index + offset;
+                    // Check bounds
+                    if (surroundingIndex < 0 || surroundingIndex >= width*width) return false;
+                    // Check horizontal wrapping
+                    if (Math.abs(offset) === 1 && Math.floor((index + offset) / width) !== Math.floor(index / width)) return false;
+                    return allBoardCells[surroundingIndex]?.classList.contains('occupied');
+                });
+            };
+            // Check if the cell or its surroundings are already occupied
+            if (cell.classList.contains('occupied') || isSurroundingCellOccupied(index)) {
+                isValidPlacement = false;
+                break;
+            }
+            shipCells.push(cell);
+        }
+        if (isValidPlacement) {
+            shipCells.forEach(shipCell => {
+                shipCell.classList.add(ship.name);
+                shipCell.classList.add('occupied');
+            });
+            success = true;
         }
     }
-    shipBlocks.forEach(shipBlock=> {
-        shipBlock.classList.add(ship.name);
-        shipBlock.classList.add('ocuppied');
-    })
 }
 ships.forEach(ship => {
     addShip(ship);
-})
-
-
+});
 
 // Draggable elements
 let draggedShip;
