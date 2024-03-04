@@ -6,7 +6,6 @@ const rotateBtn = document.querySelector('.rotateBtn');
 const width = 10;
 let angle = 0;
 const shipTypes = Array.from(shipSection.children);
-const draggables = document.querySelectorAll('.draggable');
 
 // Ship Class
 class Ships {
@@ -51,15 +50,43 @@ function rotateShip() {
         (shipType) => (shipType.style.transform = `rotate(${angle}deg)`)
     );
 }
+//Add Ship
+function addShip(ship) {
+    const allBoardCells = document.querySelectorAll('#ai div');
+    console.log(allBoardCells);
+    let randomBoolean = Math.random() < 0.5;
+    let isHorizontal = randomBoolean;
+    let randomStartIndex = Math.floor(Math.random() * width * width);
+    console.log(randomStartIndex);
+    let shipBlocks = [];
+
+    for (let i = 0; i < ship.length ; i++) {
+        if(isHorizontal) {
+            shipBlocks.push(allBoardCells[Number(randomStartIndex) + i]);
+        } else {
+            shipBlocks.push(allBoardCells[Number(randomStartIndex) + i * width])
+        }
+    }
+    shipBlocks.forEach(shipBlock=> {
+        shipBlock.classList.add(ship.name);
+        shipBlock.classList.add('ocuppied');
+    })
+}
+ships.forEach(ship => {
+    addShip(ship);
+})
+
+
+
 // Draggable elements
 let draggedShip;
 shipTypes.forEach(shipType =>
     shipType.addEventListener('dragstart', dragStart));
-const allPlayerBlocks = document.querySelectorAll('#player div');
-allPlayerBlocks.forEach(playerBlock => {
-    playerBlock.addEventListener('dragover', dragOver)
-    playerBlock.addEventListener('drop', ()=> {
-        playerBlock.append(draggedShip);
+const allPlayerCells = document.querySelectorAll('#player div');
+allPlayerCells.forEach(playerCell => {
+    playerCell.addEventListener('dragover', dragOver)
+    playerCell.addEventListener('drop', ()=> {
+        playerCell.append(draggedShip);
     })
 });
 function dragStart(e) {
@@ -72,10 +99,4 @@ function dragOver(e) {
 //     const startId = e.target.id;
 //     const ship = ships[draggedShip.id];
 // }
-
-
-
-
-
-
-
+// Function to add ships randomly to the AI board

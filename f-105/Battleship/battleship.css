@@ -82,21 +82,11 @@ h1 {
 .carrier {
     background-color: blue;
 }
-.draggable.dragging {
-    opacity: 0.5;
-}
-.dragging {
-    position:absolute;
-}
 /*Btn section*/
 .buttonSection {
     display: flex;
     justify-content: center;
 }
-
-/* Adjust sizes to fit within a grid cell */
-
 .invisible {
     display: none;
 }
-
