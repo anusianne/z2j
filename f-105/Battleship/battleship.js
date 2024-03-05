@@ -121,6 +121,12 @@ function addShip(user, ship, startId) {
     } else {
       if (user === "player") addShip("player", ship, startId);
     }
+    //basic highlighting
+    shipCells.forEach((shipCell) =>
+      shipCell.addEventListener("click", () => {
+        shipCell.style.backgroundColor = "red";
+      })
+    );
   }
 }
 ships.forEach((ship) => {
