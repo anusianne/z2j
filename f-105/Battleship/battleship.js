@@ -121,10 +121,8 @@ function addShip(user, ship, startId) {
         shipCell.classList.add("occupied");
       });
       success = true;
-      // } else {
-      //   if (user === "ai") addShip(ship);
-      //   if (user === "player") notDropped = true;
-      // }
+    } else {
+      if (user === "player") addShip("player", ship, startId);
     }
   }
 }
@@ -144,7 +142,7 @@ allPlayerCells.forEach((playerCell) => {
 });
 
 function dragStart(e) {
-  //   notDropped = false;
+  notDropped = false;
   draggedShip = e.target;
   console.log(e.target);
 }
@@ -152,12 +150,12 @@ function dragOver(e) {
   e.preventDefault();
 }
 function dropShip(e) {
-  const startId = e.target.id;
+  const startId = e.target.id - 1;
   console.log(startId);
   const ship = ships[draggedShip.id];
   console.log(ship);
   addShip("player", ship, startId);
-  //   if (!notDropped) {
-  //     draggedShip.remove();
-  //   }
+  if (!notDropped) {
+    draggedShip.remove();
+  }
 }
