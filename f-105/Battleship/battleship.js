@@ -6,7 +6,6 @@ const rotateBtn = document.querySelector(".rotateBtn");
 const width = 10;
 let angle = 0;
 const shipTypes = Array.from(shipSection.children);
-
 // Ship Class
 class Ships {
   constructor(name, length) {
@@ -19,7 +18,6 @@ const submarine = new Ships("submarine", 3);
 const cruiser = new Ships("cruiser", 3);
 const battleship = new Ships("battleship", 4);
 const carrier = new Ships("carrier", 5);
-
 const ships = [destroyer, submarine, cruiser, battleship, carrier];
 let notDropped;
 //Create Board:
@@ -54,7 +52,6 @@ function addShip(user, ship, startId) {
   const allBoardCells = document.querySelectorAll(`#${user} div`);
   let attempt = 0; // To avoid infinite loops
   let success = false;
-
   while (!success && attempt < 200) {
     // Limit attempts to prevent infinite loop
     attempt++;
@@ -129,7 +126,6 @@ function addShip(user, ship, startId) {
 ships.forEach((ship) => {
   addShip("ai", ship);
 });
-
 // Draggable elements
 let draggedShip;
 shipTypes.forEach((shipType) =>
@@ -140,11 +136,11 @@ allPlayerCells.forEach((playerCell) => {
   playerCell.addEventListener("dragover", dragOver);
   playerCell.addEventListener("drop", dropShip);
 });
-
 function dragStart(e) {
   notDropped = false;
   draggedShip = e.target;
   console.log(e.target);
+  addShadowShip();
 }
 function dragOver(e) {
   e.preventDefault();
@@ -153,9 +149,15 @@ function dropShip(e) {
   const startId = e.target.id - 1;
   console.log(startId);
   const ship = ships[draggedShip.id];
-  console.log(ship);
   addShip("player", ship, startId);
   if (!notDropped) {
     draggedShip.remove();
   }
+  removeShadowShip();
+}
+function addShadowShip() {
+  draggedShip.classList.add("shadow");
+}
+function removeShadowShip() {
+  draggedShip.classList.remove("shadow");
 }
