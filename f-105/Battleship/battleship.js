@@ -156,14 +156,23 @@ function dropShip(e) {
   console.log(startId);
   const ship = ships[draggedShip.id];
   addShip("player", ship, startId);
+
   if (!notDropped) {
     draggedShip.remove();
+
   }
+    if(shipSection.children.length === 0) {
+        shipSection.style.display = "none";
+        rotateBtn.style.display = "none"
+    }
+
   removeShadowShip();
+
 }
 function addShadowShip() {
   draggedShip.classList.add("shadow");
 }
 function removeShadowShip() {
   draggedShip.classList.remove("shadow");
+
 }
