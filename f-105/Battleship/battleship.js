@@ -3,6 +3,7 @@ const shipSection = document.getElementById("shipSection");
 const player = document.querySelector("#player");
 const ai = document.getElementById("ai");
 const rotateBtn = document.querySelector(".rotateBtn");
+const startBtn = document.querySelector('.startBtn');
 const width = 10;
 let angle = 0;
 const shipTypes = Array.from(shipSection.children);
@@ -156,23 +157,41 @@ function dropShip(e) {
   console.log(startId);
   const ship = ships[draggedShip.id];
   addShip("player", ship, startId);
-
   if (!notDropped) {
     draggedShip.remove();
-
   }
     if(shipSection.children.length === 0) {
         shipSection.style.display = "none";
         rotateBtn.style.display = "none"
     }
-
   removeShadowShip();
-
 }
 function addShadowShip() {
   draggedShip.classList.add("shadow");
 }
 function removeShadowShip() {
   draggedShip.classList.remove("shadow");
-
 }
+let gameOver = false;
+let playerTurn;
+// Start Game
+function startGame() {
+
+    if (shipSection.children.length!==0) {
+      console.log('You must place the ships on the player board first!')
+    } else {
+      startBtn.style.display = 'none';
+      const allBoardCells = document.querySelectorAll('#ai div');
+      allBoardCells.forEach(cell=> cell.addEventListener('click', handleClick));
+    }
+}
+
+function handleClick(e) {
+  if(!gameOver) {
+    if(e.target.classList.contains('occupied')) {
+      e.target.classList.add('boom');
+      console.log('You hit the ai ship.')
+    }
+  }
+}
+startBtn.addEventListener('click', startGame);
