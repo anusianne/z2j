@@ -185,12 +185,23 @@ function startGame() {
       allBoardCells.forEach(cell=> cell.addEventListener('click', handleClick));
     }
 }
-
+let playerHits = [];
+let aiHits = [];
 function handleClick(e) {
   if(!gameOver) {
     if(e.target.classList.contains('occupied')) {
       e.target.classList.add('boom');
       console.log('You hit the ai ship.')
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className=>className !== 'gridCell');
+      classes = classes.filter(className=>className !== 'boom');
+      classes = classes.filter(className=>className !== 'occupied');
+      playerHits.push(...classes);
+      console.log(playerHits)
+    }
+    if (!e.target.classList.contains('occupied')) {
+      console.log('Nothing hit this time.');
+      e.target.style.backgroundColor = 'grey';
     }
   }
 }
