@@ -181,6 +181,57 @@ function startGame() {
 }
 let playerHits = [];
 let aiHits = [];
+const playerSunkedShips = [];
+const aiSunkedShips = [];
+
+function handleClick(e) {
+  if(!gameOver) {
+    if(e.target.classList.contains('occupied')) {
+      //basic highlighting
+            e.target.style.backgroundColor = "red";
+            e.target.classList.add('boom');
+        console.log('You hit the ai ship.');
+    }
+      let classes = Array.from(e.target.classList);
+      classes = classes.filter(className=>className !== 'gridCell');
+      classes = classes.filter(className=>className !== 'boom');
+      classes = classes.filter(className=>className !== 'occupied');
+      playerHits.push(...classes);
+      console.log(playerHits)
+    checkScore('player', playerHits, playerSunkedShips);
+    }
+    if (!e.target.classList.contains('occupied')) {
+      console.log('Nothing hit this time.');
+      e.target.style.backgroundColor = 'grey';
+    }
+    playerTurn = false;
+    const allBoardCells = document.querySelectorAll('#ai div');
+    allBoardCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
+    setTimeout(aiMove, 2000)
+}
+startBtn.addEventListener('click', startGame);
+
+function checkScore(user, userHits, userSunkedShips) {
+  function checkShip(shipName, shipLength) {
+    if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
+      console.log(`You sunk the ${user}'s ${shipName}.`)
+      if(user === 'player') {
+        playerHits = userHits.filter(storedShipName => storedShipName !== shipName);
+      }
+      if(user === 'ai') {
+        aiHits = userHits.filter(storedShipName => storedShipName !== shipName);
+      }
+      userSunkedShips.push(shipName);
+    }
+  }
+  checkShip('destroyer', 2);
+  checkShip('submarine', 3);
+  checkShip('cruiser', 3);
+  checkShip('battleship', 4);
+  checkShip('carrier', 5);
+  console.log('playerHits', playerHits);
+  console.log('playerSunkedShips', playerSunkedShips);
+}
 //ai move function
 function aiMove() {
   if (!gameOver) {
@@ -198,11 +249,12 @@ function aiMove() {
       {
         allPlayerCells[randomMove].classList.add('boom');
         console.log('The computer hit your ship.');
-        let classes = Array.from(e.target.classList);
+        let classes = Array.from(allPlayerCells[randomMove].classList);
         classes = classes.filter(className=>className !== 'gridCell');
         classes = classes.filter(className=>className !== 'boom');
         classes = classes.filter(className=>className !== 'occupied');
         aiHits.push(...classes);
+        checkScore('ai', aiHits, aiSunkedShips);
       } else {
         console.log("Nothing hit this time.");
         allPlayerCells[randomMove].style.backgroundColor = 'grey';
@@ -216,28 +268,3 @@ function aiMove() {
     }, 6000)
   }
 }
-function handleClick(e) {
-  if(!gameOver) {
-    if(e.target.classList.contains('occupied')) {
-      //basic highlighting
-            e.target.style.backgroundColor = "red";
-            e.target.classList.add('boom');
-        console.log('You hit the ai ship.')
-          };
-      let classes = Array.from(e.target.classList);
-      classes = classes.filter(className=>className !== 'gridCell');
-      classes = classes.filter(className=>className !== 'boom');
-      classes = classes.filter(className=>className !== 'occupied');
-      playerHits.push(...classes);
-      console.log(playerHits)
-    }
-    if (!e.target.classList.contains('occupied')) {
-      console.log('Nothing hit this time.');
-      e.target.style.backgroundColor = 'grey';
-    }
-    playerTurn = false;
-    const allBoardCells = document.querySelectorAll('#ai div');
-    allBoardCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
-    setTimeout(aiMove, 2000)
-}
-startBtn.addEventListener('click', startGame);
