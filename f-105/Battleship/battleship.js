@@ -60,7 +60,6 @@ function addShip(user, ship, startId) {
     let isHorizontal = user === "player" ? angle === 0 : randomBoolean;
     let randomStartIndex = Math.floor(Math.random() * width * width);
     let startIndex = startId ? startId : randomStartIndex;
-
     let validStart = isHorizontal
       ? startIndex % width <= width - ship.length
         ? startIndex
@@ -122,7 +121,6 @@ function addShip(user, ship, startId) {
     } else {
       if (user === "player") addShip("player", ship, startId);
     }
-
   }
 }
 ships.forEach((ship) => {
@@ -178,12 +176,13 @@ function startGame() {
       const allBoardCells = document.querySelectorAll('#ai div');
       allBoardCells.forEach(cell=> cell.addEventListener('click', handleClick));
     }
+    playerTurn = true;
 }
+startBtn.addEventListener('click', startGame);
 let playerHits = [];
 let aiHits = [];
 const playerSunkedShips = [];
 const aiSunkedShips = [];
-
 function handleClick(e) {
   if(!gameOver) {
     if(e.target.classList.contains('occupied')) {
@@ -209,18 +208,16 @@ function handleClick(e) {
     allBoardCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
     setTimeout(aiMove, 2000)
 }
-startBtn.addEventListener('click', startGame);
-
 function checkScore(user, userHits, userSunkedShips) {
   function checkShip(shipName, shipLength) {
     if(userHits.filter(storedShipName => storedShipName === shipName).length === shipLength) {
-      console.log(`You sunk the ${user}'s ${shipName}.`)
       if(user === 'player') {
         playerHits = userHits.filter(storedShipName => storedShipName !== shipName);
       }
       if(user === 'ai') {
         aiHits = userHits.filter(storedShipName => storedShipName !== shipName);
       }
+      console.log(`You sunk the ${user}'s ${shipName}.`)
       userSunkedShips.push(shipName);
     }
   }
@@ -231,6 +228,15 @@ function checkScore(user, userHits, userSunkedShips) {
   checkShip('carrier', 5);
   console.log('playerHits', playerHits);
   console.log('playerSunkedShips', playerSunkedShips);
+
+  if (playerSunkedShips === 5) {
+    console.log('You won, you sunked the ai ships.');
+    gameOver = true;
+  }
+  if (aiSunkedShips === 5) {
+    console.log('Ai won, you loose with your ships.');
+    gameOver = true;
+  }
 }
 //ai move function
 function aiMove() {
