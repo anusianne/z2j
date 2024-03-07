@@ -122,12 +122,7 @@ function addShip(user, ship, startId) {
     } else {
       if (user === "player") addShip("player", ship, startId);
     }
-    //basic highlighting
-    shipCells.forEach((shipCell) =>
-      shipCell.addEventListener("click", () => {
-        shipCell.style.backgroundColor = "red";
-      })
-    );
+
   }
 }
 ships.forEach((ship) => {
@@ -176,7 +171,6 @@ let gameOver = false;
 let playerTurn;
 // Start Game
 function startGame() {
-
     if (shipSection.children.length!==0) {
       console.log('You must place the ships on the player board first!')
     } else {
@@ -187,11 +181,49 @@ function startGame() {
 }
 let playerHits = [];
 let aiHits = [];
+//ai move function
+function aiMove() {
+  if (!gameOver) {
+    console.log('Computer goes!');
+    setTimeout(() => {
+      let randomMove = Math.floor(Math.random() * width * width);
+      if(allPlayerCells[randomMove].classList.contains('occupied') &&
+          allPlayerCells[randomMove].classList.contains('boom')
+      ) {
+        aiMove()
+        return;
+      } else if (
+          allPlayerCells[randomMove].classList.contains('occupied') &&
+          !allPlayerCells[randomMove].classList.contains('boom'))
+      {
+        allPlayerCells[randomMove].classList.add('boom');
+        console.log('The computer hit your ship.');
+        let classes = Array.from(e.target.classList);
+        classes = classes.filter(className=>className !== 'gridCell');
+        classes = classes.filter(className=>className !== 'boom');
+        classes = classes.filter(className=>className !== 'occupied');
+        aiHits.push(...classes);
+      } else {
+        console.log("Nothing hit this time.");
+        allPlayerCells[randomMove].style.backgroundColor = 'grey';
+      }
+    }, 3000);
+    setTimeout(() => {
+      playerTurn = true;
+      console.log('Your move now. ');
+      const allBoardCells = document.querySelectorAll('#ai div');
+      allBoardCells.forEach(cell => cell.addEventListener('click', handleClick))
+    }, 6000)
+  }
+}
 function handleClick(e) {
   if(!gameOver) {
     if(e.target.classList.contains('occupied')) {
-      e.target.classList.add('boom');
-      console.log('You hit the ai ship.')
+      //basic highlighting
+            e.target.style.backgroundColor = "red";
+            e.target.classList.add('boom');
+        console.log('You hit the ai ship.')
+          };
       let classes = Array.from(e.target.classList);
       classes = classes.filter(className=>className !== 'gridCell');
       classes = classes.filter(className=>className !== 'boom');
@@ -203,6 +235,9 @@ function handleClick(e) {
       console.log('Nothing hit this time.');
       e.target.style.backgroundColor = 'grey';
     }
-  }
+    playerTurn = false;
+    const allBoardCells = document.querySelectorAll('#ai div');
+    allBoardCells.forEach(cell => cell.replaceWith(cell.cloneNode(true)));
+    setTimeout(aiMove, 2000)
 }
 startBtn.addEventListener('click', startGame);
