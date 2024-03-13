@@ -143,16 +143,63 @@ allPlayerCells.forEach((playerCell) => {
 function dragStart(e) {
     notDropped = false;
     draggedShip = e.target;
-    console.log(e.target);
     addShadowShip();
 }
 function dragOver(e) {
     e.preventDefault();
+    clearHighlight(); // Clear existing highlights before setting new ones
+    const cell = e.target;
+    const startId = parseInt(cell.id, 10);
+    if (!draggedShip) return; // Exit if no ship is being dragged
+
+    const shipLength = ships.find(
+        (ship) => ship.name === draggedShip.getAttribute('data-name')
+    ).length;
+    const cellsToHighlight = getCellsToHighlight(
+        startId,
+        shipLength,
+        angle === 0
+    );
+    cellsToHighlight.forEach((id) => {
+        const cell = document.querySelector(`#player div[id="${id}"]`);
+        if (cell) cell.style.backgroundColor = 'pink';
+    });
 }
+// Helper function to clear highlighted cells
+function clearHighlight() {
+    document.querySelectorAll('#player .gridCell').forEach((cell) => {
+        cell.style.backgroundColor = ''; // Reset background color
+    });
+}
+// Helper function to get cells to highlight
+function getCellsToHighlight(startId, length, isHorizontal) {
+    const cells = [];
+    for (let i = 0; i < length; i++) {
+        let cellId = isHorizontal ? startId + i : startId + i * width;
+        if (isHorizontal) {
+            // Prevent wrapping: if moving to the next row, break
+            if (
+                Math.floor((startId - 1) / width) !==
+                Math.floor((cellId - 1) / width)
+            ) {
+                break;
+            }
+        }
+        if (cellId > width * width) break; // Prevent going out of bounds
+        cells.push(cellId);
+    }
+    return cells;
+}
+
+shipTypes.forEach((ship, index) => {
+    ship.setAttribute('data-name', ships[index].name);
+});
 function dropShip(e) {
     const startId = e.target.id - 1;
-    console.log(startId);
     const ship = ships[draggedShip.id];
+    clearHighlight();
+    console.log(startId);
+    console.log(ship);
     addShip('player', ship, startId);
     if (!notDropped) {
         draggedShip.remove();
@@ -294,3 +341,4 @@ function aiMove() {
         }, 6000);
     }
 }
+//Add highlights
