@@ -2,18 +2,18 @@
 function createCircle(radius) {
     return {
         radius,
-        draw: function() {
+        draw: function () {
             console.log('draw');
-        }
+        },
     };
 }
 const circle = createCircle(1);
 //Constructor Function
 function Circle(radius) {
     this.radius = radius;
-    this.draw = function() {
+    this.draw = function () {
         console.log('draw');
-    }
+    };
 }
 const anotherCircle = new Circle(3);
 //class with get method behaves like a property
@@ -32,7 +32,7 @@ class Square {
 }
 let square1 = new Square(4);
 square1.area = 25;
-console.log(square1.width)
+console.log(square1.width);
 
 // Getters (readable) & setters (writeable)
 class Rectangle {
@@ -43,17 +43,15 @@ class Rectangle {
     set width(newWidth) {
         if (newWidth > 0) {
             this._width = newWidth;
-        }
-        else {
-            console.error("Width must be a positive number");
+        } else {
+            console.error('Width must be a positive number');
         }
     }
     set height(newHeight) {
         if (newHeight > 0) {
             this._height = newHeight;
-        }
-        else {
-            console.error("Height must be a positive number")
+        } else {
+            console.error('Height must be a positive number');
         }
     }
     get width() {
@@ -68,8 +66,8 @@ class Rectangle {
 }
 const rect = new Rectangle(3, 4);
 console.log(rect.width);
-console.log(rect.height)
-console.log(rect.area)
+console.log(rect.height);
+console.log(rect.area);
 // ex. 2 with getter & setter
 class Person {
     constructor(firstName, lastName, age) {
@@ -78,27 +76,24 @@ class Person {
         this.age = age;
     }
     set firstName(newFirstName) {
-        if(typeof newFirstName === "string" && newFirstName.length > 0) {
+        if (typeof newFirstName === 'string' && newFirstName.length > 0) {
             this._firstName = newFirstName;
-        }
-        else {
-            console.error("First name must be a non-empty string.")
+        } else {
+            console.error('First name must be a non-empty string.');
         }
     }
     set lastName(newLastName) {
-        if(typeof newLastName === "string" && newLastName.length > 0) {
+        if (typeof newLastName === 'string' && newLastName.length > 0) {
             this._lastName = newLastName;
-        }
-        else {
-            console.error("Last name must be a non-empty string.")
+        } else {
+            console.error('Last name must be a non-empty string.');
         }
     }
     set age(newAge) {
-        if(typeof newAge === "number" && newAge >= 0) {
+        if (typeof newAge === 'number' && newAge >= 0) {
             this._newAge = newAge;
-        }
-        else {
-            console.error("Age must be a non-empty number.")
+        } else {
+            console.error('Age must be a non-empty number.');
         }
     }
     get firstName() {
@@ -108,14 +103,14 @@ class Person {
         return this._lastName;
     }
     get fullName() {
-        return this._firstName + " " + this._lastName;
+        return this._firstName + ' ' + this._lastName;
     }
     get age() {
         return this._newAge;
     }
 }
-const person = new Person("Spongebob", "Square", 99);
-console.log(person.firstName, person.lastName, person.age)
+const person = new Person('Spongebob', 'Square', 99);
+console.log(person.firstName, person.lastName, person.age);
 console.log(person.fullName);
 //class User
 class User {
@@ -124,14 +119,14 @@ class User {
         this.age = age;
     }
     introduce() {
-        console.log(`My name is ${this.name} and I am ${this.age} years old.`)
+        console.log(`My name is ${this.name} and I am ${this.age} years old.`);
     }
 }
 //Exercise 2: Inheritance
 // Also, override the introduce method to include the grade in the introduction.
 class Student extends Person {
     constructor(name, age, grade) {
-        super(name,age);
+        super(name, age);
         this.grade = grade;
     }
 }

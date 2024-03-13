@@ -1,62 +1,62 @@
 body {
-  background-color: #ffd6ff;
-  font-family: "Delicious Handrawn", cursive;
+    background-color: #ffd6ff;
+    font-family: 'Delicious Handrawn', cursive;
 }
 .container {
-  display: grid;
-  justify-content: center;
-  padding-top: 3em;
-  grid-template-columns: repeat(3, 0fr);
-  gap: 0px;
+    display: grid;
+    justify-content: center;
+    padding-top: 3em;
+    grid-template-columns: repeat(3, 0fr);
+    gap: 0px;
 }
 .square {
-  display: block;
-  width: 15vh;
-  height: 15vh;
-  border: 2px solid #003566;
-  background-color: #f5c6ec;
-  padding-top: 6vh;
-  text-align: center;
-  text-shadow: 2px 2px greenyellow;
-  color: #003566;
-  font-size: 5vh;
-  cursor: pointer;
-  border-radius: 10px;
+    display: block;
+    width: 15vh;
+    height: 15vh;
+    border: 2px solid #003566;
+    background-color: #f5c6ec;
+    padding-top: 6vh;
+    text-align: center;
+    text-shadow: 2px 2px greenyellow;
+    color: #003566;
+    font-size: 5vh;
+    cursor: pointer;
+    border-radius: 10px;
 }
 .heading {
-  text-transform: uppercase;
-  text-align: center;
-  letter-spacing: 0.3em;
-  font-size: 8vh;
-  font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.3em;
+    font-size: 8vh;
+    font-weight: bold;
 }
 #playerChooser {
-  margin-top: 2vh;
-  text-align: center;
-  font-size: 3vh;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.3em;
+    margin-top: 2vh;
+    text-align: center;
+    font-size: 3vh;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.3em;
 }
 .restart-button {
-  margin: auto;
-  display: block;
+    margin: auto;
+    display: block;
 }
 .sqBtn,
 .restart-button {
-  margin-top: 0.5em;
-  font-size: 2.5vh;
-  border: 2px solid #003566;
-  border-radius: 10px;
-  padding: 10px;
-  background-color: #f5c6ec;
-  text-shadow: 2px 2px greenyellow;
-  color: #003566;
-  cursor: pointer;
-  font-family: "Delicious Handrawn", cursive;
-  text-transform: uppercase;
-  font-weight: bold;
+    margin-top: 0.5em;
+    font-size: 2.5vh;
+    border: 2px solid #003566;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #f5c6ec;
+    text-shadow: 2px 2px greenyellow;
+    color: #003566;
+    cursor: pointer;
+    font-family: 'Delicious Handrawn', cursive;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 @media (max-width: 1250px) {
-  /* … */
+    /* … */
 }

@@ -1,40 +1,40 @@
 .container {
-  display: grid;
-  grid-template-columns: repeat(3, 8%);
-  grid-template-rows: repeat(3, 70%);
-  gap: 25px 25px;
-  align-content: start;
-  justify-content: center;
-  counter-reset: section;
+    display: grid;
+    grid-template-columns: repeat(3, 8%);
+    grid-template-rows: repeat(3, 70%);
+    gap: 25px 25px;
+    align-content: start;
+    justify-content: center;
+    counter-reset: section;
 }
 .btn {
-  background-color: #ced4da;
-  border-radius: 15px;
-  box-shadow: 2px 2px 3px black;
-  border: 1px solid gray;
+    background-color: #ced4da;
+    border-radius: 15px;
+    box-shadow: 2px 2px 3px black;
+    border: 1px solid gray;
 }
 .btn::before {
-  counter-increment: section;
-  content: counter(section);
+    counter-increment: section;
+    content: counter(section);
 }
 .btn:nth-child(4) {
-  background-color: orange;
+    background-color: orange;
 }
 .btn:nth-child(9) {
-  background-color: green;
-  color: antiquewhite;
+    background-color: green;
+    color: antiquewhite;
 }
 .row-1:before {
-  counter-increment: section;
-  content: counter(section, decimal) ". ";
+    counter-increment: section;
+    content: counter(section, decimal) '. ';
 }
 .row-2:before {
-  counter-increment: section;
-  content: counter(section, upper-roman) ") ";
+    counter-increment: section;
+    content: counter(section, upper-roman) ') ';
 }
 .row-3:before {
-  counter-increment: section;
-  content: "[" counter(section, decimal-leading-zero) "] ";
+    counter-increment: section;
+    content: '[' counter(section, decimal-leading-zero) '] ';
 }
 .btn:nth-child(1):hover,
 .btn:nth-child(2):hover,
@@ -43,19 +43,19 @@
 .btn:nth-child(6):hover,
 .btn:nth-child(7):hover,
 .btn:nth-child(8):hover {
-  background-color: #e6e6fa;
-  color: white;
+    background-color: #e6e6fa;
+    color: white;
 }
 .btn:nth-child(4):hover {
-  background-color: #2ec4b6;
-  color: yellow;
+    background-color: #2ec4b6;
+    color: yellow;
 }
 .btn:nth-child(9):hover {
-  background-color: #8ecae6;
-  color: black;
+    background-color: #8ecae6;
+    color: black;
 }
 .btn:active,
 .btn:nth-child(4):active,
 .btn:nth-child(9):active {
-  border: none;
+    border: none;
 }

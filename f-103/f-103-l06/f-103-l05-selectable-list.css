@@ -1,6 +1,6 @@
 .animals {
-  cursor: pointer;
+    cursor: pointer;
 }
 .selected {
-  background-color: red;
+    background-color: red;
 }

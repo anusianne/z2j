@@ -15,8 +15,7 @@ alert(dateFeb);
 //2
 //Write a function getWeekDay(date) to show the weekday in short format: ‘MO’, ‘TU’, ‘WE’, ‘TH’, ‘FR’, ‘SA’, ‘SU’.
 function getWeekDay(date) {
-  const weekDay = ["SU", "MO", "TU", "WE", "TH", "FR", "SA"];
-  return weekDay[date.getDay()];
+    const weekDay = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+    return weekDay[date.getDay()];
 }
 alert(getWeekDay(myDate));
-

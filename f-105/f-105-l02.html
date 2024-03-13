@@ -1,21 +1,16 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>F-105-l02</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F-105-l02</title>
-</head>
-
-<body>
-
-
-
-    <script src="f-105-l02.js"></script>
-<script type="text/javascript">
-let companies =
-    `[{
+    <body>
+        <script src="f-105-l02.js"></script>
+        <script type="text/javascript">
+            let companies = `[{
         "name": "Big Corporation",
         "numberOfEmployees": 10000,
         "ceo": "Mary",
@@ -26,10 +21,8 @@ let companies =
     "numberOfEmployees": 3,
     "ceo": null,
     "rating": 4.3
-}]`
-console.log(JSON.parse(companies)[0].name);
-
-</script>
-</body>
-
+}]`;
+            console.log(JSON.parse(companies)[0].name);
+        </script>
+    </body>
 </html>

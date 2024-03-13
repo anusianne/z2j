@@ -1,39 +1,39 @@
 ul {
-  list-style-type: lower-greek;
+    list-style-type: lower-greek;
 }
 ::marker {
-  color: hotpink;
+    color: hotpink;
 }
 ul ::marker {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 .container {
-  display: grid;
-  grid-template-columns: 3fr 300px 3fr 300px;
-  grid-template-rows: 200px auto;
-  gap: 10px;
-  background-color: aquamarine;
-  padding: 1em;
+    display: grid;
+    grid-template-columns: 3fr 300px 3fr 300px;
+    grid-template-rows: 200px auto;
+    gap: 10px;
+    background-color: aquamarine;
+    padding: 1em;
 }
 .container_2 {
-  background-color: blueviolet;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+    background-color: blueviolet;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 .container_3 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 50px;
 }
 .type::first-letter {
-  color: goldenrod;
-  font-weight: bold;
-  font-size: 2.5em;
+    color: goldenrod;
+    font-weight: bold;
+    font-size: 2.5em;
 }
 
 ::selection {
-  background: darkblue;
-  color: yellowgreen;
+    background: darkblue;
+    color: yellowgreen;
 }
 
 ::first-line {
@@ -41,4 +41,3 @@ ul ::marker {
 
 ::placeholder {
 }
-

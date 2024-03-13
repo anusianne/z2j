@@ -1,48 +1,48 @@
 img {
-  display: block;
+    display: block;
 }
 .carousel {
-  margin: auto;
-  position: relative;
-  width: 398px;
-  padding: 10px 40px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  background: #eee;
+    margin: auto;
+    position: relative;
+    width: 398px;
+    padding: 10px 40px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background: #eee;
 }
 .carousel img {
-  display: block;
+    display: block;
 }
 .btn {
-  width: 30px;
-  cursor: pointer;
-  display: block;
-  position: absolute;
-  top: 60px;
-  padding: 0;
+    width: 30px;
+    cursor: pointer;
+    display: block;
+    position: absolute;
+    top: 60px;
+    padding: 0;
 }
 .next {
-  right: 7px;
+    right: 7px;
 }
 .prev {
-  left: 7px;
+    left: 7px;
 }
 .gallery {
-  width: 390px;
-  overflow: hidden;
+    width: 390px;
+    overflow: hidden;
 }
 .gallery ul {
-  height: 130px;
-  width: 9999px;
-  padding: 0;
-  list-style: none;
-  transition: margin-left 250ms;
-  font-size: 0;
+    height: 130px;
+    width: 9999px;
+    padding: 0;
+    list-style: none;
+    transition: margin-left 250ms;
+    font-size: 0;
 }
 .gallery li {
-  display: inline-block;
+    display: inline-block;
 }
 .icons {
-  width: 130px;
-  transition: -webkit-transform 500ms ease-out;
+    width: 130px;
+    transition: -webkit-transform 500ms ease-out;
 }

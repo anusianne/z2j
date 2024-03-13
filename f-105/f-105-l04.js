@@ -1,6 +1,6 @@
 //Classes
 class Product {
-    constructor(name,price) {
+    constructor(name, price) {
         this.name = name;
         this.price = price;
     }
@@ -9,19 +9,19 @@ class Product {
         console.log(`Price: ${this.price.toFixed(2)}`);
     }
     calculateTotal(salesTax) {
-        return this.price + (this.price * salesTax);
+        return this.price + this.price * salesTax;
     }
 }
 const salesTax = 0.05;
-const product1 = new Product("Shirt", 19.99);
-const product2 = new Product("Pants", 22.50);
+const product1 = new Product('Shirt', 19.99);
+const product2 = new Product('Pants', 22.5);
 product1.displayProduct();
 product2.displayProduct();
 const total = product1.calculateTotal(salesTax);
 console.log(`Total price (with tax): $ ${total.toFixed(2)}`);
 
 //Classes inheritance
-class Animal{
+class Animal {
     alive = true;
     eat() {
         console.log(`This ${this.name} is eating.`);
@@ -31,13 +31,13 @@ class Animal{
     }
 }
 class Rabbit extends Animal {
-    name = "rabbit";
+    name = 'rabbit';
 }
 class Fish extends Animal {
-    name = "fish";
+    name = 'fish';
 }
 class Cat extends Animal {
-    name = "kitty";
+    name = 'kitty';
 }
 const rabbit = new Rabbit();
 const fish = new Fish();
@@ -57,31 +57,33 @@ class Rectangle {
         return this.width * this.height;
     }
     printDescription() {
-        console.log(`I am a rectangle of ${this.width} x ${this.height} and I am ${this.color}`)
+        console.log(
+            `I am a rectangle of ${this.width} x ${this.height} and I am ${this.color}`
+        );
     }
 }
-let myRectangle1 = new Rectangle(5,2,"red");
-let myRectangle2 = new Rectangle(6,3,"orange");
+let myRectangle1 = new Rectangle(5, 2, 'red');
+let myRectangle2 = new Rectangle(6, 3, 'orange');
 console.log(myRectangle1.getArea());
 console.log(myRectangle2.getArea());
 myRectangle2.printDescription();
 
 // super keyword with using class
-class Animal2{
+class Animal2 {
     constructor(name, age) {
         this.name = name;
         this.age = age;
     }
 }
-class Fox extends Animal2{
+class Fox extends Animal2 {
     constructor(name, age, runSpeed) {
-        super(name,age);
+        super(name, age);
         this.runSpeed = runSpeed;
     }
 }
 class Fishes extends Animal {
     constructor(name, age, swimSpeed) {
-        super(name,age);
+        super(name, age);
         this.swimSpeed = swimSpeed;
     }
 }

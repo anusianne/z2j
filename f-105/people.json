@@ -1,17 +1,17 @@
 {
-  "date": "Wed, 12 Dec 2018 10:07:35 GMT",
-  "people": [
-    {
-      "name": "Domenic",
-      "occupation": "Web Developer",
-      "age": 29,
-      "country": "Australia"
-    },
-    {
-  "name": "Alice",
-  "occupation": "Surgeon",
-  "age": 45,
-  "country": "United States"
-}
+    "date": "Wed, 12 Dec 2018 10:07:35 GMT",
+    "people": [
+        {
+            "name": "Domenic",
+            "occupation": "Web Developer",
+            "age": 29,
+            "country": "Australia"
+        },
+        {
+            "name": "Alice",
+            "occupation": "Surgeon",
+            "age": 45,
+            "country": "United States"
+        }
     ]
 }

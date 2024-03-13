@@ -6,156 +6,156 @@ console.log(newArr);
 const num = [55, 44, 33, 22];
 const newNum = num.map(myFunction);
 function myFunction(num) {
-  return num * 10;
+    return num * 10;
 }
 console.log(newNum);
 //3
 let users = [
-  { firstName: "Susan", lastName: "Steward" },
-  { firstName: "Daniel", lastName: "Longbottom" },
-  { firstName: "Jacob", lastName: "Black" },
+    { firstName: 'Susan', lastName: 'Steward' },
+    { firstName: 'Daniel', lastName: 'Longbottom' },
+    { firstName: 'Jacob', lastName: 'Black' },
 ];
 let usersFullName = users.map(function (user) {
-  return `${user.firstName} ${user.lastName}`;
+    return `${user.firstName} ${user.lastName}`;
 });
 console.log(usersFullName);
 //4
 function doubleNumbers(arr) {
-  return arr.map((el) => el * 2);
+    return arr.map((el) => el * 2);
 }
 console.log(doubleNumbers([2, 5, 100]));
 //5
 function stringItUp(arr) {
-  return arr.map((element) => element.toString());
+    return arr.map((element) => element.toString());
 }
 console.log(stringItUp([2, 5, 100]));
 //6
 function capitalizeNames(arr) {
-  return arr.map(
-    (name) => name[0].toUpperCase() + name.substring(1).toLowerCase()
-  );
+    return arr.map(
+        (name) => name[0].toUpperCase() + name.substring(1).toLowerCase()
+    );
 }
-console.log(capitalizeNames(["john", "JACOB", "jinGleHeimer", "schmidt"]));
+console.log(capitalizeNames(['john', 'JACOB', 'jinGleHeimer', 'schmidt']));
 //7
 function namesOnly(arr) {
-  return arr.map((userData) => userData.name);
+    return arr.map((userData) => userData.name);
 }
 console.log(
-  namesOnly([
-    {
-      name: "Angelina Jolie",
-      age: 80,
-    },
-    {
-      name: "Eric Jones",
-      age: 2,
-    },
-    {
-      name: "Paris Hilton",
-      age: 5,
-    },
-    {
-      name: "Kayne West",
-      age: 16,
-    },
-    {
-      name: "Bob Ziroll",
-      age: 100,
-    },
-  ])
+    namesOnly([
+        {
+            name: 'Angelina Jolie',
+            age: 80,
+        },
+        {
+            name: 'Eric Jones',
+            age: 2,
+        },
+        {
+            name: 'Paris Hilton',
+            age: 5,
+        },
+        {
+            name: 'Kayne West',
+            age: 16,
+        },
+        {
+            name: 'Bob Ziroll',
+            age: 100,
+        },
+    ])
 );
 //8
 function makeStrings(arr) {
-  return arr.map((user) => {
-    if (user.age >= 18) {
-      console.log(`${user.name}` + " can go to the Matrix.");
-    } else {
-      console.log(`${user.name}` + " can't go to the Matrix.");
-    }
-  });
+    return arr.map((user) => {
+        if (user.age >= 18) {
+            console.log(`${user.name}` + ' can go to the Matrix.');
+        } else {
+            console.log(`${user.name}` + " can't go to the Matrix.");
+        }
+    });
 }
 console.log(
-  makeStrings([
-    {
-      name: "Angelina Jolie",
-      age: 80,
-    },
-    {
-      name: "Eric Jones",
-      age: 2,
-    },
-    {
-      name: "Paris Hilton",
-      age: 5,
-    },
-    {
-      name: "Kayne West",
-      age: 16,
-    },
-    {
-      name: "Bob Ziroll",
-      age: 100,
-    },
-  ])
+    makeStrings([
+        {
+            name: 'Angelina Jolie',
+            age: 80,
+        },
+        {
+            name: 'Eric Jones',
+            age: 2,
+        },
+        {
+            name: 'Paris Hilton',
+            age: 5,
+        },
+        {
+            name: 'Kayne West',
+            age: 16,
+        },
+        {
+            name: 'Bob Ziroll',
+            age: 100,
+        },
+    ])
 );
 //9
 function readyToPutInTheDOM(arr) {
-  return arr.map((userData) => {
-    return `<h1>${userData.name}</h1> <h2>${userData.age}</h2>`;
-  });
+    return arr.map((userData) => {
+        return `<h1>${userData.name}</h1> <h2>${userData.age}</h2>`;
+    });
 }
 console.log(
-  readyToPutInTheDOM([
-    {
-      name: "Angelina Jolie",
-      age: 80,
-    },
-    {
-      name: "Eric Jones",
-      age: 2,
-    },
-    {
-      name: "Paris Hilton",
-      age: 5,
-    },
-    {
-      name: "Kayne West",
-      age: 16,
-    },
-    {
-      name: "Bob Ziroll",
-      age: 100,
-    },
-  ])
+    readyToPutInTheDOM([
+        {
+            name: 'Angelina Jolie',
+            age: 80,
+        },
+        {
+            name: 'Eric Jones',
+            age: 2,
+        },
+        {
+            name: 'Paris Hilton',
+            age: 5,
+        },
+        {
+            name: 'Kayne West',
+            age: 16,
+        },
+        {
+            name: 'Bob Ziroll',
+            age: 100,
+        },
+    ])
 );
 
 //10 Doubling Numbers
 const numbers = [1, 2, 3, 4, 5];
-const doubleNums = numbers.map(num=>num*2);
+const doubleNums = numbers.map((num) => num * 2);
 console.log(doubleNums);
 
 //11 Uppercasing Strings
 const words = ['apple', 'banana', 'cherry'];
 const uppercasedStrings = words.map((word) => word.toUpperCase());
-console.log(uppercasedStrings)
+console.log(uppercasedStrings);
 
 //12 Extracting Object Properties
 const users = [
- { name: 'Alice', age: 25 },
- { name: 'Bob', age: 30 },
- { name: 'Charlie', age: 22 }
+    { name: 'Alice', age: 25 },
+    { name: 'Bob', age: 30 },
+    { name: 'Charlie', age: 22 },
 ];
-const userName = users.map((user) => user.name)
+const userName = users.map((user) => user.name);
 console.log(userName);
 
 //13 Calculate Area of Rectangles
 const rectangles = [
     { width: 3, height: 5 },
     { width: 4, height: 8 },
-    { width: 2, height: 6 }
+    { width: 2, height: 6 },
 ];
 const areaOfRect = rectangles.map((area) => area.width * area.height);
-console.log(areaOfRect)
+console.log(areaOfRect);
 
 //14 Extract Initials from Names
 const names = ['John Doe', 'Alice Smith', 'Bob Johnson'];
