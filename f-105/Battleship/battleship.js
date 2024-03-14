@@ -51,85 +51,103 @@ function rotateShip() {
 //Add Ship
 function addShip(user, ship, startId) {
     const allBoardCells = document.querySelectorAll(`#${user} div`);
-    let attempt = 0; // To avoid infinite loops
+    let attempt = 0;
     let success = false;
-    while (!success && attempt < 200) {
-        // Limit attempts to prevent infinite loop
+    const maxAttempts = 200;
+    const boardWidth = width;
+
+    while (!success && attempt < maxAttempts) {
         attempt++;
-        let randomBoolean = Math.random() < 0.5;
-        let isHorizontal = user === 'player' ? angle === 0 : randomBoolean;
-        let randomStartIndex = Math.floor(Math.random() * width * width);
-        let startIndex = startId ? startId : randomStartIndex;
-        let validStart = isHorizontal
-            ? startIndex % width <= width - ship.length
-                ? startIndex
-                : null // Horizontal invalid start
-            : startIndex < width * (width - ship.length + 1)
-              ? startIndex
-              : null; // Vertical invalid start
-        let shipCells = [];
-        let isValidPlacement = true;
-        for (let i = 0; i < ship.length; i++) {
-            let index = isHorizontal
-                ? Number(validStart) + i
-                : Number(validStart) + i * width;
-            const cell = allBoardCells[index];
-            // Define a function to check surrounding cells
-            const isSurroundingCellOccupied = (index) => {
-                const surroundingOffsets = [
-                    -1,
-                    1,
-                    -width,
-                    width,
-                    -width - 1,
-                    -width + 1,
-                    width - 1,
-                    width + 1,
-                ];
-                return surroundingOffsets.some((offset) => {
-                    const surroundingIndex = index + offset;
-                    // Check bounds
-                    if (
-                        surroundingIndex < 0 ||
-                        surroundingIndex >= width * width
-                    )
-                        return false;
-                    // Check horizontal wrapping
-                    if (
-                        Math.abs(offset) === 1 &&
-                        Math.floor((index + offset) / width) !==
-                            Math.floor(index / width)
-                    )
-                        return false;
-                    return allBoardCells[surroundingIndex]?.classList.contains(
-                        'occupied'
-                    );
-                });
-            };
-            // Check if the cell or its surroundings are already occupied
-            if (
-                cell.classList.contains('occupied') ||
-                isSurroundingCellOccupied(index)
-            ) {
-                isValidPlacement = false;
-                break;
-            }
-            shipCells.push(cell);
-        }
-        if (isValidPlacement) {
-            shipCells.forEach((shipCell) => {
-                shipCell.classList.add(ship.name);
-                shipCell.classList.add('occupied');
-            });
-            success = true;
+        const randomBoolean = Math.random() < 0.5;
+        const isHorizontal = user === 'player' ? angle === 0 : randomBoolean;
+        const randomStartIndex = Math.floor(Math.random() * width * width);
+        const startIndex = startId !== undefined ? startId : randomStartIndex;
+        let validStart;
+
+        if (isHorizontal) {
+            validStart =
+                startIndex % boardWidth <= boardWidth - ship.length
+                    ? startIndex
+                    : null;
         } else {
-            if (user === 'player') addShip('player', ship, startId);
+            validStart =
+                startIndex < boardWidth * (boardWidth - ship.length + 1)
+                    ? startIndex
+                    : null;
+        }
+        let isValidPlacement = true;
+        if (validStart !== null) {
+            const shipCells = [];
+            for (let i = 0; i < ship.length; i++) {
+                let index = isHorizontal
+                    ? Number(validStart) + i
+                    : Number(validStart) + i * boardWidth;
+                if (index >= allBoardCells.length || index < 0) {
+                    isValidPlacement = false;
+                    break;
+                }
+                const cell = allBoardCells[index];
+                if (
+                    cell.classList.contains('occupied') ||
+                    isSurroundingCellOccupied(index, allBoardCells)
+                ) {
+                    isValidPlacement = false;
+                    break;
+                }
+                shipCells.push(cell);
+            }
+            if (isValidPlacement) {
+                shipCells.forEach((shipCell) => {
+                    shipCell.classList.add(ship.name);
+                    shipCell.classList.add('occupied');
+                });
+                success = true;
+            }
+        }
+        if (!success && startId !== undefined) {
+            alert(
+                'Nie można umieścić statku w tej lokalizacji. Proszę spróbować gdzie indziej.'
+            );
+            return false;
         }
     }
+    return success;
 }
 ships.forEach((ship) => {
     addShip('ai', ship);
 });
+function isSurroundingCellOccupied(index, allBoardCells) {
+    const boardWidth = width;
+    const row = Math.floor(index / boardWidth);
+    const col = index % boardWidth;
+    const positions = [
+        [-1, -1],
+        [-1, 0],
+        [-1, 1],
+        [0, -1],
+        [0, 1],
+        [1, -1],
+        [1, 0],
+        [1, 1],
+    ];
+    for (let pos of positions) {
+        const newRow = row + pos[0];
+        const newCol = col + pos[1];
+        const newIndex = newRow * boardWidth + newCol;
+        if (
+            newRow >= 0 &&
+            newRow <= boardWidth &&
+            newCol >= 0 &&
+            newCol <= boardWidth
+        ) {
+            const cell = allBoardCells[newIndex];
+            if (cell && cell.classList.contains('occupied')) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 // Draggable elements
 let draggedShip;
 shipTypes.forEach((shipType) =>
@@ -147,11 +165,10 @@ function dragStart(e) {
 }
 function dragOver(e) {
     e.preventDefault();
-    clearHighlight(); // Clear existing highlights before setting new ones
+    clearHighlight();
+    // Clear existing highlights before setting new ones
     const cell = e.target;
     const startId = parseInt(cell.id, 10);
-    if (!draggedShip) return; // Exit if no ship is being dragged
-
     const shipLength = ships.find(
         (ship) => ship.name === draggedShip.getAttribute('data-name')
     ).length;
@@ -190,31 +207,34 @@ function getCellsToHighlight(startId, length, isHorizontal) {
     }
     return cells;
 }
-
 shipTypes.forEach((ship, index) => {
     ship.setAttribute('data-name', ships[index].name);
 });
 function dropShip(e) {
-    const startId = e.target.id - 1;
-    const ship = ships[draggedShip.id];
+    e.preventDefault();
+    const startId = parseInt(e.target.id, 10) - 1;
+    const shipName = draggedShip.getAttribute('data-name');
+    const ship = ships.find((s) => s.name === shipName);
+    const success = addShip('player', ship, startId);
     clearHighlight();
-    console.log(startId);
-    console.log(ship);
-    addShip('player', ship, startId);
-    if (!notDropped) {
-        draggedShip.remove();
+    if (success) {
+        draggedShip.style.display = 'none'; // Ukryj statek po pomyślnym upuszczeniu
+    } else {
+        draggedShip.classList.remove('shadow');
     }
-    if (shipSection.children.length === 0) {
+    checkAllShipsPlaced();
+}
+function checkAllShipsPlaced() {
+    const visibleShips = Array.from(shipSection.children).filter(
+        (ship) => ship.style.display !== 'none'
+    );
+    if (visibleShips.length === 0) {
         shipSection.style.display = 'none';
         rotateBtn.style.display = 'none';
     }
-    removeShadowShip();
 }
 function addShadowShip() {
     draggedShip.classList.add('shadow');
-}
-function removeShadowShip() {
-    draggedShip.classList.remove('shadow');
 }
 let gameOver = false;
 let playerTurn;
@@ -341,4 +361,3 @@ function aiMove() {
         }, 6000);
     }
 }
-//Add highlights
