@@ -206,7 +206,6 @@ function dropShip(e) {
     } else {
         // Przenieś statek z powrotem do shipSection
         draggedShip.classList.remove('shadow');
-        draggedShip.style.visibility = 'visible';
     }
     checkAllShipsPlaced();
 }
@@ -218,7 +217,6 @@ function dragEnd(e) {
         );
         clearHighlight();
         // Przenieś statek z powrotem do shipSection
-        draggedShip.style.visibility = 'visible';
         draggedShip.classList.remove('shadow'); // Ponownie wyświetl statek
     }
     // Reset flagi na przyszłość
@@ -268,19 +266,42 @@ function addShadowShip() {
 let gameOver = false;
 let playerTurn;
 // Start Game
+startBtn.addEventListener('click', startGame);
+// function startGame() {
+//     if (shipSection.children.length !== 0) {
+//         console.log('You must place the ships on the player board first!');
+//         console.log(shipSection.children);
+//         return;
+//     } else {
+//         startBtn.style.display = 'none';
+//         const allBoardCells = document.querySelectorAll('#ai div');
+//         allBoardCells.forEach((cell) =>
+//             cell.addEventListener('click', handleClick)
+//         );
+//     }
+//     playerTurn = true;
+// }
 function startGame() {
-    if (shipSection.children.length !== 0) {
-        console.log('You must place the ships on the player board first!');
-    } else {
-        startBtn.style.display = 'none';
-        const allBoardCells = document.querySelectorAll('#ai div');
-        allBoardCells.forEach((cell) =>
-            cell.addEventListener('click', handleClick)
-        );
+    // Sprawdza, czy wszystkie statki zostały ukryte (czyli umieszczone na planszy)
+    const allShipsPlaced = Array.from(shipSection.children).every(
+        (ship) => ship.style.display === 'none'
+    );
+
+    if (!allShipsPlaced) {
+        console.log('You must place all the ships on the player board first!');
+        return;
     }
+
+    // Jeśli wszystkie statki są ukryte, kontynuujemy uruchamianie gry
+    startBtn.style.display = 'none';
+    const allBoardCells = document.querySelectorAll('#ai div');
+    allBoardCells.forEach((cell) =>
+        cell.addEventListener('click', handleClick)
+    );
+
     playerTurn = true;
 }
-startBtn.addEventListener('click', startGame);
+
 let playerHits = [];
 let aiHits = [];
 const playerSunkedShips = [];
