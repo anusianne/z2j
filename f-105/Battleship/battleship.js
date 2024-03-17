@@ -65,17 +65,19 @@ function addShip(user, ship, startId) {
         let validStart;
 
         if (isHorizontal) {
-            validStart =
-                startIndex % boardWidth <= boardWidth - ship.length
-                    ? startIndex
-                    : null;
+            if (isHorizontal) {
+                validStart =
+                    (startIndex % boardWidth) + ship.length <= boardWidth
+                        ? startIndex
+                        : null;
+            }
         } else {
             validStart =
                 startIndex < boardWidth * (boardWidth - ship.length + 1)
                     ? startIndex
                     : null;
         }
-        let isValidPlacement = true;
+        let isValidPlacement;
         if (validStart !== null) {
             const shipCells = [];
             for (let i = 0; i < ship.length; i++) {
@@ -93,6 +95,8 @@ function addShip(user, ship, startId) {
                 ) {
                     isValidPlacement = false;
                     break;
+                } else {
+                    isValidPlacement = true;
                 }
                 shipCells.push(cell);
             }
@@ -136,9 +140,9 @@ function isSurroundingCellOccupied(index, allBoardCells) {
         const newIndex = newRow * boardWidth + newCol;
         if (
             newRow >= 0 &&
-            newRow <= boardWidth &&
+            newRow <= boardWidth - 1 &&
             newCol >= 0 &&
-            newCol <= boardWidth
+            newCol <= boardWidth - 1
         ) {
             const cell = allBoardCells[newIndex];
             if (cell && cell.classList.contains('occupied')) {
@@ -150,14 +154,20 @@ function isSurroundingCellOccupied(index, allBoardCells) {
 }
 // Draggable elements
 let draggedShip;
-shipTypes.forEach((shipType) =>
-    shipType.addEventListener('dragstart', dragStart)
-);
+let isShipDroppedOnBoard = false;
+shipTypes.forEach((shipType) => {
+    shipType.addEventListener('dragstart', dragStart);
+});
 const allPlayerCells = document.querySelectorAll('#player div');
 allPlayerCells.forEach((playerCell) => {
     playerCell.addEventListener('dragover', dragOver);
     playerCell.addEventListener('drop', dropShip);
 });
+// Dodajemy obsługę zdarzenia dragend dla statków
+shipTypes.forEach((shipType) => {
+    shipType.addEventListener('dragend', dragEnd);
+});
+
 function dragStart(e) {
     notDropped = false;
     draggedShip = e.target;
@@ -181,6 +191,38 @@ function dragOver(e) {
         const cell = document.querySelector(`#player div[id="${id}"]`);
         if (cell) cell.style.backgroundColor = 'pink';
     });
+}
+
+function dropShip(e) {
+    isShipDroppedOnBoard = true;
+    e.preventDefault();
+    const startId = parseInt(e.target.id, 10) - 1;
+    const shipName = draggedShip.getAttribute('data-name');
+    const ship = ships.find((s) => s.name === shipName);
+    const success = addShip('player', ship, startId);
+    clearHighlight();
+    if (success) {
+        draggedShip.style.display = 'none'; // Ukryj statek po pomyślnym upuszczeniu
+    } else {
+        // Przenieś statek z powrotem do shipSection
+        draggedShip.classList.remove('shadow');
+        draggedShip.style.visibility = 'visible';
+    }
+    checkAllShipsPlaced();
+}
+function dragEnd(e) {
+    // Sprawdź, czy statek nie został upuszczony na planszy
+    if (!isShipDroppedOnBoard) {
+        alert(
+            'Nie można umieścić statku poza planszą. Proszę spróbować ponownie.'
+        );
+        clearHighlight();
+        // Przenieś statek z powrotem do shipSection
+        draggedShip.style.visibility = 'visible';
+        draggedShip.classList.remove('shadow'); // Ponownie wyświetl statek
+    }
+    // Reset flagi na przyszłość
+    isShipDroppedOnBoard = false;
 }
 // Helper function to clear highlighted cells
 function clearHighlight() {
@@ -210,20 +252,7 @@ function getCellsToHighlight(startId, length, isHorizontal) {
 shipTypes.forEach((ship, index) => {
     ship.setAttribute('data-name', ships[index].name);
 });
-function dropShip(e) {
-    e.preventDefault();
-    const startId = parseInt(e.target.id, 10) - 1;
-    const shipName = draggedShip.getAttribute('data-name');
-    const ship = ships.find((s) => s.name === shipName);
-    const success = addShip('player', ship, startId);
-    clearHighlight();
-    if (success) {
-        draggedShip.style.display = 'none'; // Ukryj statek po pomyślnym upuszczeniu
-    } else {
-        draggedShip.classList.remove('shadow');
-    }
-    checkAllShipsPlaced();
-}
+
 function checkAllShipsPlaced() {
     const visibleShips = Array.from(shipSection.children).filter(
         (ship) => ship.style.display !== 'none'
