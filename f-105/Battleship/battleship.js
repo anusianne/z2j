@@ -359,11 +359,11 @@ function checkScore(user, userHits, userSunkedShips) {
     console.log('playerHits', playerHits);
     console.log('playerSunkedShips', playerSunkedShips);
 
-    if (playerSunkedShips === 5) {
+    if (playerSunkedShips.length === 5) {
         console.log('You won, you sunked the ai ships.');
         gameOver = true;
     }
-    if (aiSunkedShips === 5) {
+    if (aiSunkedShips.length === 5) {
         console.log('Ai won, you loose with your ships.');
         gameOver = true;
     }
