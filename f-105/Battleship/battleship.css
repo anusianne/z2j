@@ -7,40 +7,35 @@
 h1 {
     display: flex;
     justify-content: center;
+    background-color: plum;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+}
+.boardContainer {
     background-color: #8ecae6;
-}
-#boardSection {
-    margin: 0 auto;
-    width: 500px;
-    display: flex;
-    justify-content: space-between;
-    background-color: #8c7ae6;
-}
-#shipSection {
-    background-color: #3f25c4;
-    width: 500px;
-    margin: 0 auto;
-    height: 100px;
-}
-.gameContainer {
-    width: 200px;
-    height: 200px;
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
 }
 .gridCell {
     width: 20px;
     height: 20px;
     border: 1px solid black;
-    box-sizing: border-box;
 }
 /* Ships */
 #shipSection {
+    width: 25%;
+    height: 100px;
     display: flex;
-    justify-content: center;
-    padding-top: 2em;
+    flex-direction: row;
+    background-color: darkseagreen;
+    position: absolute;
+    left: 38%;
 }
+
 .destroyer-preview {
     width: 20px;
     height: 10px;
@@ -89,6 +84,15 @@ h1 {
 .buttonSection {
     display: flex;
     justify-content: center;
+    position: relative;
+}
+.btn {
+    margin: 1em;
+}
+.buttonSection,
+#shipSection,
+.boardContainer {
+    margin-top: 2em;
 }
 .invisible {
     display: none;

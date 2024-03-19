@@ -17,7 +17,7 @@ function createBoard(user) {
     const boardSection = document.getElementById('boardSection');
     const width = 10;
     const gameContainer = document.createElement('div');
-    gameContainer.classList.add('gameContainer');
+    gameContainer.classList.add('boardContainer');
     gameContainer.id = user;
     for (let i = 1; i <= width * width; i++) {
         const gridCell = document.createElement('div');
