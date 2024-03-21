@@ -24,6 +24,7 @@ h1 {
     background-color: #8ecae6;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
+    cursor: url('ViewFinder.png'), auto;
 }
 .gridCell {
     width: 20px;
