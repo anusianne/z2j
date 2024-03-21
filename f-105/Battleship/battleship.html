@@ -17,44 +17,46 @@
     </head>
     <body>
         <h1>Battleship</h1>
+        <section class="buttonSection">
+            <button class="rotateBtn btn">Rotate</button>
+            <button class="startBtn btn">Start Game</button>
+        </section>
         <div id="gameContainer">
             <section id="boardSection" class="container"></section>
-            <section id="shipSection" class="container">
-                <div
-                    id="0"
-                    class="destroyer-preview destroyer draggable"
-                    draggable="true"
-                    data-name="destroyer"
-                ></div>
-                <div
-                    id="1"
-                    class="submarine-preview submarine draggable"
-                    draggable="true"
-                    data-name="submarine"
-                ></div>
-                <div
-                    id="2"
-                    class="cruiser-preview cruiser draggable"
-                    draggable="true"
-                    data-name="cruiser"
-                ></div>
-                <div
-                    id="3"
-                    class="battleship-preview battleship draggable"
-                    draggable="true"
-                    data-name="battleship"
-                ></div>
-                <div
-                    id="4"
-                    class="carrier-preview carrier draggable"
-                    draggable="true"
-                    data-name="carrier"
-                ></div>
-            </section>
-            <section class="buttonSection">
-                <button class="rotateBtn btn">Rotate</button>
-                <button class="startBtn btn">Start Game</button>
-            </section>
+            <div id="shipSectionContainer">
+                <section id="shipSection">
+                    <div
+                        id="0"
+                        class="destroyer-preview destroyer draggable"
+                        draggable="true"
+                        data-name="destroyer"
+                    ></div>
+                    <div
+                        id="1"
+                        class="submarine-preview submarine draggable"
+                        draggable="true"
+                        data-name="submarine"
+                    ></div>
+                    <div
+                        id="2"
+                        class="cruiser-preview cruiser draggable"
+                        draggable="true"
+                        data-name="cruiser"
+                    ></div>
+                    <div
+                        id="3"
+                        class="battleship-preview battleship draggable"
+                        draggable="true"
+                        data-name="battleship"
+                    ></div>
+                    <div
+                        id="4"
+                        class="carrier-preview carrier draggable"
+                        draggable="true"
+                        data-name="carrier"
+                    ></div>
+                </section>
+            </div>
         </div>
         <script type="module" src="battleship.js"></script>
         <script type="module" src="modules/board.js"></script>

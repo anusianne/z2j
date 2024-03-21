@@ -8,9 +8,9 @@ export const shipTypes = Array.from(shipSection.children);
 rotateBtn.addEventListener('click', rotateShip);
 function rotateShip() {
     angle = angle === 0 ? 90 : 0;
-    shipTypes.forEach(
-        (shipType) => (shipType.style.transform = `rotate(${angle}deg)`)
-    );
+    shipTypes.forEach((shipType) => {
+        shipType.style.transform = `rotate(${angle}deg)`;
+    });
 }
 //Add Ship
 export function addShip(user, ship, startId) {
@@ -68,6 +68,7 @@ export function addShip(user, ship, startId) {
                 shipCells.forEach((shipCell) => {
                     shipCell.classList.add(ship.name);
                     shipCell.classList.add('occupied');
+                    shipCell.classList.add('ship');
                 });
                 success = true;
             }

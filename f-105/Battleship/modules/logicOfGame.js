@@ -23,7 +23,6 @@ function startGame() {
     );
     playerTurn = true;
 }
-
 let playerHits = [];
 let aiHits = [];
 const playerSunkedShips = [];
@@ -32,8 +31,8 @@ function handleClick(e) {
     if (!gameOver) {
         if (e.target.classList.contains('occupied')) {
             //basic highlighting
-            e.target.style.backgroundColor = 'red';
             e.target.classList.add('boom');
+            e.target.style.backgroundImage = "url('explode.png')";
             console.log('You hit the ai ship.');
         }
         let classes = Array.from(e.target.classList);
@@ -45,13 +44,15 @@ function handleClick(e) {
         checkScore('player', playerHits, playerSunkedShips);
     }
     if (!e.target.classList.contains('occupied')) {
-        console.log('Nothing hit this time.');
-        e.target.style.backgroundColor = 'grey';
+        e.target.innerHTML = `X`;
+        e.target.style.paddingTop = '5px';
+        e.target.style.textAlign = 'center';
+        e.target.style.backgroundColor = '#302F2F';
     }
     playerTurn = false;
     const allBoardCells = document.querySelectorAll('#ai div');
     allBoardCells.forEach((cell) => cell.replaceWith(cell.cloneNode(true)));
-    setTimeout(aiMove, 2000);
+    setTimeout(aiMove, 1000);
 }
 function checkScore(user, userHits, userSunkedShips) {
     function checkShip(shipName, shipLength) {
@@ -69,6 +70,8 @@ function checkScore(user, userHits, userSunkedShips) {
                     (storedShipName) => storedShipName !== shipName
                 );
             }
+            //modal needed
+            //
             console.log(`You sunk the ${user}'s ${shipName}.`);
             userSunkedShips.push(shipName);
         }
@@ -82,10 +85,12 @@ function checkScore(user, userHits, userSunkedShips) {
     console.log('playerSunkedShips', playerSunkedShips);
 
     if (playerSunkedShips.length === 5) {
+        //modal needed
         console.log('You won, you sunked the ai ships.');
         gameOver = true;
     }
     if (aiSunkedShips.length === 5) {
+        //modal needed
         console.log('Ai won, you loose with your ships.');
         gameOver = true;
     }
@@ -107,6 +112,8 @@ function aiMove() {
                 !allPlayerCells[randomMove].classList.contains('boom')
             ) {
                 allPlayerCells[randomMove].classList.add('boom');
+                e.target.classList.add('boom');
+                e.target.style.backgroundImage = "url('explode.png')";
                 console.log('The computer hit your ship.');
                 let classes = Array.from(allPlayerCells[randomMove].classList);
                 classes = classes.filter(
@@ -119,10 +126,12 @@ function aiMove() {
                 aiHits.push(...classes);
                 checkScore('ai', aiHits, aiSunkedShips);
             } else {
-                console.log('Nothing hit this time.');
-                allPlayerCells[randomMove].style.backgroundColor = 'grey';
+                allPlayerCells[randomMove].innerHTML = `X`;
+                allPlayerCells[randomMove].style.paddingTop = '5px';
+                allPlayerCells[randomMove].style.textAlign = 'center';
+                allPlayerCells[randomMove].style.backgroundColor = '#302F2F';
             }
-        }, 3000);
+        }, 1000);
         setTimeout(() => {
             playerTurn = true;
             console.log('Your move now. ');
@@ -130,6 +139,6 @@ function aiMove() {
             allBoardCells.forEach((cell) =>
                 cell.addEventListener('click', handleClick)
             );
-        }, 6000);
+        }, 2000);
     }
 }
