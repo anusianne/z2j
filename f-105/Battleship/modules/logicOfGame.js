@@ -7,11 +7,15 @@ let playerTurn;
 // Start Game
 startBtn.addEventListener('click', startGame);
 function startGame() {
-    // Sprawdza, czy wszystkie statki zostały ukryte (czyli umieszczone na planszy)
     const allShipsPlaced = Array.from(shipSection.children).every(
         (ship) => ship.style.display === 'none'
     );
     if (!allShipsPlaced) {
+        const modalStart = document.createElement('div');
+        modalStart.classList.add('modalStart');
+        modalStart.innerHTML =
+            'You must place all the ships on the player board first!';
+        document.body.appendChild(modalStart);
         console.log('You must place all the ships on the player board first!');
         return;
     }

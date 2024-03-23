@@ -37,8 +37,8 @@ h1 {
 
 .destroyer-preview {
     width: 3em;
-    height: 1em;
-    margin: 0.5em;
+    height: 5vh;
+    margin-right: 10px;
     border-radius: 0.25em;
 }
 .destroyer {
@@ -46,8 +46,8 @@ h1 {
 }
 .submarine-preview {
     width: 4em;
-    height: 1em;
-    margin: 0.5em;
+    height: 5vh;
+    margin-right: 10px;
     border-radius: 0.25em;
 }
 .submarine {
@@ -55,8 +55,8 @@ h1 {
 }
 .cruiser-preview {
     width: 4em;
-    height: 1em;
-    margin: 0.5em;
+    height: 5vh;
+    margin-right: 10px;
     border-radius: 0.25em;
 }
 .cruiser {
@@ -64,8 +64,8 @@ h1 {
 }
 .battleship-preview {
     width: 6em;
-    height: 1em;
-    margin: 0.5em;
+    height: 5vh;
+    margin-right: 10px;
     border-radius: 0.25em;
 }
 .battleship {
@@ -73,12 +73,56 @@ h1 {
 }
 .carrier-preview {
     width: 7em;
-    height: 1em;
-    margin: 0.5em;
+    height: 5vh;
+    margin-right: 10px;
     border-radius: 0.25em;
 }
 .carrier {
     background-color: #302f2f;
+}
+.shadow {
+    background-color: grey;
+    opacity: 0.7;
+}
+#shipSectionContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#shipSection {
+    border: 1.5px solid #535353;
+    display: flex;
+    flex-direction: row;
+    width: 50vw;
+    align-items: center;
+    justify-content: center;
+}
+.buttonSection {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.btn,
+#shipSection {
+    padding: 1em 1em;
+    margin-bottom: 1em;
+    cursor: pointer;
+    box-shadow: 3px 3px #535353;
+    border-radius: 3px;
+}
+#shipSection {
+    height: 100px;
+}
+.buttonSection,
+#shipSection,
+.boardContainer,
+h1 {
+    margin: 0.75em 0;
+}
+.invisible {
+    display: none;
 }
 .boom {
     transform: transition;
@@ -88,6 +132,22 @@ h1 {
     background-size: cover;
     animation: boomAnimation 0.8s ease-in;
 }
+/*modals*/
+.modalStart {
+    position: fixed;
+    top: 30%;
+    left: 25%;
+    z-index: 1;
+    height: 200px;
+    width: 200px;
+    padding: 2.5em;
+    text-align: center;
+    border: 1px solid #652525;
+    box-shadow: 3px 3px #652525;
+    border-radius: 3px;
+    color: #652525;
+}
+
 @keyframes boomAnimation {
     0% {
         opacity: 1;
@@ -99,45 +159,16 @@ h1 {
         opacity: 1;
     }
 }
-.shadow {
-    background-color: grey;
-    opacity: 0.7;
+@media only screen and (min-width: 500px) {
+.modalStart {
+        left: 30%;
+    }
 }
-#shipSectionContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media only screen and (min-width: 600px) {
+    .modalStart {
+        left: 35%;
+    }
 }
-#shipSection {
-    border: 1.5px solid #535353;
-    display: flex;
-    flex-direction: row;
-}
-
-/*Btn section*/
-.buttonSection {
-    justify-content: center;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.btn,
-#shipSection {
-    width: 15em;
-    padding: 1em 0;
-    margin-bottom: 1em;
-    cursor: pointer;
-    box-shadow: 3px 3px #535353;
-    border-radius: 3px;
-}
-.buttonSection,
-#shipSection,
-.boardContainer,
-h1 {
-    margin: 0.75em 0;
-}
-.invisible {
-    display: none;
 }
 @media only screen and (min-width: 700px) {
     .boardContainer {
@@ -154,5 +185,15 @@ h1 {
     .gridCell {
         width: 30px;
         height: 30px;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .modalStart {
+        left: 40%;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .modalStart {
+        left: 43%;
     }
 }
