@@ -160,7 +160,7 @@ h1 {
     }
 }
 @media only screen and (min-width: 500px) {
-.modalStart {
+    .modalStart {
         left: 30%;
     }
 }
@@ -168,7 +168,6 @@ h1 {
     .modalStart {
         left: 35%;
     }
-}
 }
 @media only screen and (min-width: 700px) {
     .boardContainer {
