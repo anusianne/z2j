@@ -2,6 +2,7 @@ import { shipSection, width } from '../battleship.js';
 import { allPlayerCells } from './dragDrop.js';
 
 const startBtn = document.querySelector('.startBtn');
+const modal = document.createElement('div');
 let gameOver = false;
 let playerTurn;
 // Start Game
@@ -11,15 +12,15 @@ function startGame() {
         (ship) => ship.style.display === 'none'
     );
     if (!allShipsPlaced) {
-        const modalStart = document.createElement('div');
-        modalStart.classList.add('modalStart');
-        modalStart.innerHTML =
+        modal.classList.add('modal');
+        modal.innerHTML =
             'You must place all the ships on the player board first!';
-        document.body.appendChild(modalStart);
-        console.log('You must place all the ships on the player board first!');
+        document.body.appendChild(modal);
+        setTimeout(() => {
+            modal.remove();
+        }, 1500);
         return;
     }
-    // Jeśli wszystkie statki są ukryte, kontynuujemy uruchamianie gry
     startBtn.style.display = 'none';
     const allBoardCells = document.querySelectorAll('#ai div');
     allBoardCells.forEach((cell) =>
@@ -34,24 +35,21 @@ const aiSunkedShips = [];
 function handleClick(e) {
     if (!gameOver) {
         if (e.target.classList.contains('occupied')) {
-            //basic highlighting
             e.target.classList.add('boom');
             e.target.style.backgroundImage = "url('explode.png')";
-            console.log('You hit the ai ship.');
         }
         let classes = Array.from(e.target.classList);
         classes = classes.filter((className) => className !== 'gridCell');
         classes = classes.filter((className) => className !== 'boom');
         classes = classes.filter((className) => className !== 'occupied');
         playerHits.push(...classes);
-        console.log(playerHits);
         checkScore('player', playerHits, playerSunkedShips);
     }
     if (!e.target.classList.contains('occupied')) {
         e.target.innerHTML = `X`;
         e.target.style.paddingTop = '5px';
         e.target.style.textAlign = 'center';
-        e.target.style.backgroundColor = '#302F2F';
+        e.target.style.backgroundColor = '#032219';
     }
     playerTurn = false;
     const allBoardCells = document.querySelectorAll('#ai div');
@@ -74,9 +72,12 @@ function checkScore(user, userHits, userSunkedShips) {
                     (storedShipName) => storedShipName !== shipName
                 );
             }
-            //modal needed
-            //
-            console.log(`You sunk the ${user}'s ${shipName}.`);
+            modal.classList.add('modal');
+            modal.innerHTML = `You sunk the ai's ${shipName}.`;
+            document.body.appendChild(modal);
+            setTimeout(() => {
+                modal.remove();
+            }, 1000);
             userSunkedShips.push(shipName);
         }
     }
@@ -85,24 +86,34 @@ function checkScore(user, userHits, userSunkedShips) {
     checkShip('cruiser', 3);
     checkShip('battleship', 4);
     checkShip('carrier', 5);
-    console.log('playerHits', playerHits);
-    console.log('playerSunkedShips', playerSunkedShips);
-
     if (playerSunkedShips.length === 5) {
-        //modal needed
-        console.log('You won, you sunked the ai ships.');
+        const modalWin = document.createElement('div');
+        const restartBtn = document.createElement('button');
+        restartBtn.innerHTML = 'Restart';
+        restartBtn.classList.add('restartBtn');
+        restartBtn.addEventListener('click', () => {
+            window.location.reload();
+        });
+        modalWin.classList.add('modal');
+        modalWin.innerHTML =
+            'You won, you sunked the ai ships. Do you want to restart?';
+        modalWin.appendChild(restartBtn);
+        document.body.appendChild(modalWin);
         gameOver = true;
     }
     if (aiSunkedShips.length === 5) {
-        //modal needed
-        console.log('Ai won, you loose with your ships.');
+        modal.classList.add('modal');
+        modal.innerHTML = 'Ai won, you loose with your ships.';
+        document.body.appendChild(modal);
+        setTimeout(() => {
+            modal.remove();
+        }, 1500);
         gameOver = true;
     }
 }
 //ai move function
 function aiMove() {
     if (!gameOver) {
-        console.log('Computer goes!');
         setTimeout(() => {
             let randomMove = Math.floor(Math.random() * width * width);
             if (
@@ -116,9 +127,9 @@ function aiMove() {
                 !allPlayerCells[randomMove].classList.contains('boom')
             ) {
                 allPlayerCells[randomMove].classList.add('boom');
-                e.target.classList.add('boom');
-                e.target.style.backgroundImage = "url('explode.png')";
-                console.log('The computer hit your ship.');
+                allPlayerCells[randomMove].classList.add('boom');
+                allPlayerCells[randomMove].style.backgroundImage =
+                    "url('explode.png')";
                 let classes = Array.from(allPlayerCells[randomMove].classList);
                 classes = classes.filter(
                     (className) => className !== 'gridCell'
@@ -133,12 +144,11 @@ function aiMove() {
                 allPlayerCells[randomMove].innerHTML = `X`;
                 allPlayerCells[randomMove].style.paddingTop = '5px';
                 allPlayerCells[randomMove].style.textAlign = 'center';
-                allPlayerCells[randomMove].style.backgroundColor = '#302F2F';
+                allPlayerCells[randomMove].style.backgroundColor = '#032219';
             }
         }, 1000);
         setTimeout(() => {
             playerTurn = true;
-            console.log('Your move now. ');
             const allBoardCells = document.querySelectorAll('#ai div');
             allBoardCells.forEach((cell) =>
                 cell.addEventListener('click', handleClick)
