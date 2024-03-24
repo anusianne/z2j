@@ -163,6 +163,19 @@ h1 {
         opacity: 1;
     }
 }
+<<<<<<< HEAD
+=======
+@media only screen and (min-width: 500px) {
+    .modalStart {
+        left: 30%;
+    }
+}
+@media only screen and (min-width: 600px) {
+    .modalStart {
+        left: 35%;
+    }
+}
+>>>>>>> e2a23b4890034573ca94164789d6dd543cf5bc91
 @media only screen and (min-width: 700px) {
     .boardContainer {
         width: 300px;
