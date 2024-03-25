@@ -4,7 +4,7 @@ export const rotateBtn = document.querySelector('.rotateBtn');
 export const width = 10;
 export let angle = 0;
 export const shipTypes = Array.from(shipSection.children);
-//Rotate button to rotate ship's direction:
+
 rotateBtn.addEventListener('click', rotateShip);
 function rotateShip() {
     angle = angle === 0 ? 90 : 0;
@@ -12,14 +12,12 @@ function rotateShip() {
         shipType.style.transform = `rotate(${angle}deg)`;
     });
 }
-//Add Ship
 export function addShip(user, ship, startId) {
     const allBoardCells = document.querySelectorAll(`#${user} div`);
     let attempt = 0;
     let success = false;
     const maxAttempts = 200;
     const boardWidth = width;
-
     while (!success && attempt < maxAttempts) {
         attempt++;
         const randomBoolean = Math.random() < 0.5;
@@ -27,7 +25,6 @@ export function addShip(user, ship, startId) {
         const randomStartIndex = Math.floor(Math.random() * width * width);
         const startIndex = startId !== undefined ? startId : randomStartIndex;
         let validStart;
-
         if (isHorizontal) {
             if (isHorizontal) {
                 validStart =
@@ -66,9 +63,14 @@ export function addShip(user, ship, startId) {
             }
             if (isValidPlacement) {
                 shipCells.forEach((shipCell) => {
-                    shipCell.classList.add(ship.name);
-                    shipCell.classList.add('occupied');
-                    shipCell.classList.add('ship');
+                    if (user === 'player') {
+                        shipCell.classList.add(ship.name);
+                        shipCell.classList.add('occupied');
+                        shipCell.classList.add(`${ship.name}Player`);
+                    } else {
+                        shipCell.classList.add(ship.name);
+                        shipCell.classList.add('occupied');
+                    }
                 });
                 success = true;
             }

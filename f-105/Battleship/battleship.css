@@ -38,8 +38,9 @@ h1 {
     height: 5vh;
     margin-right: 10px;
     border-radius: 0.25em;
+    background-color: #262166;
 }
-.destroyer {
+.destroyerPlayer {
     background-color: #262166;
 }
 .submarine-preview {
@@ -47,8 +48,9 @@ h1 {
     height: 5vh;
     margin-right: 10px;
     border-radius: 0.25em;
+    background-color: #0a5b43;
 }
-.submarine {
+.submarinePlayer {
     background-color: #0a5b43;
 }
 .cruiser-preview {
@@ -56,8 +58,9 @@ h1 {
     height: 5vh;
     margin-right: 10px;
     border-radius: 0.25em;
+    background-color: #1a547e;
 }
-.cruiser {
+.cruiserPlayer {
     background-color: #1a547e;
 }
 .battleship-preview {
@@ -65,8 +68,9 @@ h1 {
     height: 5vh;
     margin-right: 10px;
     border-radius: 0.25em;
+    background-color: #652525;
 }
-.battleship {
+.battleshipPlayer {
     background-color: #652525;
 }
 .carrier-preview {
@@ -74,8 +78,9 @@ h1 {
     height: 5vh;
     margin-right: 10px;
     border-radius: 0.25em;
+    background-color: #302f2f;
 }
-.carrier {
+.carrierPlayer {
     background-color: #302f2f;
 }
 .shadow {
@@ -136,7 +141,7 @@ h1 {
     padding: 0.5em;
     box-shadow: 3px 3px #063a2b;
     border-radius: 3px;
-    margin-top: 0.75em;
+    cursor: pointer;
 }
 .modal {
     position: absolute;
@@ -163,19 +168,16 @@ h1 {
         opacity: 1;
     }
 }
-<<<<<<< HEAD
-=======
 @media only screen and (min-width: 500px) {
-    .modalStart {
-        left: 30%;
-    }
-}
-@media only screen and (min-width: 600px) {
-    .modalStart {
+    .modal {
         left: 35%;
     }
 }
->>>>>>> e2a23b4890034573ca94164789d6dd543cf5bc91
+@media only screen and (min-width: 600px) {
+    .modal {
+        left: 35%;
+    }
+}
 @media only screen and (min-width: 700px) {
     .boardContainer {
         width: 300px;
@@ -195,11 +197,33 @@ h1 {
     .modal {
         left: 30%;
         top: 30%;
-        height: 250px;
         width: 250px;
-        padding-top: 3em;
+        padding-top: 2em;
     }
     .restartBtn {
-        margin-top: 2em;
+        margin-top: 1em;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .modal {
+        left: 35%;
+        height: 150px;
+    }
+}
+@media only screen and (min-width: 1000px) {
+    .modal {
+        left: 37%;
+        height: 150px;
+    }
+}
+@media only screen and (min-width: 1200px) {
+    .modal {
+        left: 40%;
+        height: 150px;
+    }
+}
+@media only screen and (min-width: 1500px) {
+    .modal {
+        left: 42%;
     }
 }

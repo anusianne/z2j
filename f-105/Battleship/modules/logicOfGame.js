@@ -111,7 +111,6 @@ function checkScore(user, userHits, userSunkedShips) {
         gameOver = true;
     }
 }
-//ai move function
 function aiMove() {
     if (!gameOver) {
         setTimeout(() => {
@@ -146,13 +145,13 @@ function aiMove() {
                 allPlayerCells[randomMove].style.textAlign = 'center';
                 allPlayerCells[randomMove].style.backgroundColor = '#032219';
             }
-        }, 1000);
+        }, 500);
         setTimeout(() => {
             playerTurn = true;
             const allBoardCells = document.querySelectorAll('#ai div');
             allBoardCells.forEach((cell) =>
                 cell.addEventListener('click', handleClick)
             );
-        }, 2000);
+        }, 1000);
     }
 }

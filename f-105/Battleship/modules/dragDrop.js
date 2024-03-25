@@ -7,7 +7,7 @@ import {
     addShip,
 } from '../battleship.js';
 import { ships } from './board.js';
-// Draggable elements
+
 let draggedShip;
 let notDropped;
 let isShipDroppedOnBoard = false;
@@ -19,7 +19,6 @@ allPlayerCells.forEach((playerCell) => {
     playerCell.addEventListener('dragover', dragOver);
     playerCell.addEventListener('drop', dropShip);
 });
-// Dodajemy obsługę zdarzenia dragend dla statków
 shipTypes.forEach((shipType) => {
     shipType.addEventListener('dragend', dragEnd);
 });
@@ -31,7 +30,6 @@ function dragStart(e) {
 function dragOver(e) {
     e.preventDefault();
     clearHighlight();
-    // Clear existing highlights before setting new ones
     const cell = e.target;
     const startId = parseInt(cell.id, 10);
     const shipLength = ships.find(
@@ -58,37 +56,30 @@ function dropShip(e) {
     if (success) {
         draggedShip.style.display = 'none'; // Ukryj statek po pomyślnym upuszczeniu
     } else {
-        // Przenieś statek z powrotem do shipSection
         draggedShip.classList.remove('shadow');
     }
     checkAllShipsPlaced();
 }
 function dragEnd(e) {
-    // Sprawdź, czy statek nie został upuszczony na planszy
     if (!isShipDroppedOnBoard) {
         alert(
             'Nie można umieścić statku poza planszą. Proszę spróbować ponownie.'
         );
         clearHighlight();
-        // Przenieś statek z powrotem do shipSection
         draggedShip.classList.remove('shadow'); // Ponownie wyświetl statek
     }
-    // Reset flagi na przyszłość
     isShipDroppedOnBoard = false;
 }
-// Helper function to clear highlighted cells
 function clearHighlight() {
     document.querySelectorAll('#player .gridCell').forEach((cell) => {
         cell.style.backgroundColor = ''; // Reset background color
     });
 }
-// Helper function to get cells to highlight
 function getCellsToHighlight(startId, length, isHorizontal) {
     const cells = [];
     for (let i = 0; i < length; i++) {
         let cellId = isHorizontal ? startId + i : startId + i * width;
         if (isHorizontal) {
-            // Prevent wrapping: if moving to the next row, break
             if (
                 Math.floor((startId - 1) / width) !==
                 Math.floor((cellId - 1) / width)

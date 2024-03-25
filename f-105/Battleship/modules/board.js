@@ -1,4 +1,3 @@
-// Ship Class
 class Ships {
     constructor(name, length) {
         this.name = name;
@@ -12,7 +11,6 @@ const battleship = new Ships('battleship', 4);
 const carrier = new Ships('carrier', 5);
 export const ships = [destroyer, submarine, cruiser, battleship, carrier];
 
-//Creating boards
 function createBoard(user) {
     const boardSection = document.getElementById('boardSection');
     const width = 10;
