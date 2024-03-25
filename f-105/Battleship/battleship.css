@@ -133,7 +133,13 @@ h1 {
     width: 30px;
     height: 30px;
     background-size: cover;
-    animation: boomAnimation 0.8s ease-in;
+    animation: boomAnimation 0.8s ease-out forwards;
+}
+.empty {
+    color: white;
+    padding-top: 5px;
+    text-align: center;
+    background-color: #063a2b;
 }
 .restartBtn {
     color: #063a2b;

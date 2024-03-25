@@ -5,7 +5,6 @@ const startBtn = document.querySelector('.startBtn');
 const modal = document.createElement('div');
 let gameOver = false;
 let playerTurn;
-// Start Game
 startBtn.addEventListener('click', startGame);
 function startGame() {
     const allShipsPlaced = Array.from(shipSection.children).every(
@@ -33,28 +32,23 @@ let aiHits = [];
 const playerSunkedShips = [];
 const aiSunkedShips = [];
 function handleClick(e) {
-    if (!gameOver) {
-        if (e.target.classList.contains('occupied')) {
-            e.target.classList.add('boom');
-            e.target.style.backgroundImage = "url('explode.png')";
+    setTimeout(() => {
+        if (!gameOver) {
+            if (e.target.classList.contains('occupied')) {
+                e.target.classList.add('boom');
+                e.target.style.backgroundImage = "url('explode.png')";
+            }
+            let classes = Array.from(e.target.classList);
+            playerHits.push(...classes);
+            checkScore('player', playerHits, playerSunkedShips);
         }
-        let classes = Array.from(e.target.classList);
-        classes = classes.filter((className) => className !== 'gridCell');
-        classes = classes.filter((className) => className !== 'boom');
-        classes = classes.filter((className) => className !== 'occupied');
-        playerHits.push(...classes);
-        checkScore('player', playerHits, playerSunkedShips);
-    }
-    if (!e.target.classList.contains('occupied')) {
-        e.target.innerHTML = `X`;
-        e.target.style.paddingTop = '5px';
-        e.target.style.textAlign = 'center';
-        e.target.style.backgroundColor = '#032219';
-    }
-    playerTurn = false;
-    const allBoardCells = document.querySelectorAll('#ai div');
-    allBoardCells.forEach((cell) => cell.replaceWith(cell.cloneNode(true)));
-    setTimeout(aiMove, 1000);
+        if (!e.target.classList.contains('occupied')) {
+            e.target.classList.add('empty');
+            e.target.innerHTML = `X`;
+        }
+        playerTurn = false;
+        setTimeout(aiMove, 100);
+    }, 150);
 }
 function checkScore(user, userHits, userSunkedShips) {
     function checkShip(shipName, shipLength) {
@@ -107,12 +101,13 @@ function checkScore(user, userHits, userSunkedShips) {
         document.body.appendChild(modal);
         setTimeout(() => {
             modal.remove();
-        }, 1500);
+        }, 1000);
         gameOver = true;
     }
 }
 function aiMove() {
     if (!gameOver) {
+        playerTurn = false;
         setTimeout(() => {
             let randomMove = Math.floor(Math.random() * width * width);
             if (
@@ -126,32 +121,13 @@ function aiMove() {
                 !allPlayerCells[randomMove].classList.contains('boom')
             ) {
                 allPlayerCells[randomMove].classList.add('boom');
-                allPlayerCells[randomMove].classList.add('boom');
                 allPlayerCells[randomMove].style.backgroundImage =
                     "url('explode.png')";
-                let classes = Array.from(allPlayerCells[randomMove].classList);
-                classes = classes.filter(
-                    (className) => className !== 'gridCell'
-                );
-                classes = classes.filter((className) => className !== 'boom');
-                classes = classes.filter(
-                    (className) => className !== 'occupied'
-                );
-                aiHits.push(...classes);
                 checkScore('ai', aiHits, aiSunkedShips);
             } else {
+                allPlayerCells[randomMove].classList.add('empty');
                 allPlayerCells[randomMove].innerHTML = `X`;
-                allPlayerCells[randomMove].style.paddingTop = '5px';
-                allPlayerCells[randomMove].style.textAlign = 'center';
-                allPlayerCells[randomMove].style.backgroundColor = '#032219';
             }
-        }, 500);
-        setTimeout(() => {
-            playerTurn = true;
-            const allBoardCells = document.querySelectorAll('#ai div');
-            allBoardCells.forEach((cell) =>
-                cell.addEventListener('click', handleClick)
-            );
-        }, 1000);
+        }, 200);
     }
 }
