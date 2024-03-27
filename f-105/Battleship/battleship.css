@@ -127,14 +127,6 @@ h1 {
 .invisible {
     display: none;
 }
-.boom {
-    transform: transition;
-    background-color: #17171a;
-    width: 30px;
-    height: 30px;
-    background-size: cover;
-    animation: boomAnimation 0.8s ease-out forwards;
-}
 .empty {
     color: white;
     padding-top: 5px;
