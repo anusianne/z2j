@@ -1,4 +1,4 @@
-import { ships } from './modules/board.js';
+import { ships, Cell, allAiCells, allPlayerCells } from './modules/board.js';
 export const shipSection = document.getElementById('shipSection');
 export const rotateBtn = document.querySelector('.rotateBtn');
 export const width = 10;
@@ -49,27 +49,34 @@ export function addShip(user, ship, startId) {
                     isValidPlacement = false;
                     break;
                 }
-                const cell = allBoardCells[index];
+                let allCells = user === 'player' ? allPlayerCells : allAiCells;
                 if (
-                    cell.classList.contains('occupied') ||
-                    isSurroundingCellOccupied(index, allBoardCells)
+                    allCells[index].isOccupied ||
+                    isSurroundingCellOccupied(index, allCells)
                 ) {
                     isValidPlacement = false;
                     break;
                 } else {
                     isValidPlacement = true;
                 }
-                shipCells.push(cell);
+                shipCells.push(allCells[index]);
             }
             if (isValidPlacement) {
                 shipCells.forEach((shipCell) => {
                     if (user === 'player') {
-                        shipCell.classList.add(ship.name);
-                        shipCell.classList.add('occupied');
-                        shipCell.classList.add(`${ship.name}Player`);
+                        shipCell.setOccupied();
+                        shipCell.setShip(ship.name);
+                        shipCell.updateView();
+                        // shipCell.setShip(ship.name);
+                        // shipCell.classList.add(ship.name);
+                        // shipCell.classList.add(`${ship.name}Player`);
                     } else {
-                        shipCell.classList.add(ship.name);
-                        shipCell.classList.add('occupied');
+                        shipCell.setOccupied();
+                        shipCell.setShip(ship.name);
+                        console.log('statki komputerka');
+                        console.log(shipCell.id);
+                        // shipCell.classList.add(ship.name);
+                        // shipCell.classList.add('occupied');
                     }
                 });
                 success = true;
@@ -87,7 +94,7 @@ export function addShip(user, ship, startId) {
 ships.forEach((ship) => {
     addShip('ai', ship);
 });
-function isSurroundingCellOccupied(index, allBoardCells) {
+function isSurroundingCellOccupied(index, allCells) {
     const boardWidth = width;
     const row = Math.floor(index / boardWidth);
     const col = index % boardWidth;
@@ -111,8 +118,8 @@ function isSurroundingCellOccupied(index, allBoardCells) {
             newCol >= 0 &&
             newCol <= boardWidth - 1
         ) {
-            const cell = allBoardCells[newIndex];
-            if (cell && cell.classList.contains('occupied')) {
+            const cell = allCells[newIndex];
+            if (cell && cell.isOccupied) {
                 return true;
             }
         }
