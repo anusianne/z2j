@@ -14,8 +14,8 @@ let isShipDroppedOnBoard = false;
 shipTypes.forEach((shipType) => {
     shipType.addEventListener('dragstart', dragStart);
 });
-export const allPlayerGridCells = document.querySelectorAll('#player div');
-allPlayerGridCells.forEach((playerCell) => {
+export const allPlayerCells = document.querySelectorAll('#player div');
+allPlayerCells.forEach((playerCell) => {
     playerCell.addEventListener('dragover', dragOver);
     playerCell.addEventListener('drop', dropShip);
 });

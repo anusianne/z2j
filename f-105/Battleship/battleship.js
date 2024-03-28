@@ -1,4 +1,4 @@
-import { ships, allPlayerCells, allAiCells, Cell } from './modules/board.js';
+import { ships } from './modules/board.js';
 export const shipSection = document.getElementById('shipSection');
 export const rotateBtn = document.querySelector('.rotateBtn');
 export const width = 10;
@@ -13,66 +13,68 @@ function rotateShip() {
     });
 }
 export function addShip(user, ship, startId) {
+    const allBoardCells = document.querySelectorAll(`#${user} div`);
     let attempt = 0;
     let success = false;
     const maxAttempts = 200;
-    const boardWidth = 10; // Upewnij się, że wartość szerokości planszy jest poprawna
-    const allGridCells = user === 'player' ? allPlayerCells : allAiCells;
-
+    const boardWidth = width;
     while (!success && attempt < maxAttempts) {
         attempt++;
         const randomBoolean = Math.random() < 0.5;
-        const isHorizontal =
-            user === 'player' ? Math.random() < 0.5 : randomBoolean; // Zaktualizowano logikę, aby działała bez zmiennej `angle`
-        const randomStartIndex = Math.floor(
-            Math.random() * boardWidth * boardWidth
-        );
+        const isHorizontal = user === 'player' ? angle === 0 : randomBoolean;
+        const randomStartIndex = Math.floor(Math.random() * width * width);
         const startIndex = startId !== undefined ? startId : randomStartIndex;
-
-        let validStart = null;
-
+        let validStart;
         if (isHorizontal) {
-            validStart =
-                (startIndex % boardWidth) + ship.length <= boardWidth
-                    ? startIndex
-                    : null;
+            if (isHorizontal) {
+                validStart =
+                    (startIndex % boardWidth) + ship.length <= boardWidth
+                        ? startIndex
+                        : null;
+            }
         } else {
             validStart =
                 startIndex < boardWidth * (boardWidth - ship.length + 1)
                     ? startIndex
                     : null;
         }
-
+        let isValidPlacement;
         if (validStart !== null) {
             const shipCells = [];
-            let isValidPlacement = true;
-
             for (let i = 0; i < ship.length; i++) {
                 let index = isHorizontal
-                    ? validStart + i
-                    : validStart + i * boardWidth;
-                const cell = allGridCells[index];
-
+                    ? Number(validStart) + i
+                    : Number(validStart) + i * boardWidth;
+                if (index >= allBoardCells.length || index < 0) {
+                    isValidPlacement = false;
+                    break;
+                }
+                const cell = allBoardCells[index];
                 if (
-                    cell === undefined ||
-                    cell.isOccupied ||
-                    isSurroundingCellOccupied(index, allGridCells, boardWidth)
+                    cell.classList.contains('occupied') ||
+                    isSurroundingCellOccupied(index, allBoardCells)
                 ) {
                     isValidPlacement = false;
                     break;
                 } else {
-                    shipCells.push(cell);
+                    isValidPlacement = true;
                 }
+                shipCells.push(cell);
             }
-
             if (isValidPlacement) {
-                shipCells.forEach((cell) => {
-                    cell.setShip(ship);
+                shipCells.forEach((shipCell) => {
+                    if (user === 'player') {
+                        shipCell.classList.add(ship.name);
+                        shipCell.classList.add('occupied');
+                        shipCell.classList.add(`${ship.name}Player`);
+                    } else {
+                        shipCell.classList.add(ship.name);
+                        shipCell.classList.add('occupied');
+                    }
                 });
                 success = true;
             }
         }
-
         if (!success && startId !== undefined) {
             alert(
                 'Nie można umieścić statku w tej lokalizacji. Proszę spróbować gdzie indziej.'
@@ -80,14 +82,12 @@ export function addShip(user, ship, startId) {
             return false;
         }
     }
-
     return success;
 }
-
 ships.forEach((ship) => {
     addShip('ai', ship);
 });
-function isSurroundingCellOccupied(index, allGridCells) {
+function isSurroundingCellOccupied(index, allBoardCells) {
     const boardWidth = width;
     const row = Math.floor(index / boardWidth);
     const col = index % boardWidth;
@@ -111,8 +111,8 @@ function isSurroundingCellOccupied(index, allGridCells) {
             newCol >= 0 &&
             newCol <= boardWidth - 1
         ) {
-            const cell = allGridCells[newIndex];
-            if (cell && cell.isOccupied) {
+            const cell = allBoardCells[newIndex];
+            if (cell && cell.classList.contains('occupied')) {
                 return true;
             }
         }
