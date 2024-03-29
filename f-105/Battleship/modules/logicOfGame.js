@@ -1,5 +1,5 @@
 import { shipSection, width } from '../battleship.js';
-import { allPlayerCells } from './dragDrop.js';
+import { allAiCells, allPlayerCells, Cell } from './board.js';
 
 const startBtn = document.querySelector('.startBtn');
 const modal = document.createElement('div');
@@ -21,7 +21,7 @@ function startGame() {
         return;
     }
     startBtn.style.display = 'none';
-    const allBoardCells = document.querySelectorAll('#ai div');
+    const allBoardCells = document.querySelectorAll('#ai .gridCell');
     allBoardCells.forEach((cell) =>
         cell.addEventListener('click', handleClick)
     );
@@ -31,24 +31,25 @@ let playerHits = [];
 let aiHits = [];
 const playerSunkedShips = [];
 const aiSunkedShips = [];
-function handleClick(e) {
-    setTimeout(() => {
-        if (!gameOver) {
-            if (e.target.classList.contains('occupied')) {
-                e.target.classList.add('boom');
-                e.target.style.backgroundImage = "url('explode.png')";
-            }
-            let classes = Array.from(e.target.classList);
-            playerHits.push(...classes);
-            checkScore('player', playerHits, playerSunkedShips);
+function handleClick(event) {
+    const cellId = event.target.id - 1;
+    const cell = allAiCells.find((c) => c.id == cellId);
+    if (!gameOver && playerTurn && !cell.isBoom) {
+        const allBoardCells = document.querySelectorAll('#ai .gridCell');
+        const cellElement = allBoardCells[cellId];
+        if (cell.isOccupied) {
+            cellElement.style.backgroundColor = 'red';
+            console.log('occupied');
+            console.log(cellElement);
+        } else {
+            cellElement.style.backgroundColor = 'green';
+            console.log('not');
+            console.log(cellElement);
         }
-        if (!e.target.classList.contains('occupied')) {
-            e.target.classList.add('empty');
-            e.target.innerHTML = `X`;
-        }
+        checkScore('player', playerHits, playerSunkedShips);
         playerTurn = false;
-        setTimeout(aiMove, 100);
-    }, 150);
+        setTimeout(aiMove, 1000);
+    }
 }
 function checkScore(user, userHits, userSunkedShips) {
     function checkShip(shipName, shipLength) {
@@ -111,22 +112,22 @@ function aiMove() {
         setTimeout(() => {
             let randomMove = Math.floor(Math.random() * width * width);
             if (
-                allPlayerCells[randomMove].classList.contains('occupied') &&
-                allPlayerCells[randomMove].classList.contains('boom')
+                allPlayerCells[randomMove].isOccupied &&
+                allPlayerCells[randomMove].isBoom
             ) {
                 aiMove();
                 return;
             } else if (
-                allPlayerCells[randomMove].classList.contains('occupied') &&
-                !allPlayerCells[randomMove].classList.contains('boom')
+                allPlayerCells[randomMove].isOccupied &&
+                !allPlayerCells[randomMove].isBoom
             ) {
-                allPlayerCells[randomMove].classList.add('boom');
-                allPlayerCells[randomMove].style.backgroundImage =
-                    "url('explode.png')";
+                allPlayerCells[randomMove].setBoom();
+                // allPlayerCells[randomMove].style.backgroundImage =
+                //     "url('explode.png')";
                 checkScore('ai', aiHits, aiSunkedShips);
             } else {
-                allPlayerCells[randomMove].classList.add('empty');
-                allPlayerCells[randomMove].innerHTML = `X`;
+                // allPlayerCells[randomMove].classList.add('empty');
+                // allPlayerCells[randomMove].innerHTML = `X`;
             }
         }, 200);
     }

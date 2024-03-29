@@ -6,7 +6,7 @@ import {
     shipSection,
     addShip,
 } from '../battleship.js';
-import { ships, Cell } from './board.js';
+import { ships } from './board.js';
 
 let draggedShip;
 let notDropped;

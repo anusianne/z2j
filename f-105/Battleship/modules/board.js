@@ -37,10 +37,10 @@ export class Cell {
     updateView() {
         const cellElement = document.getElementById(this.id);
         if (cellElement && this.occupied && this.ship) {
-            cellElement.classList.add(`${this.ship}Player`); // Załóżmy, że `ship` przechowuje nazwę statku jako string
-            // Możesz też dodać inny kolor lub klasę w zależności od typu statku
+            cellElement.classList.add(`${this.ship}Player`);
         } else if (cellElement) {
             cellElement.classList.remove(`${this.ship}Player`);
+            cellElement.style.backgroundColor = 'red';
         }
     }
 }
@@ -54,7 +54,8 @@ function createBoard(user) {
         const cell = new Cell(i);
         if (user === 'player') {
             allPlayerCells.push(cell);
-        } else {
+        }
+        if (user === 'ai') {
             allAiCells.push(cell);
         }
         const gridCell = document.createElement('div');
