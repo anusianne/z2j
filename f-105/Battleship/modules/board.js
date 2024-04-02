@@ -17,6 +17,7 @@ export class Cell {
         this.id = id;
         this.boom = false;
         this.occupied = false;
+        this._isBoom = false;
     }
     setShip(ship) {
         this.ship = ship;
@@ -25,11 +26,11 @@ export class Cell {
     setOccupied() {
         this.occupied = true;
     }
-    setBoom() {
-        this.boom = true;
+    setBoom(value) {
+        this._isBoom = value;
     }
     get isBoom() {
-        return this.boom;
+        return this._isBoom;
     }
     get isOccupied() {
         return this.occupied;

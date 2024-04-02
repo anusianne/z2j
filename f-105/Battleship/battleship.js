@@ -67,15 +67,12 @@ export function addShip(user, ship, startId) {
                         shipCell.setOccupied();
                         shipCell.setShip(ship.name);
                         shipCell.updateView();
-                        console.log(allPlayerCells);
                         // shipCell.setShip(ship.name);
                         // shipCell.classList.add(ship.name);
                         // shipCell.classList.add(`${ship.name}Player`);
                     } else {
                         shipCell.setShip(ship.name);
                         shipCell.setOccupied();
-                        console.log('statki komputerka');
-                        console.log(shipCell.id);
                         console.log(allAiCells);
                         // shipCell.classList.add(ship.name);
                         // shipCell.classList.add('occupied');
