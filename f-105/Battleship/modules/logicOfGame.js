@@ -1,5 +1,5 @@
 import { shipSection, width } from '../battleship.js';
-import { allAiCells, allPlayerCells, Cell } from './board.js';
+import { allAiCells, allPlayerCells, Cell, ships } from './board.js';
 
 const startBtn = document.querySelector('.startBtn');
 const modal = document.createElement('div');
@@ -38,74 +38,55 @@ function handleClick(e) {
         const cellElement = e.target;
         if (cell.isOccupied && !cell.isBoom) {
             cellElement.style.backgroundColor = 'red';
-            console.log('occupied');
-            console.log(cellElement);
             cell.setBoom();
+            if (cell.ship) {
+                playerHits.push(cell.ship);
+            }
         } else {
             cellElement.style.backgroundColor = 'green';
-            console.log('not');
-            console.log(cellElement);
         }
         playerTurn = false;
-        // checkScore('player', playerHits, playerSunkedShips);
+        checkScore('player', playerHits, playerSunkedShips);
         setTimeout(aiMove, 1000);
     }
 }
-// function checkScore(user, userHits, userSunkedShips) {
-//     function checkShip(shipName, shipLength) {
-//         if (
-//             userHits.filter((storedShipName) => storedShipName === shipName)
-//                 .length === shipLength
-//         ) {
-//             if (user === 'player') {
-//                 playerHits = userHits.filter(
-//                     (storedShipName) => storedShipName !== shipName
-//                 );
-//             }
-//             if (user === 'ai') {
-//                 aiHits = userHits.filter(
-//                     (storedShipName) => storedShipName !== shipName
-//                 );
-//             }
-//             modal.classList.add('modal');
-//             modal.innerHTML = `You sunk the ai's ${shipName}.`;
-//             document.body.appendChild(modal);
-//             setTimeout(() => {
-//                 modal.remove();
-//             }, 1000);
-//             userSunkedShips.push(shipName);
-//         }
-//     }
-//     checkShip('destroyer', 2);
-//     checkShip('submarine', 3);
-//     checkShip('cruiser', 3);
-//     checkShip('battleship', 4);
-//     checkShip('carrier', 5);
-//     if (playerSunkedShips.length === 5) {
-//         const modalWin = document.createElement('div');
-//         const restartBtn = document.createElement('button');
-//         restartBtn.innerHTML = 'Restart';
-//         restartBtn.classList.add('restartBtn');
-//         restartBtn.addEventListener('click', () => {
-//             window.location.reload();
-//         });
-//         modalWin.classList.add('modal');
-//         modalWin.innerHTML =
-//             'You won, you sunked the ai ships. Do you want to restart?';
-//         modalWin.appendChild(restartBtn);
-//         document.body.appendChild(modalWin);
-//         gameOver = true;
-//     }
-//     if (aiSunkedShips.length === 5) {
-//         modal.classList.add('modal');
-//         modal.innerHTML = 'Ai won, you loose with your ships.';
-//         document.body.appendChild(modal);
-//         setTimeout(() => {
-//             modal.remove();
-//         }, 1000);
-//         gameOver = true;
-//     }
-// }
+function checkScore(user, userHits, userSunkedShips) {
+    function checkShip(shipName, shipLength) {
+        const hitsOnShip = userHits.filter((id) => id === shipName).length;
+        if (hitsOnShip === shipLength) {
+            userHits = userHits.filter((id) => id !== shipName);
+            if (user === 'player') {
+                playerHits = userHits;
+            } else if (user === 'ai') {
+                aiHits = userHits;
+            }
+            modal.classList.add('modal');
+            modal.innerHTML = `You sunk the ${user === 'ai' ? "player's" : "ai's"} ${shipName}!`;
+            document.body.appendChild(modal);
+            setTimeout(() => modal.remove(), 1500);
+            userSunkedShips.push(shipName);
+            console.log(userSunkedShips);
+        }
+    }
+    checkShip('destroyer', 2);
+    checkShip('submarine', 3);
+    checkShip('cruiser', 3);
+    checkShip('battleship', 4);
+    checkShip('carrier', 5);
+    if (playerSunkedShips.length === 5 || aiSunkedShips.length === 5) {
+        gameOver = true;
+        modal.classList.add('modal');
+        modal.innerHTML =
+            user === 'player'
+                ? 'You won! All enemy ships have been sunk.'
+                : 'AI won! All your ships have been sunk.';
+        document.body.appendChild(modal);
+        setTimeout(() => {
+            modal.remove();
+            startBtn.style.display = '';
+        }, 3000);
+    }
+}
 function aiMove(e) {
     if (!gameOver) {
         let randomMove;
@@ -113,23 +94,23 @@ function aiMove(e) {
         do {
             randomMove = Math.floor(Math.random() * width * width);
             attempt++;
-            if (attempt > width * width) break; // Prevents infinite loop
+            if (attempt > width * width) break;
         } while (allPlayerCells[randomMove].isBoom);
-
         if (attempt <= width * width) {
+            const cellId = allPlayerCells[randomMove].id;
             const cell = allPlayerCells[randomMove];
             const cells = document.querySelectorAll('#player .gridCell');
             const cellElement = cells[randomMove];
-
             if (cellElement) {
                 if (cell.isOccupied && !cell.isBoom) {
                     cell.setBoom(true);
-                    cellElement.style.backgroundColor = 'red'; // Mark hit
-                    aiHits++;
-                    // checkScore('ai', aiHits, aiSunkedShips);
+                    cellElement.style.backgroundColor = 'red';
+                    aiHits.push(cellId);
+                    console.log(aiHits);
+                    checkScore('ai', aiHits, aiSunkedShips);
                 } else {
                     cell.setBoom(false);
-                    cellElement.style.backgroundColor = 'green'; // Mark miss
+                    cellElement.style.backgroundColor = 'green';
                 }
             }
         }

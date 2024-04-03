@@ -18,6 +18,7 @@ export class Cell {
         this.boom = false;
         this.occupied = false;
         this._isBoom = false;
+        this.ship = null;
     }
     setShip(ship) {
         this.ship = ship;
