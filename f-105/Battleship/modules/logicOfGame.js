@@ -65,7 +65,6 @@ function checkScore(user, userHits, userSunkedShips) {
             document.body.appendChild(modal);
             setTimeout(() => modal.remove(), 1500);
             userSunkedShips.push(shipName);
-            console.log(userSunkedShips);
         }
     }
     checkShip('destroyer', 2);
@@ -78,9 +77,16 @@ function checkScore(user, userHits, userSunkedShips) {
         modal.classList.add('modal');
         modal.innerHTML =
             user === 'player'
-                ? 'You won! All enemy ships have been sunk.'
-                : 'AI won! All your ships have been sunk.';
+                ? 'You won! All enemy ships have been sunk. Do you want to restart?'
+                : 'AI won! All your ships have been sunk. Do you want to try again?';
         document.body.appendChild(modal);
+        const restartBtn = document.createElement('button');
+        restartBtn.innerHTML = 'Restart';
+        restartBtn.classList.add('restartBtn');
+        restartBtn.addEventListener('click', () => {
+            window.location.reload();
+        });
+        modal.appendChild(restartBtn);
         setTimeout(() => {
             modal.remove();
             startBtn.style.display = '';
@@ -105,8 +111,9 @@ function aiMove(e) {
                 if (cell.isOccupied && !cell.isBoom) {
                     cell.setBoom(true);
                     cellElement.style.backgroundColor = 'red';
-                    aiHits.push(cellId);
-                    console.log(aiHits);
+                    if (cell.ship) {
+                        aiHits.push(cell.ship);
+                    }
                     checkScore('ai', aiHits, aiSunkedShips);
                 } else {
                     cell.setBoom(false);

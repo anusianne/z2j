@@ -67,15 +67,10 @@ export function addShip(user, ship, startId) {
                         shipCell.setOccupied();
                         shipCell.setShip(ship.name);
                         shipCell.updateView();
-                        // shipCell.setShip(ship.name);
-                        // shipCell.classList.add(ship.name);
-                        // shipCell.classList.add(`${ship.name}Player`);
                     } else {
                         shipCell.setShip(ship.name);
                         shipCell.setOccupied();
-                        console.log(allAiCells);
-                        // shipCell.classList.add(ship.name);
-                        // shipCell.classList.add('occupied');
+                        // console.log(allAiCells);
                     }
                 });
                 success = true;
