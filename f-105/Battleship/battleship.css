@@ -130,6 +130,7 @@ h1 {
 .boom {
     transform: transition;
     background-color: #17171a;
+    background: url('explode.png') no-repeat;
     width: 30px;
     height: 30px;
     background-size: cover;

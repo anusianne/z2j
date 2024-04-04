@@ -37,13 +37,16 @@ function handleClick(e) {
     if (!gameOver && playerTurn && !cell.isBoom) {
         const cellElement = e.target;
         if (cell.isOccupied && !cell.isBoom) {
-            cellElement.style.backgroundColor = 'red';
+            cellElement.style.backgroundColor = 'black';
+            cellElement.classList.add('boom');
             cell.setBoom();
             if (cell.ship) {
                 playerHits.push(cell.ship);
             }
         } else {
             cellElement.style.backgroundColor = 'green';
+            cellElement.innerHTML = 'X';
+            cellElement.classList.add('empty');
         }
         playerTurn = false;
         checkScore('player', playerHits, playerSunkedShips);
@@ -61,7 +64,7 @@ function checkScore(user, userHits, userSunkedShips) {
                 aiHits = userHits;
             }
             modal.classList.add('modal');
-            modal.innerHTML = `You sunk the ${user === 'ai' ? "player's" : "ai's"} ${shipName}!`;
+            modal.innerHTML = `${user === 'ai' ? "player's" : "ai's"} ${shipName} is sunked!`;
             document.body.appendChild(modal);
             setTimeout(() => modal.remove(), 1500);
             userSunkedShips.push(shipName);
@@ -74,23 +77,20 @@ function checkScore(user, userHits, userSunkedShips) {
     checkShip('carrier', 5);
     if (playerSunkedShips.length === 5 || aiSunkedShips.length === 5) {
         gameOver = true;
-        modal.classList.add('modal');
-        modal.innerHTML =
+        const modalWin = document.createElement('div');
+        modalWin.classList.add('modal');
+        modalWin.innerHTML =
             user === 'player'
                 ? 'You won! All enemy ships have been sunk. Do you want to restart?'
                 : 'AI won! All your ships have been sunk. Do you want to try again?';
-        document.body.appendChild(modal);
+        document.body.appendChild(modalWin);
         const restartBtn = document.createElement('button');
         restartBtn.innerHTML = 'Restart';
         restartBtn.classList.add('restartBtn');
         restartBtn.addEventListener('click', () => {
             window.location.reload();
         });
-        modal.appendChild(restartBtn);
-        setTimeout(() => {
-            modal.remove();
-            startBtn.style.display = '';
-        }, 3000);
+        modalWin.appendChild(restartBtn);
     }
 }
 function aiMove(e) {
@@ -110,7 +110,8 @@ function aiMove(e) {
             if (cellElement) {
                 if (cell.isOccupied && !cell.isBoom) {
                     cell.setBoom(true);
-                    cellElement.style.backgroundColor = 'red';
+                    cellElement.style.backgroundColor = 'black';
+                    cellElement.classList.add('boom');
                     if (cell.ship) {
                         aiHits.push(cell.ship);
                     }
@@ -118,6 +119,8 @@ function aiMove(e) {
                 } else {
                     cell.setBoom(false);
                     cellElement.style.backgroundColor = 'green';
+                    cellElement.innerHTML = 'X';
+                    cellElement.classList.add('empty');
                 }
             }
         }
