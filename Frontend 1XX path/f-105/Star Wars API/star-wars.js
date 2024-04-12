@@ -3,21 +3,35 @@ const previousBtn = document.getElementById('previous');
 const nextBtn = document.getElementById('next');
 let previousURL = null;
 let nextURL = null;
-let currentPage = 1; // Initial page
+let currentPage = 1;
+
 function fetchUrl(url, successCallback, errorCallback) {
     fetch(url)
-        .then((response) => response.json())
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(
+                    `Request failed with status ${response.status}: ${response.statusText}`
+                );
+            }
+        })
         .then(successCallback)
         .catch(errorCallback);
 }
+
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/people123/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
+
 function handleFetchError(error) {
     console.error('Error fetching data:', error);
+    container.textContent = `Failed to fetch data: ${error.message}`; // Wyświetlenie błędu w kontenerze
 }
+
 function displayCharacters(people) {
+    container.innerHTML = ''; // Wyczyszczenie kontenera przed wyświetleniem nowych danych
     for (let person of people.results) {
         const newDiv = document.createElement('div');
         newDiv.classList.add('character');
@@ -46,6 +60,7 @@ function displayCharacters(people) {
     previousBtn.disabled = !previousURL;
     nextBtn.disabled = !nextURL;
 }
+
 function callHomePlanet(planetUrl, containerElement) {
     fetchUrl(
         planetUrl,
@@ -58,16 +73,23 @@ function callHomePlanet(planetUrl, containerElement) {
         handleFetchError
     );
 }
+
 function loadPreviousButton() {
-    container.innerHTML = '';
-    currentPage--;
-    fetchCharacters();
+    if (previousURL) {
+        container.innerHTML = '';
+        currentPage--;
+        fetchCharacters();
+    }
 }
+
 function loadNextButton() {
-    container.innerHTML = '';
-    currentPage++;
-    fetchCharacters();
+    if (nextURL) {
+        container.innerHTML = '';
+        currentPage++;
+        fetchCharacters();
+    }
 }
+
 fetchCharacters();
 previousBtn.addEventListener('click', loadPreviousButton);
 nextBtn.addEventListener('click', loadNextButton);
