@@ -19,19 +19,16 @@ function fetchUrl(url, successCallback, errorCallback) {
         .then(successCallback)
         .catch(errorCallback);
 }
-
 function fetchCharacters() {
     const url = `https://swapi.dev/api/people123/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
-
 function handleFetchError(error) {
     console.error('Error fetching data:', error);
-    container.textContent = `Failed to fetch data: ${error.message}`; // Wyświetlenie błędu w kontenerze
+    container.textContent = `Failed to fetch data: ${error.message}`;
 }
-
 function displayCharacters(people) {
-    container.innerHTML = ''; // Wyczyszczenie kontenera przed wyświetleniem nowych danych
+    container.innerHTML = '';
     for (let person of people.results) {
         const newDiv = document.createElement('div');
         newDiv.classList.add('character');
@@ -52,7 +49,6 @@ function displayCharacters(people) {
         newDiv.append(h2);
         newDiv.append(h3);
         newDiv.append(p);
-        // Call the function to fetch and display home planet
         callHomePlanet(person.homeworld, newDiv);
     }
     previousURL = people.previous;
@@ -60,7 +56,6 @@ function displayCharacters(people) {
     previousBtn.disabled = !previousURL;
     nextBtn.disabled = !nextURL;
 }
-
 function callHomePlanet(planetUrl, containerElement) {
     fetchUrl(
         planetUrl,
@@ -73,7 +68,6 @@ function callHomePlanet(planetUrl, containerElement) {
         handleFetchError
     );
 }
-
 function loadPreviousButton() {
     if (previousURL) {
         container.innerHTML = '';
@@ -81,7 +75,6 @@ function loadPreviousButton() {
         fetchCharacters();
     }
 }
-
 function loadNextButton() {
     if (nextURL) {
         container.innerHTML = '';
@@ -89,7 +82,6 @@ function loadNextButton() {
         fetchCharacters();
     }
 }
-
 fetchCharacters();
 previousBtn.addEventListener('click', loadPreviousButton);
 nextBtn.addEventListener('click', loadNextButton);
