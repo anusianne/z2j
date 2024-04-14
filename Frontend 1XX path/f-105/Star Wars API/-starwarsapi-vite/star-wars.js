@@ -12,7 +12,7 @@ function fetchUrl(url, successCallback, errorCallback) {
                 return response.json();
             } else {
                 throw new Error(
-                    `Request failed with status ${response.status}: ${response.statusText}`
+                    `Request failed with status: ${response.status}`
                 );
             }
         })
@@ -20,7 +20,7 @@ function fetchUrl(url, successCallback, errorCallback) {
         .catch(errorCallback);
 }
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people123/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/people111/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
 function handleFetchError(error) {
