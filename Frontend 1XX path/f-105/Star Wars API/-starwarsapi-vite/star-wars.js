@@ -55,16 +55,12 @@ function displayCharacters(people) {
     nextBtn.disabled = !nextURL;
 }
 function callHomePlanet(planetUrl, containerElement) {
-    fetchUrl(
-        planetUrl,
-        (planet) => {
-            const h4 = document.createElement('h4');
-            h4.classList.add('planet');
-            h4.textContent = `Home Planet: ${planet.name}`;
-            containerElement.append(h4);
-        },
-        handleFetchError
-    );
+    axios.get(planetUrl).then(function (planet) {
+        const h4 = document.createElement('h4');
+        h4.classList.add('planet');
+        h4.textContent = `Home Planet: ${planet.data.name}`;
+        containerElement.append(h4);
+    });
 }
 function loadPreviousButton() {
     if (previousURL) {
