@@ -11,10 +11,14 @@ function fetchUrl(url, successCallback, errorCallback) {
     axios
         .get(url)
         .then(function (response) {
-            successCallback(response.data);
+            if (response.status === 200) {
+                successCallback(response.data);
+            } else {
+                errorCallback(`Request failed with status ${response.status}`);
+            }
         })
         .catch((error) => {
-            errorCallback(error);
+            errorCallback(error.message);
         });
 }
 function fetchCharacters() {
@@ -23,7 +27,7 @@ function fetchCharacters() {
 }
 function handleFetchError(error) {
     console.error('Error fetching data:', error);
-    container.textContent = `Failed to fetch data: ${error.message}`;
+    container.textContent = `Failed to fetch data: ${error}`;
 }
 function displayCharacters(people) {
     container.innerHTML = '';
@@ -55,12 +59,21 @@ function displayCharacters(people) {
     nextBtn.disabled = !nextURL;
 }
 function callHomePlanet(planetUrl, containerElement) {
-    axios.get(planetUrl).then(function (planet) {
-        const h4 = document.createElement('h4');
-        h4.classList.add('planet');
-        h4.textContent = `Home Planet: ${planet.data.name}`;
-        containerElement.append(h4);
-    });
+    axios
+        .get(planetUrl)
+        .then(function (planetResponse) {
+            if (planetResponse.status === 200) {
+                const h4 = document.createElement('h4');
+                h4.classList.add('planet');
+                h4.textContent = `Home Planet: ${planetResponse.data.name}`;
+                containerElement.append(h4);
+            } else {
+                containerElement.textContent = `Failed to fetch data: ${planetResponse.status}`;
+            }
+        })
+        .catch(function (error) {
+            containerElement.textContent = `Failed to fetch data: ${error.message}`;
+        });
 }
 function loadPreviousButton() {
     if (previousURL) {
