@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const container = document.getElementById('container');
 const previousBtn = document.getElementById('previous');
 const nextBtn = document.getElementById('next');
@@ -6,21 +8,17 @@ let nextURL = null;
 let currentPage = 1;
 
 function fetchUrl(url, successCallback, errorCallback) {
-    fetch(url)
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error(
-                    `Request failed with status: ${response.status}`
-                );
-            }
+    axios
+        .get(url)
+        .then(function (response) {
+            successCallback(response.data);
         })
-        .then(successCallback)
-        .catch(errorCallback);
+        .catch((error) => {
+            errorCallback(error);
+        });
 }
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people111/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
 function handleFetchError(error) {
