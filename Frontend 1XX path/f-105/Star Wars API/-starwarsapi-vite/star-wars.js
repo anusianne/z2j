@@ -3,9 +3,9 @@ import axios from 'axios';
 const container = document.getElementById('container');
 const previousBtn = document.getElementById('previous');
 const nextBtn = document.getElementById('next');
-let previousURL = null;
-let nextURL = null;
-let currentPage = 1;
+let previousURL = localStorage.getItem('previousURL');
+let nextURL = localStorage.getItem('nextURL');
+let currentPage = parseInt(localStorage.getItem('currentPage'), 10) || 1;
 
 function fetchUrl(url, successCallback, errorCallback) {
     axios
@@ -31,7 +31,7 @@ function handleFetchError(error) {
 }
 function displayCharacters(people) {
     container.innerHTML = '';
-    for (let person of people.results) {
+    people.results.forEach((person) => {
         const newDiv = document.createElement('div');
         newDiv.classList.add('character');
         const h2 = document.createElement('h2');
@@ -47,14 +47,15 @@ function displayCharacters(people) {
             p.textContent = `Gender: ${person.gender}`;
         }
         h3.textContent = `Date of birth: ${person.birth_year}`;
+        newDiv.append(h2, h3, p);
         container.append(newDiv);
-        newDiv.append(h2);
-        newDiv.append(h3);
-        newDiv.append(p);
         callHomePlanet(person.homeworld, newDiv);
-    }
+    });
     previousURL = people.previous;
     nextURL = people.next;
+    localStorage.setItem('previousURL', previousURL);
+    localStorage.setItem('nextURL', nextURL);
+    localStorage.setItem('currentPage', currentPage);
     previousBtn.disabled = !previousURL;
     nextBtn.disabled = !nextURL;
 }
