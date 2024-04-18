@@ -10,19 +10,23 @@ let currentPage = parseInt(localStorage.getItem('currentPage'), 10) || 1;
 function fetchUrl(url, successCallback, errorCallback) {
     axios
         .get(url)
-        .then(function (response) {
-            if (response.status === 200) {
-                successCallback(response.data);
+        // .then(function (response) {
+        //     if (response.status === 200) {
+        //         successCallback(response.data);
+        //     }}
+        .catch(function (error) {
+            if (error.response) {
+                console.log(error.response.status);
+            } else if (error.request) {
+                console.log(error.request);
             } else {
-                errorCallback(`Request failed with status ${response.status}`);
+                console.log('Error', error.message);
             }
-        })
-        .catch((error) => {
-            errorCallback(error.message);
         });
 }
+
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/111people/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
 function handleFetchError(error) {
