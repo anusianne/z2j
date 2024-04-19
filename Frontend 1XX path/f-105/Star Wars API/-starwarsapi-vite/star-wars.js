@@ -18,7 +18,7 @@ function fetchUrl(url, successCallback, errorCallback) {
         });
 }
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people111/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
 function handleFetchError(error) {
