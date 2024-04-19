@@ -11,23 +11,19 @@ function fetchUrl(url, successCallback, errorCallback) {
     axios
         .get(url)
         .then(function (response) {
-            if (response.status === 200) {
-                successCallback(response.data);
-            } else {
-                errorCallback(`Request failed with status ${response.status}`);
-            }
+            successCallback(response.data);
         })
         .catch((error) => {
-            errorCallback(error.message);
+            errorCallback(error);
         });
 }
 function fetchCharacters() {
-    const url = `https://swapi.dev/api/people/?page=${currentPage}`;
+    const url = `https://swapi.dev/api/people111/?page=${currentPage}`;
     fetchUrl(url, displayCharacters, handleFetchError);
 }
 function handleFetchError(error) {
     console.error('Error fetching data:', error);
-    container.textContent = `Failed to fetch data: ${error}`;
+    container.textContent = `Failed to fetch data: ${error.message}, ${error}`;
 }
 function displayCharacters(people) {
     container.innerHTML = '';
